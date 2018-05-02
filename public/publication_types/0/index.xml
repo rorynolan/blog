@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>0 on Rory Nolan</title>
+    <link>/publication_types/0/</link>
+    <description>Recent content in 0 on Rory Nolan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Sat, 02 Jan 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/publication_types/0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>autothresholdr: An R Port of the &#39;ImageJ&#39; Plugin &#39;Auto Threshold&#39;</title>
+      <link>/publication/autothresholdr/</link>
+      <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/autothresholdr/</guid>
+      <description>autothresholdr is available to download for free from CRAN and GitHub.</description>
+    </item>
+    
+    <item>
+      <title>filesstrings: An R Package for File and String Manipulation</title>
+      <link>/publication/filesstrings/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/filesstrings/</guid>
+      <description>filesstrings is available to download for free from CRAN and GitHub.</description>
+    </item>
+    
+  </channel>
+</rss>

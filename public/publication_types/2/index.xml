@@ -7,18 +7,45 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Tue, 01 Sep 2015 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 06 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/publication_types/2/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>A Person Re-Identification System For Mobile Devices</title>
-      <link>/publication/person-re-identification/</link>
-      <pubDate>Tue, 01 Sep 2015 00:00:00 +0100</pubDate>
+      <title>ijtiff: An R Package Providing Comprehensive TIFF I/O</title>
+      <link>/publication/ijtiff/</link>
+      <pubDate>Tue, 06 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>/publication/person-re-identification/</guid>
-      <description>More detail can easily be written here using Markdown and $\rm \LaTeX$ math code.</description>
+      <guid>/publication/ijtiff/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Detecting Protein Aggregation and Interactions in Live Cells: a Guide to Number and Brightness</title>
+      <link>/publication/nbreview/</link>
+      <pubDate>Wed, 06 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/nbreview/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nandb — Number and Brightness in R with a Novel Automatic Detrending Algorithm</title>
+      <link>/publication/nandb/</link>
+      <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/nandb/</guid>
+      <description>nandb is available to download for free from CRAN and GitHub.</description>
+    </item>
+    
+    <item>
+      <title>exampletestr - An Easy Start to Unit Testing R Packages</title>
+      <link>/publication/exampletestr/</link>
+      <pubDate>Wed, 21 Jun 2017 00:00:00 +0100</pubDate>
+      
+      <guid>/publication/exampletestr/</guid>
+      <description>exampletestr is available to download for free from CRAN and GitHub.</description>
     </item>
     
   </channel>

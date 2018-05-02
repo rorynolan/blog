@@ -24,8 +24,9 @@ weight = 3
 ##   label = '<i class="fa fa-download"></i> Install Now'
 +++
 
-PhD Student. 
+Data scientist.
+R developer.
 Image analyst. 
 Statistician. 
-Data scientist. 
-R developer.
+ 
+

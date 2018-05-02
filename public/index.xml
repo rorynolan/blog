@@ -11,12 +11,50 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Example Talk</title>
-      <link>/talk/example-talk/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      <title>Improved Algorithms for Detrending Images for FCS and FFS.</title>
+      <link>/talk/elmi2018/</link>
+      <pubDate>Wed, 25 Apr 2018 00:00:00 +0100</pubDate>
       
-      <guid>/talk/example-talk/</guid>
+      <guid>/talk/elmi2018/</guid>
       <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ijtiff: An R Package Providing Comprehensive TIFF I/O</title>
+      <link>/publication/ijtiff/</link>
+      <pubDate>Tue, 06 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/ijtiff/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Detecting Protein Aggregation and Interactions in Live Cells: a Guide to Number and Brightness</title>
+      <link>/publication/nbreview/</link>
+      <pubDate>Wed, 06 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/nbreview/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nandb — Number and Brightness in R with a Novel Automatic Detrending Algorithm</title>
+      <link>/publication/nandb/</link>
+      <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/nandb/</guid>
+      <description>&lt;p&gt;&lt;code&gt;nandb&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=nandb&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/nandb&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>exampletestr - An Easy Start to Unit Testing R Packages</title>
+      <link>/publication/exampletestr/</link>
+      <pubDate>Wed, 21 Jun 2017 00:00:00 +0100</pubDate>
+      
+      <guid>/publication/exampletestr/</guid>
+      <description>&lt;p&gt;&lt;code&gt;exampletestr&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=exampletestr&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/exampletestr&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -236,12 +274,22 @@ git submodule update --init --recursive
     </item>
     
     <item>
-      <title>A Person Re-Identification System For Mobile Devices</title>
-      <link>/publication/person-re-identification/</link>
-      <pubDate>Tue, 01 Sep 2015 00:00:00 +0100</pubDate>
+      <title>autothresholdr: An R Port of the &#39;ImageJ&#39; Plugin &#39;Auto Threshold&#39;</title>
+      <link>/publication/autothresholdr/</link>
+      <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>/publication/person-re-identification/</guid>
-      <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
+      <guid>/publication/autothresholdr/</guid>
+      <description>&lt;p&gt;&lt;code&gt;autothresholdr&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=autothresholdr&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/autothresholdr&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>filesstrings: An R Package for File and String Manipulation</title>
+      <link>/publication/filesstrings/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/filesstrings/</guid>
+      <description>&lt;p&gt;&lt;code&gt;filesstrings&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=filesstrings&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/filesstrings&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -290,16 +338,6 @@ Figure 1: A fancy pie chart.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Mobile visual clothing search</title>
-      <link>/publication/clothing-search/</link>
-      <pubDate>Mon, 01 Jul 2013 00:00:00 +0100</pubDate>
-      
-      <guid>/publication/clothing-search/</guid>
-      <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     
