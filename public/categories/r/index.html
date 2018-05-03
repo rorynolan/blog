@@ -37,9 +37,7 @@
   
     
     
-      
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-      
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
     
   
   
@@ -80,7 +78,7 @@
   <meta property="og:description" content="PhD Student">
   <meta property="og:locale" content="en-us">
   
-  <meta property="og:updated_time" content="2015-07-23T21:13:14-05:00">
+  <meta property="og:updated_time" content="2015-09-23T00:00:00&#43;00:00">
   
 
   
@@ -252,12 +250,12 @@
   
   
   <div>
-    <h2><a href="/2015/07/23/hello-r-markdown/">Hello R Markdown</a></h2>
+    <h2><a href="/2015/09/23/rcsetseed/">Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</a></h2>
     <div class="article-style">
       
-      R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" target="_blank">http://rmarkdown.rstudio.com</a>.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.
+      In native R, the user sets the seed for random number generation (RNG) with set.seed(). Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by set.seed(). Good news guys, it can be done.
+We’ll need the inline, purrr and microbenchmark packages.
+pkgs &lt;- c(&quot;inline&quot;, &quot;purrr&quot;, &quot;microbenchmark&quot;) for (p in pkgs) if (!require(p, character.only = TRUE)) { install.packages(p) library(p, character.only = TRUE) } ## Loading required package: inline ## Loading required package: purrr ## Loading required package: microbenchmark rbernoulli Base R (or technically the stats package) provides no rbernoulli().
       
     </div>
   </div>
@@ -338,6 +336,8 @@ summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
       <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
       
 
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/R.min.js"></script>
       
 
       

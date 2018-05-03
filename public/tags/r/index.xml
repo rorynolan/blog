@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on Rory Nolan</title>
+    <link>/tags/r/</link>
+    <description>Recent content in R on Rory Nolan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Wed, 23 Sep 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</title>
+      <link>/2015/09/23/rcsetseed/</link>
+      <pubDate>Wed, 23 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/2015/09/23/rcsetseed/</guid>
+      <description>In native R, the user sets the seed for random number generation (RNG) with set.seed(). Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by set.seed(). Good news guys, it can be done.
+We’ll need the inline, purrr and microbenchmark packages.
+pkgs &amp;lt;- c(&amp;quot;inline&amp;quot;, &amp;quot;purrr&amp;quot;, &amp;quot;microbenchmark&amp;quot;) for (p in pkgs) if (!require(p, character.only = TRUE)) { install.packages(p) library(p, character.only = TRUE) } ## Loading required package: inline ## Loading required package: purrr ## Loading required package: microbenchmark rbernoulli Base R (or technically the stats package) provides no rbernoulli().</description>
+    </item>
+    
+  </channel>
+</rss>

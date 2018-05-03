@@ -1,0 +1,127 @@
+---
+slug: "rcsetseed"
+title: "Using R's set.seed() to set seeds for use in C/C++ (including Rcpp)"
+author: "Rory Nolan"
+date: 2015-09-23
+categories: ["R"]
+tags: ["R", "seeds", "set.seed()", "C", "C++", "Rcpp"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+In native R, the user sets the seed for random number generation (RNG) with `set.seed()`. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by `set.seed()`. Good news guys, it can be done.
+
+We'll need the `inline`, `purrr` and `microbenchmark` packages. 
+```{r load-libraries, warning=FALSE}
+pkgs <- c("inline", "purrr", "microbenchmark")
+for (p in pkgs) if (!require(p, character.only = TRUE)) {
+  install.packages(p)
+  library(p, character.only = TRUE)
+}
+```
+
+
+# `rbernoulli`
+
+Base R (or technically the `stats` package) provides no `rbernoulli()`. It's a pretty gaping hole in the pantheon of   `rbeta()`, `rbinom()`, `rcauchy`, `rchisq()`, `rexp()`, `rf()`, `rgamma`, etc. Thankfully, Hadley Wickham noticed this and gave us `purrr::rbernoulli()`. 
+
+```{r first-glance-rbernoulli}
+set.seed(1)
+rbernoulli(5, 0.7)
+set.seed(1)
+rbernoulli(5, 0.7)
+```
+
+So it seems like Hadley managed to get `set.seed()` to work with `rbernoulli()`. How did he do this? Let's take a closer look at `purrr::rbernoulli()`.
+
+```{r closer-look-rbernoulli}
+purrr::rbernoulli
+```
+
+Ah, it seems Hadley just wrapped `runif()`; hence, because `set.seed()` works with `runif()`, it works with his implementation of `purrr::rbernoulli()`. 
+
+
+# C++ RNG
+
+The C++ standard library provides the `<random>` header file, which includes Bernoulli RNG. Let's give that a whirl.
+
+```{r cpp-rbernoulli1, results='hide'}
+cpp_rbernoulli <- rcpp(c(n = "integer", p = "numeric", seed = "integer"), '
+                       int n_ = as<int>(n), seed_ = as<int>(seed);
+                       double p_ = as<double>(p);
+                       std::default_random_engine generator(seed_);
+                       std::bernoulli_distribution distribution(p_);
+                       IntegerVector out(n_);
+                       for (std::size_t i = 0; i != n_; ++i) {
+                         out[i] = distribution(generator);
+                       }
+                       return out;
+                       ', includes = "#include <random>")
+```
+```{r cpp-rbernoulli2}
+cpp_rbernoulli(6, 0.7, seed = 1)
+cpp_rbernoulli(6, 0.7, seed = 1)
+cpp_rbernoulli(6, 0.7, seed = 2)
+```
+
+OK, so now we have `cpp_rbernoulli()` which is working, but the user has to pass the seed as an argument of the function, there's no option to use `set.seed()`. 
+
+
+# `get_seed()`
+
+If only there was a `get_seed()` function that we could use. Well, here it is!
+
+```{r get-seed}
+get_seed <- function() {
+  sample.int(.Machine$integer.max, 1)
+}
+```
+
+This gets a positive number in the unsigned 32-bit integer range (which is always a safe bet for a seed) and it is completely determined by `set.seed()`. Therefore, it's fine to use as a seed itself. Let's take a look.
+
+```{r get-seed-test}
+set.seed(1)
+replicate(6, get_seed())
+set.seed(1)
+replicate(6, get_seed())
+set.seed(2)
+replicate(6, get_seed())
+set.seed(2)
+replicate(6, get_seed())
+```
+
+So as we can see, setting a seed via `set.seed()` determines the seeds that subsequently come out of `get_seed()`, so all is well with the world. `get_seed()` can now be used to create a version of `cpp_rbernoulli()` which uses `set.seed()`. For the sake of inflating my own ego, I'll name this version after myself.
+
+```{r rorybernoulli}
+rorybernoulli <- function(n, p) {
+  cpp_rbernoulli(n, p, get_seed())
+}
+```
+
+Let's check that it's in working order.
+
+```{r rorybernoulli-check} 
+set.seed(1)
+rorybernoulli(6, 0.7)
+set.seed(1)
+rorybernoulli(6, 0.7)
+set.seed(2)
+rorybernoulli(6, 0.7)
+set.seed(2)
+rorybernoulli(6, 0.7)
+```
+
+Everything is awesome.
+
+# Benchmarking
+
+Lastly, let's compare the two Bernoulli RNGs that we have now by asking them both to give us a million Bernoulli random numbers with `p = 0.5`.
+
+```{r benchmark}
+microbenchmark(purrr::rbernoulli(1e6, p = 0.5),
+               rorybernoulli(1e6, p = 0.5))
+```
+
+Wow, `rorybernoulli()` is three times faster! I wasn't expecting that. Perhaps it's because there's a quicker way of generating a Bernoulli random number than by going through a uniform random number (as `purrr::rbernoulli()` does). The point of me writing this post was to share this `get_seed()` thing with people so that the can use `set.seed()` with `Rcpp` and the like; `purrr::rbernoulli()` was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to `purrr`!

@@ -35,9 +35,7 @@
   
     
     
-      
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-      
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
     
   
   
@@ -1215,6 +1213,12 @@ Statistician.</p>
       
           
       
+          
+      
+          
+      
+          
+      
 
       
       
@@ -1229,8 +1233,8 @@ Statistician.</p>
 
   <span class="article-date">
     
-    <time datetime="2015-07-23 21:13:14 -0500 -0500" itemprop="datePublished dateModified">
-      Jul 23, 2015
+    <time datetime="2015-09-23 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      Sep 23, 2015
     </time>
   </span>
   <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
@@ -1240,7 +1244,7 @@ Statistician.</p>
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    1 min read
+    4 min read
   </span>
   
 
@@ -1269,17 +1273,17 @@ Statistician.</p>
   
   
   <h3 class="article-title" itemprop="headline">
-    <a href="/2015/07/23/hello-r-markdown/" itemprop="url">Hello R Markdown</a>
+    <a href="/2015/09/23/rcsetseed/" itemprop="url">Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</a>
   </h3>
   <div class="article-style" itemprop="articleBody">
     
-    R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.
+    In native R, the user sets the seed for random number generation (RNG) with set.seed(). Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by set.seed(). Good news guys, it can be done.
+We’ll need the inline, purrr and microbenchmark packages.
+pkgs &lt;- c(&quot;inline&quot;, &quot;purrr&quot;, &quot;microbenchmark&quot;) for (p in pkgs) if (!require(p, character.only = TRUE)) { install.packages(p) library(p, character.only = TRUE) } ## Loading required package: inline ## Loading required package: purrr ## Loading required package: microbenchmark rbernoulli Base R (or technically the stats package) provides no rbernoulli().
     
   </div>
   <p class="read-more" itemprop="mainEntityOfPage">
-    <a href="/2015/07/23/hello-r-markdown/" class="btn btn-primary btn-outline">
+    <a href="/2015/09/23/rcsetseed/" class="btn btn-primary btn-outline">
       CONTINUE READING
     </a>
   </p>
@@ -1468,7 +1472,22 @@ summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
           
           
           
-          <a href="/tags/r-markdown/" style="font-size:0.8rem">R Markdown</a>
+          <a href="/tags/c/" style="font-size:0.8rem">C</a>
+        
+          
+          
+          
+          <a href="/tags/c&#43;&#43;/" style="font-size:0.8rem">C&#43;&#43;</a>
+        
+          
+          
+          
+          <a href="/tags/r/" style="font-size:0.8rem">R</a>
+        
+          
+          
+          
+          <a href="/tags/rcpp/" style="font-size:0.8rem">Rcpp</a>
         
           
           
@@ -1488,12 +1507,12 @@ summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
           
           
           
-          <a href="/tags/plot/" style="font-size:0.8rem">plot</a>
+          <a href="/tags/seeds/" style="font-size:0.8rem">seeds</a>
         
           
           
           
-          <a href="/tags/regression/" style="font-size:0.8rem">regression</a>
+          <a href="/tags/set.seed/" style="font-size:0.8rem">set.seed()</a>
         
       </div>
     
@@ -1635,6 +1654,8 @@ summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
       <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
       
 
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/R.min.js"></script>
       
 
       

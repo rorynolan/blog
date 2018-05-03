@@ -1,0 +1,114 @@
+---
+slug: "rcsetseed"
+title: "Using R's set.seed() to set seeds for use in C/C++ (including Rcpp)"
+author: "Rory Nolan"
+date: 2015-09-23
+categories: ["R"]
+tags: ["R", "seeds", "set.seed()", "C", "C++", "Rcpp"]
+---
+
+
+
+<p>In native R, the user sets the seed for random number generation (RNG) with <code>set.seed()</code>. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by <code>set.seed()</code>. Good news guys, it can be done.</p>
+<p>We’ll need the <code>inline</code>, <code>purrr</code> and <code>microbenchmark</code> packages.</p>
+<pre class="r"><code>pkgs &lt;- c(&quot;inline&quot;, &quot;purrr&quot;, &quot;microbenchmark&quot;)
+for (p in pkgs) if (!require(p, character.only = TRUE)) {
+  install.packages(p)
+  library(p, character.only = TRUE)
+}
+## Loading required package: inline
+## Loading required package: purrr
+## Loading required package: microbenchmark</code></pre>
+<div id="rbernoulli" class="section level1">
+<h1><code>rbernoulli</code></h1>
+<p>Base R (or technically the <code>stats</code> package) provides no <code>rbernoulli()</code>. It’s a pretty gaping hole in the pantheon of <code>rbeta()</code>, <code>rbinom()</code>, <code>rcauchy</code>, <code>rchisq()</code>, <code>rexp()</code>, <code>rf()</code>, <code>rgamma</code>, etc. Thankfully, Hadley Wickham noticed this and gave us <code>purrr::rbernoulli()</code>.</p>
+<pre class="r"><code>set.seed(1)
+rbernoulli(5, 0.7)
+## [1] FALSE  TRUE  TRUE  TRUE FALSE
+set.seed(1)
+rbernoulli(5, 0.7)
+## [1] FALSE  TRUE  TRUE  TRUE FALSE</code></pre>
+<p>So it seems like Hadley managed to get <code>set.seed()</code> to work with <code>rbernoulli()</code>. How did he do this? Let’s take a closer look at <code>purrr::rbernoulli()</code>.</p>
+<pre class="r"><code>purrr::rbernoulli
+## function (n, p = 0.5) 
+## {
+##     stats::runif(n) &gt; (1 - p)
+## }
+## &lt;bytecode: 0x7fe6f42dd248&gt;
+## &lt;environment: namespace:purrr&gt;</code></pre>
+<p>Ah, it seems Hadley just wrapped <code>runif()</code>; hence, because <code>set.seed()</code> works with <code>runif()</code>, it works with his implementation of <code>purrr::rbernoulli()</code>.</p>
+</div>
+<div id="c-rng" class="section level1">
+<h1>C++ RNG</h1>
+<p>The C++ standard library provides the <code>&lt;random&gt;</code> header file, which includes Bernoulli RNG. Let’s give that a whirl.</p>
+<pre class="r"><code>cpp_rbernoulli &lt;- rcpp(c(n = &quot;integer&quot;, p = &quot;numeric&quot;, seed = &quot;integer&quot;), &#39;
+                       int n_ = as&lt;int&gt;(n), seed_ = as&lt;int&gt;(seed);
+                       double p_ = as&lt;double&gt;(p);
+                       std::default_random_engine generator(seed_);
+                       std::bernoulli_distribution distribution(p_);
+                       IntegerVector out(n_);
+                       for (std::size_t i = 0; i != n_; ++i) {
+                         out[i] = distribution(generator);
+                       }
+                       return out;
+                       &#39;, includes = &quot;#include &lt;random&gt;&quot;)</code></pre>
+<pre class="r"><code>cpp_rbernoulli(6, 0.7, seed = 1)
+## [1] 1 0 1 1 0 1
+cpp_rbernoulli(6, 0.7, seed = 1)
+## [1] 1 0 1 1 0 1
+cpp_rbernoulli(6, 0.7, seed = 2)
+## [1] 1 0 1 0 1 1</code></pre>
+<p>OK, so now we have <code>cpp_rbernoulli()</code> which is working, but the user has to pass the seed as an argument of the function, there’s no option to use <code>set.seed()</code>.</p>
+</div>
+<div id="get_seed" class="section level1">
+<h1><code>get_seed()</code></h1>
+<p>If only there was a <code>get_seed()</code> function that we could use. Well, here it is!</p>
+<pre class="r"><code>get_seed &lt;- function() {
+  sample.int(.Machine$integer.max, 1)
+}</code></pre>
+<p>This gets a positive number in the unsigned 32-bit integer range (which is always a safe bet for a seed) and it is completely determined by <code>set.seed()</code>. Therefore, it’s fine to use as a seed itself. Let’s take a look.</p>
+<pre class="r"><code>set.seed(1)
+replicate(6, get_seed())
+## [1]  570175513  799129990 1230193230 1950361378  433108649 1929277158
+set.seed(1)
+replicate(6, get_seed())
+## [1]  570175513  799129990 1230193230 1950361378  433108649 1929277158
+set.seed(2)
+replicate(6, get_seed())
+## [1]  397031630 1508336757 1231208929  360888751 2026879546 2026097046
+set.seed(2)
+replicate(6, get_seed())
+## [1]  397031630 1508336757 1231208929  360888751 2026879546 2026097046</code></pre>
+<p>So as we can see, setting a seed via <code>set.seed()</code> determines the seeds that subsequently come out of <code>get_seed()</code>, so all is well with the world. <code>get_seed()</code> can now be used to create a version of <code>cpp_rbernoulli()</code> which uses <code>set.seed()</code>. For the sake of inflating my own ego, I’ll name this version after myself.</p>
+<pre class="r"><code>rorybernoulli &lt;- function(n, p) {
+  cpp_rbernoulli(n, p, get_seed())
+}</code></pre>
+<p>Let’s check that it’s in working order.</p>
+<pre class="r"><code>set.seed(1)
+rorybernoulli(6, 0.7)
+## [1] 1 1 0 0 1 0
+set.seed(1)
+rorybernoulli(6, 0.7)
+## [1] 1 1 0 0 1 0
+set.seed(2)
+rorybernoulli(6, 0.7)
+## [1] 0 1 1 1 1 1
+set.seed(2)
+rorybernoulli(6, 0.7)
+## [1] 0 1 1 1 1 1</code></pre>
+<p>Everything is awesome.</p>
+</div>
+<div id="benchmarking" class="section level1">
+<h1>Benchmarking</h1>
+<p>Lastly, let’s compare the two Bernoulli RNGs that we have now by asking them both to give us a million Bernoulli random numbers with <code>p = 0.5</code>.</p>
+<pre class="r"><code>microbenchmark(purrr::rbernoulli(1e6, p = 0.5),
+               rorybernoulli(1e6, p = 0.5))
+## Unit: milliseconds
+##                               expr       min        lq      mean    median
+##  purrr::rbernoulli(1e+06, p = 0.5) 27.209945 28.401730 30.071764 28.697128
+##      rorybernoulli(1e+06, p = 0.5)  8.510996  9.153362  9.906663  9.392851
+##        uq      max neval cld
+##  31.95786 38.62771   100   b
+##   9.61524 15.70448   100  a</code></pre>
+<p>Wow, <code>rorybernoulli()</code> is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as <code>purrr::rbernoulli()</code> does). The point of me writing this post was to share this <code>get_seed()</code> thing with people so that the can use <code>set.seed()</code> with <code>Rcpp</code> and the like; <code>purrr::rbernoulli()</code> was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to <code>purrr</code>!</p>
+</div>
