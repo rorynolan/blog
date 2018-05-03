@@ -253,6 +253,75 @@
 
   <span class="article-date">
     
+    <time datetime="2018-05-03 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      May 3, 2018
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Rory Nolan">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    4 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="/categories/r/">R</a
+    >
+    
+  </span>
+  
+  
+
+  
+
+</div>
+
+
+  
+  
+  <h3 class="article-title" itemprop="headline">
+    <a href="/2018/05/03/rcsetseed/" itemprop="url">Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</a>
+  </h3>
+  <div class="article-style" itemprop="articleBody">
+    
+    In native R, the user sets the seed for random number generation (RNG) with set.seed(). Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by set.seed(). Good news guys, it can be done.
+We’ll need the inline, purrr and microbenchmark packages.
+pkgs &lt;- c(&quot;inline&quot;, &quot;purrr&quot;, &quot;microbenchmark&quot;) for (p in pkgs) if (!require(p, character.only = TRUE)) { install.packages(p) library(p, character.only = TRUE) } ## Loading required package: inline ## Loading required package: purrr ## Loading required package: microbenchmark rbernoulli Base R (or technically the stats package) provides no rbernoulli().
+    
+  </div>
+  <p class="read-more" itemprop="mainEntityOfPage">
+    <a href="/2018/05/03/rcsetseed/" class="btn btn-primary btn-outline">
+      CONTINUE READING
+    </a>
+  </p>
+</div>
+
+    
+  
+    
+    
+      
+
+<div class="card-simple" itemscope itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
+  
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
         Last updated on
     
     <time datetime="2016-04-20 00:00:00 &#43;0100 BST" itemprop="datePublished dateModified">
@@ -299,75 +368,6 @@
   </div>
   <p class="read-more" itemprop="mainEntityOfPage">
     <a href="/2016/04/20/academic-the-website-designer-for-hugo/" class="btn btn-primary btn-outline">
-      CONTINUE READING
-    </a>
-  </p>
-</div>
-
-    
-  
-    
-    
-      
-
-<div class="card-simple" itemscope itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
-  
-
-<div class="article-metadata">
-
-  <span class="article-date">
-    
-    <time datetime="2015-09-23 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
-      Sep 23, 2015
-    </time>
-  </span>
-  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Rory Nolan">
-  </span>
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    4 min read
-  </span>
-  
-
-  
-  
-
-  
-  
-  
-  <span class="middot-divider"></span>
-  <span class="article-categories">
-    <i class="fa fa-folder"></i>
-    
-    <a href="/categories/r/">R</a
-    >
-    
-  </span>
-  
-  
-
-  
-
-</div>
-
-
-  
-  
-  <h3 class="article-title" itemprop="headline">
-    <a href="/2015/09/23/rcsetseed/" itemprop="url">Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</a>
-  </h3>
-  <div class="article-style" itemprop="articleBody">
-    
-    In native R, the user sets the seed for random number generation (RNG) with set.seed(). Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by set.seed(). Good news guys, it can be done.
-We’ll need the inline, purrr and microbenchmark packages.
-pkgs &lt;- c(&quot;inline&quot;, &quot;purrr&quot;, &quot;microbenchmark&quot;) for (p in pkgs) if (!require(p, character.only = TRUE)) { install.packages(p) library(p, character.only = TRUE) } ## Loading required package: inline ## Loading required package: purrr ## Loading required package: microbenchmark rbernoulli Base R (or technically the stats package) provides no rbernoulli().
-    
-  </div>
-  <p class="read-more" itemprop="mainEntityOfPage">
-    <a href="/2015/09/23/rcsetseed/" class="btn btn-primary btn-outline">
       CONTINUE READING
     </a>
   </p>
