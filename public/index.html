@@ -1200,7 +1200,7 @@ Statistician.</p>
     
     In native R, the user sets the seed for random number generation (RNG) with set.seed(). Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by set.seed(). Good news guys, it can be done.
 We’ll need the inline, purrr and microbenchmark packages.
-pkgs &lt;- c(&quot;inline&quot;, &quot;purrr&quot;, &quot;microbenchmark&quot;) for (p in pkgs) if (!require(p, character.only = TRUE)) { install.packages(p) library(p, character.only = TRUE) } ## Loading required package: inline ## Loading required package: purrr ## Loading required package: microbenchmark rbernoulli Base R (or technically the stats package) provides no rbernoulli().
+pkgs &lt;- c(&quot;inline&quot;, &quot;purrr&quot;, &quot;microbenchmark&quot;) for (p in pkgs) if (!require(p, character.only = TRUE)) { install.packages(p) library(p, character.only = TRUE) } #&gt; Loading required package: inline #&gt; Loading required package: purrr #&gt; Loading required package: microbenchmark rbernoulli Base R (or technically the stats package) provides no rbernoulli().
     
   </div>
   <p class="read-more" itemprop="mainEntityOfPage">

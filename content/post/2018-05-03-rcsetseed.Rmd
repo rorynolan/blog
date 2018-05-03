@@ -8,7 +8,7 @@ tags: ["R", "seeds", "set.seed()", "C", "C++", "Rcpp"]
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE)
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
 In native R, the user sets the seed for random number generation (RNG) with `set.seed()`. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by `set.seed()`. Good news guys, it can be done.
