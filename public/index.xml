@@ -1,22 +1,105 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rory Nolan on Rory Nolan</title>
-    <link>/</link>
-    <description>Recent content in Rory Nolan on Rory Nolan</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 15 Oct 2017 00:00:00 +0100</lastBuildDate>
-    <atom:link href="/" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</title>
-      <link>/2018/05/03/rcsetseed/</link>
-      <pubDate>Thu, 03 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/2018/05/03/rcsetseed/</guid>
-      <description>&lt;p&gt;In native R, the user sets the seed for random number generation (RNG) with &lt;code&gt;set.seed()&lt;/code&gt;. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by &lt;code&gt;set.seed()&lt;/code&gt;. Good news guys, it can be done.&lt;/p&gt;
+  <title>Rory Nolan</title>
+  <link>/</link>
+  <description>Recent content on Rory Nolan</description>
+  <generator>Hugo -- gohugo.io</generator>
+<language>en-us</language>
+<copyright>&amp;copy; 2018</copyright>
+<lastBuildDate>Sun, 15 Oct 2017 00:00:00 +0100</lastBuildDate>
+
+<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+
+
+<item>
+  <title>Rory Nolan</title>
+  <link>/home/hero/</link>
+  <pubDate>Sun, 15 Oct 2017 00:00:00 +0100</pubDate>
+  
+<guid>/home/hero/</guid>
+  <description>&lt;p&gt;Data scientist.
+R developer.
+Image analyst.
+Statistician.&lt;/p&gt;
+</description>
+  </item>
+  
+<item>
+  <title></title>
+  <link>/home/about/</link>
+  <pubDate>Wed, 20 Apr 2016 00:00:00 +0100</pubDate>
+  
+<guid>/home/about/</guid>
+  <description>
+
+&lt;h1 id=&#34;biography&#34;&gt;Biography&lt;/h1&gt;
+
+&lt;p&gt;Rory Nolan is a PhD student at oxford supervised by Sergi Padilla. His research focuses on algorithms for the correction of photobleaching, a process which causes fluorescence microscopy images to get dimmer over time. He develops software in the R language for image analysis, TIFF file I/O and file and string manipulation.&lt;/p&gt;
+</description>
+  </item>
+  
+<item>
+  <title>Selected Publications</title>
+  <link>/home/publications_selected/</link>
+  <pubDate>Wed, 20 Apr 2016 00:00:00 +0100</pubDate>
+  
+<guid>/home/publications_selected/</guid>
+  <description></description>
+  </item>
+  
+<item>
+  <title>Recent Publications</title>
+  <link>/home/publications/</link>
+  <pubDate>Wed, 20 Apr 2016 00:00:00 +0100</pubDate>
+  
+<guid>/home/publications/</guid>
+  <description></description>
+  </item>
+  
+<item>
+  <title>Recent &amp; Upcoming Talks</title>
+  <link>/home/talks/</link>
+  <pubDate>Wed, 20 Apr 2016 00:00:00 +0100</pubDate>
+  
+<guid>/home/talks/</guid>
+  <description></description>
+  </item>
+  
+<item>
+  <title>Recent Posts</title>
+  <link>/home/posts/</link>
+  <pubDate>Wed, 20 Apr 2016 00:00:00 +0100</pubDate>
+  
+<guid>/home/posts/</guid>
+  <description></description>
+  </item>
+  
+<item>
+  <title>Tags</title>
+  <link>/home/tags/</link>
+  <pubDate>Wed, 20 Sep 2017 00:00:00 +0100</pubDate>
+  
+<guid>/home/tags/</guid>
+  <description></description>
+  </item>
+  
+<item>
+  <title>Contact</title>
+  <link>/home/contact/</link>
+  <pubDate>Wed, 20 Apr 2016 00:00:00 +0100</pubDate>
+  
+<guid>/home/contact/</guid>
+  <description></description>
+  </item>
+  
+<item>
+  <title>Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</title>
+  <link>/2018/05/03/rcsetseed/</link>
+  <pubDate>Thu, 03 May 2018 00:00:00 +0000</pubDate>
+  
+<guid>/2018/05/03/rcsetseed/</guid>
+  <description>&lt;p&gt;In native R, the user sets the seed for random number generation (RNG) with &lt;code&gt;set.seed()&lt;/code&gt;. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by &lt;code&gt;set.seed()&lt;/code&gt;. Good news guys, it can be done.&lt;/p&gt;
 &lt;p&gt;We’ll need the &lt;code&gt;inline&lt;/code&gt;, &lt;code&gt;purrr&lt;/code&gt; and &lt;code&gt;microbenchmark&lt;/code&gt; packages.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pkgs &amp;lt;- c(&amp;quot;inline&amp;quot;, &amp;quot;purrr&amp;quot;, &amp;quot;microbenchmark&amp;quot;)
 for (p in pkgs) if (!require(p, character.only = TRUE)) {
@@ -120,63 +203,63 @@ rorybernoulli(6, 0.7)
 &lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that the can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
 &lt;/div&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Improved Algorithms for Detrending Images for FCS and FFS.</title>
-      <link>/talk/elmi2018/</link>
-      <pubDate>Wed, 25 Apr 2018 00:00:00 +0100</pubDate>
-      
-      <guid>/talk/elmi2018/</guid>
-      <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
+  </item>
+  
+<item>
+  <title>Improved Algorithms for Detrending Images for FCS and FFS.</title>
+  <link>/talk/elmi2018/</link>
+  <pubDate>Wed, 25 Apr 2018 00:00:00 +0100</pubDate>
+  
+<guid>/talk/elmi2018/</guid>
+  <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>ijtiff: An R Package Providing Comprehensive TIFF I/O</title>
-      <link>/publication/ijtiff/</link>
-      <pubDate>Tue, 06 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/ijtiff/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Detecting Protein Aggregation and Interactions in Live Cells: a Guide to Number and Brightness</title>
-      <link>/publication/nbreview/</link>
-      <pubDate>Wed, 06 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/nbreview/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>nandb — Number and Brightness in R with a Novel Automatic Detrending Algorithm</title>
-      <link>/publication/nandb/</link>
-      <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/nandb/</guid>
-      <description>&lt;p&gt;&lt;code&gt;nandb&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=nandb&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/nandb&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+  </item>
+  
+<item>
+  <title>ijtiff: An R Package Providing Comprehensive TIFF I/O</title>
+  <link>/publication/ijtiff/</link>
+  <pubDate>Tue, 06 Mar 2018 00:00:00 +0000</pubDate>
+  
+<guid>/publication/ijtiff/</guid>
+  <description></description>
+  </item>
+  
+<item>
+  <title>Detecting Protein Aggregation and Interactions in Live Cells: a Guide to Number and Brightness</title>
+  <link>/publication/nbreview/</link>
+  <pubDate>Wed, 06 Dec 2017 00:00:00 +0000</pubDate>
+  
+<guid>/publication/nbreview/</guid>
+  <description></description>
+  </item>
+  
+<item>
+  <title>nandb — Number and Brightness in R with a Novel Automatic Detrending Algorithm</title>
+  <link>/publication/nandb/</link>
+  <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
+  
+<guid>/publication/nandb/</guid>
+  <description>&lt;p&gt;&lt;code&gt;nandb&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=nandb&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/nandb&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>exampletestr - An Easy Start to Unit Testing R Packages</title>
-      <link>/publication/exampletestr/</link>
-      <pubDate>Wed, 21 Jun 2017 00:00:00 +0100</pubDate>
-      
-      <guid>/publication/exampletestr/</guid>
-      <description>&lt;p&gt;&lt;code&gt;exampletestr&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=exampletestr&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/exampletestr&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+  </item>
+  
+<item>
+  <title>exampletestr - An Easy Start to Unit Testing R Packages</title>
+  <link>/publication/exampletestr/</link>
+  <pubDate>Wed, 21 Jun 2017 00:00:00 +0100</pubDate>
+  
+<guid>/publication/exampletestr/</guid>
+  <description>&lt;p&gt;&lt;code&gt;exampletestr&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=exampletestr&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/exampletestr&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Deep Learning</title>
-      <link>/project/deep-learning/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0100</pubDate>
-      
-      <guid>/project/deep-learning/</guid>
-      <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+  </item>
+  
+<item>
+  <title>Deep Learning</title>
+  <link>/project/deep-learning/</link>
+  <pubDate>Wed, 27 Apr 2016 00:00:00 +0100</pubDate>
+  
+<guid>/project/deep-learning/</guid>
+  <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
 
 &lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
 
@@ -186,36 +269,36 @@ rorybernoulli(6, 0.7)
 
 &lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>External Project</title>
-      <link>/project/example-external-project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0100</pubDate>
-      
-      <guid>/project/example-external-project/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>autothresholdr: An R Port of the &#39;ImageJ&#39; Plugin &#39;Auto Threshold&#39;</title>
-      <link>/publication/autothresholdr/</link>
-      <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/autothresholdr/</guid>
-      <description>&lt;p&gt;&lt;code&gt;autothresholdr&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=autothresholdr&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/autothresholdr&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+  </item>
+  
+<item>
+  <title>External Project</title>
+  <link>/project/example-external-project/</link>
+  <pubDate>Wed, 27 Apr 2016 00:00:00 +0100</pubDate>
+  
+<guid>/project/example-external-project/</guid>
+  <description></description>
+  </item>
+  
+<item>
+  <title>autothresholdr: An R Port of the &#39;ImageJ&#39; Plugin &#39;Auto Threshold&#39;</title>
+  <link>/publication/autothresholdr/</link>
+  <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
+  
+<guid>/publication/autothresholdr/</guid>
+  <description>&lt;p&gt;&lt;code&gt;autothresholdr&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=autothresholdr&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/autothresholdr&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>filesstrings: An R Package for File and String Manipulation</title>
-      <link>/publication/filesstrings/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/filesstrings/</guid>
-      <description>&lt;p&gt;&lt;code&gt;filesstrings&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=filesstrings&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/filesstrings&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+  </item>
+  
+<item>
+  <title>filesstrings: An R Package for File and String Manipulation</title>
+  <link>/publication/filesstrings/</link>
+  <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+  
+<guid>/publication/filesstrings/</guid>
+  <description>&lt;p&gt;&lt;code&gt;filesstrings&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=filesstrings&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/filesstrings&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
-    </item>
-    
-  </channel>
-</rss>
+  </item>
+  
+</channel>
+  </rss>
