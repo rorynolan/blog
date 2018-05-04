@@ -41,7 +41,7 @@ rbernoulli(5, 0.7)
 #&amp;gt; {
 #&amp;gt;     stats::runif(n) &amp;gt; (1 - p)
 #&amp;gt; }
-#&amp;gt; &amp;lt;bytecode: 0x7fd98b6da448&amp;gt;
+#&amp;gt; &amp;lt;bytecode: 0x7fced0a71e48&amp;gt;
 #&amp;gt; &amp;lt;environment: namespace:purrr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Ah, it seems Hadley just wrapped &lt;code&gt;runif()&lt;/code&gt;; hence, because &lt;code&gt;set.seed()&lt;/code&gt; works with &lt;code&gt;runif()&lt;/code&gt;, it works with his implementation of &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -111,12 +111,12 @@ rorybernoulli(6, 0.7)
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;microbenchmark(purrr::rbernoulli(1e6, p = 0.5),
                rorybernoulli(1e6, p = 0.5))
 #&amp;gt; Unit: milliseconds
-#&amp;gt;                               expr       min       lq     mean    median
-#&amp;gt;  purrr::rbernoulli(1e+06, p = 0.5) 27.746392 28.59405 30.50884 29.356782
-#&amp;gt;      rorybernoulli(1e+06, p = 0.5)  8.408874  9.21296 10.08756  9.484896
+#&amp;gt;                               expr       min        lq     mean    median
+#&amp;gt;  purrr::rbernoulli(1e+06, p = 0.5) 27.649190 28.925436 30.72682 29.261647
+#&amp;gt;      rorybernoulli(1e+06, p = 0.5)  8.666218  9.358442 10.05507  9.451382
 #&amp;gt;         uq      max neval cld
-#&amp;gt;  32.543185 40.91353   100   b
-#&amp;gt;   9.992909 16.52791   100  a&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt;  33.057620 44.72999   100   b
+#&amp;gt;   9.744706 16.10007   100  a&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that the can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
 &lt;/div&gt;
 </description>
