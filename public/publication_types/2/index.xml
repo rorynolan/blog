@@ -8,9 +8,7 @@
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Tue, 06 Mar 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/publication_types/2/index.xml" rel="self" type="application/rss+xml" />
-    
+    <atom:link href="/publication_types/2/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>ijtiff: An R Package Providing Comprehensive TIFF I/O</title>
@@ -36,7 +34,8 @@
       <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
       
       <guid>/publication/nandb/</guid>
-      <description>nandb is available to download for free from CRAN and GitHub.</description>
+      <description>&lt;p&gt;&lt;code&gt;nandb&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=nandb&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/nandb&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -45,7 +44,8 @@
       <pubDate>Wed, 21 Jun 2017 00:00:00 +0100</pubDate>
       
       <guid>/publication/exampletestr/</guid>
-      <description>exampletestr is available to download for free from CRAN and GitHub.</description>
+      <description>&lt;p&gt;&lt;code&gt;exampletestr&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=exampletestr&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/exampletestr&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+</description>
     </item>
     
   </channel>

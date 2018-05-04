@@ -8,9 +8,7 @@
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Sat, 02 Jan 2016 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/publication_types/0/index.xml" rel="self" type="application/rss+xml" />
-    
+    <atom:link href="/publication_types/0/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>autothresholdr: An R Port of the &#39;ImageJ&#39; Plugin &#39;Auto Threshold&#39;</title>
@@ -18,7 +16,8 @@
       <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
       
       <guid>/publication/autothresholdr/</guid>
-      <description>autothresholdr is available to download for free from CRAN and GitHub.</description>
+      <description>&lt;p&gt;&lt;code&gt;autothresholdr&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=autothresholdr&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/autothresholdr&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -27,7 +26,8 @@
       <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
       
       <guid>/publication/filesstrings/</guid>
-      <description>filesstrings is available to download for free from CRAN and GitHub.</description>
+      <description>&lt;p&gt;&lt;code&gt;filesstrings&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=filesstrings&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/filesstrings&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+</description>
     </item>
     
   </channel>
