@@ -1,139 +1,59 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-  <title>roryverse</title>
-  <link>/</link>
-  <description>Recent content on roryverse</description>
-  <generator>Hugo -- gohugo.io</generator>
-<language>en-us</language>
-<copyright>&amp;copy; 2018</copyright>
-<lastBuildDate>Sun, 15 Oct 2017 00:00:00 +0100</lastBuildDate>
-
-<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-
-
-<item>
-  <title>Rory Nolan</title>
-  <link>/home/hero/</link>
-  <pubDate>Sun, 15 Oct 2017 00:00:00 +0100</pubDate>
-  
-<guid>/home/hero/</guid>
-  <description>&lt;p&gt;Data scientist.
-R developer.
-Image analyst.
-Statistician.&lt;/p&gt;
-</description>
-  </item>
-  
-<item>
-  <title></title>
-  <link>/home/about/</link>
-  <pubDate>Wed, 20 Apr 2016 00:00:00 +0100</pubDate>
-  
-<guid>/home/about/</guid>
-  <description>
-
-&lt;h1 id=&#34;biography&#34;&gt;Biography&lt;/h1&gt;
-
-&lt;p&gt;Rory Nolan is a PhD student at oxford supervised by Sergi Padilla. His research focuses on algorithms for the correction of photobleaching, a process which causes fluorescence microscopy images to get dimmer over time. He develops software in the R language for image analysis, TIFF file I/O and file and string manipulation.&lt;/p&gt;
-</description>
-  </item>
-  
-<item>
-  <title>Selected Publications</title>
-  <link>/home/publications_selected/</link>
-  <pubDate>Wed, 20 Apr 2016 00:00:00 +0100</pubDate>
-  
-<guid>/home/publications_selected/</guid>
-  <description></description>
-  </item>
-  
-<item>
-  <title>Recent Publications</title>
-  <link>/home/publications/</link>
-  <pubDate>Wed, 20 Apr 2016 00:00:00 +0100</pubDate>
-  
-<guid>/home/publications/</guid>
-  <description></description>
-  </item>
-  
-<item>
-  <title>Recent &amp; Upcoming Talks</title>
-  <link>/home/talks/</link>
-  <pubDate>Wed, 20 Apr 2016 00:00:00 +0100</pubDate>
-  
-<guid>/home/talks/</guid>
-  <description></description>
-  </item>
-  
-<item>
-  <title>Recent Posts</title>
-  <link>/home/posts/</link>
-  <pubDate>Wed, 20 Apr 2016 00:00:00 +0100</pubDate>
-  
-<guid>/home/posts/</guid>
-  <description></description>
-  </item>
-  
-<item>
-  <title>Tags</title>
-  <link>/home/tags/</link>
-  <pubDate>Wed, 20 Sep 2017 00:00:00 +0100</pubDate>
-  
-<guid>/home/tags/</guid>
-  <description></description>
-  </item>
-  
-<item>
-  <title>Contact</title>
-  <link>/home/contact/</link>
-  <pubDate>Wed, 20 Apr 2016 00:00:00 +0100</pubDate>
-  
-<guid>/home/contact/</guid>
-  <description></description>
-  </item>
-  
-<item>
-  <title>Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</title>
-  <link>/2018/05/03/rcsetseed/</link>
-  <pubDate>Thu, 03 May 2018 00:00:00 +0000</pubDate>
-  
-<guid>/2018/05/03/rcsetseed/</guid>
-  <description>&lt;p&gt;In native R, the user sets the seed for random number generation (RNG) with &lt;code&gt;set.seed()&lt;/code&gt;. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by &lt;code&gt;set.seed()&lt;/code&gt;. Good news guys, it can be done.&lt;/p&gt;
-&lt;p&gt;We’ll need the &lt;code&gt;inline&lt;/code&gt;, &lt;code&gt;purrr&lt;/code&gt; and &lt;code&gt;microbenchmark&lt;/code&gt; packages.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pkgs &amp;lt;- c(&amp;quot;inline&amp;quot;, &amp;quot;purrr&amp;quot;, &amp;quot;microbenchmark&amp;quot;)
+    <title>roryverse on roryverse</title>
+    <link>/</link>
+    <description>Recent content in roryverse on roryverse</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Sun, 15 Oct 2017 00:00:00 +0100</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</title>
+      <link>/2018/05/03/rcsetseed/</link>
+      <pubDate>Thu, 03 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/05/03/rcsetseed/</guid>
+      <description>In native R, the user sets the seed for random number generation (RNG) with set.seed(). Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by set.seed(). Good news guys, it can be done.
+We’ll need the inline, purrr and microbenchmark packages.
+pkgs &amp;lt;- c(&amp;quot;inline&amp;quot;, &amp;quot;purrr&amp;quot;, &amp;quot;microbenchmark&amp;quot;) for (p in pkgs) if (!require(p, character.only = TRUE)) { install.packages(p) library(p, character.only = TRUE) } #&amp;gt; Loading required package: inline #&amp;gt; Loading required package: purrr #&amp;gt; Loading required package: microbenchmark rbernoulli Base R (or technically the stats package) provides no rbernoulli().</description>
+      <content:encoded><p>In native R, the user sets the seed for random number generation (RNG) with <code>set.seed()</code>. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by <code>set.seed()</code>. Good news guys, it can be done.</p>
+<p>We’ll need the <code>inline</code>, <code>purrr</code> and <code>microbenchmark</code> packages.</p>
+<pre class="r"><code>pkgs &lt;- c(&quot;inline&quot;, &quot;purrr&quot;, &quot;microbenchmark&quot;)
 for (p in pkgs) if (!require(p, character.only = TRUE)) {
   install.packages(p)
   library(p, character.only = TRUE)
 }
-#&amp;gt; Loading required package: inline
-#&amp;gt; Loading required package: purrr
-#&amp;gt; Loading required package: microbenchmark&lt;/code&gt;&lt;/pre&gt;
-&lt;div id=&#34;rbernoulli&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;&lt;code&gt;rbernoulli&lt;/code&gt;&lt;/h1&gt;
-&lt;p&gt;Base R (or technically the &lt;code&gt;stats&lt;/code&gt; package) provides no &lt;code&gt;rbernoulli()&lt;/code&gt;. It’s a pretty gaping hole in the pantheon of &lt;code&gt;rbeta()&lt;/code&gt;, &lt;code&gt;rbinom()&lt;/code&gt;, &lt;code&gt;rcauchy&lt;/code&gt;, &lt;code&gt;rchisq()&lt;/code&gt;, &lt;code&gt;rexp()&lt;/code&gt;, &lt;code&gt;rf()&lt;/code&gt;, &lt;code&gt;rgamma()&lt;/code&gt;, etc. Thankfully, Hadley Wickham noticed this and gave us &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1)
+#&gt; Loading required package: inline
+#&gt; Loading required package: purrr
+#&gt; Loading required package: microbenchmark</code></pre>
+<div id="rbernoulli" class="section level1">
+<h1><code>rbernoulli</code></h1>
+<p>Base R (or technically the <code>stats</code> package) provides no <code>rbernoulli()</code>. It’s a pretty gaping hole in the pantheon of <code>rbeta()</code>, <code>rbinom()</code>, <code>rcauchy</code>, <code>rchisq()</code>, <code>rexp()</code>, <code>rf()</code>, <code>rgamma()</code>, etc. Thankfully, Hadley Wickham noticed this and gave us <code>purrr::rbernoulli()</code>.</p>
+<pre class="r"><code>set.seed(1)
 rbernoulli(5, 0.7)
-#&amp;gt; [1] FALSE  TRUE  TRUE  TRUE FALSE
+#&gt; [1] FALSE  TRUE  TRUE  TRUE FALSE
 set.seed(1)
 rbernoulli(5, 0.7)
-#&amp;gt; [1] FALSE  TRUE  TRUE  TRUE FALSE&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So it seems like Hadley managed to get &lt;code&gt;set.seed()&lt;/code&gt; to work with &lt;code&gt;rbernoulli()&lt;/code&gt;. How did he do this? Let’s take a closer look at &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;purrr::rbernoulli
-#&amp;gt; function (n, p = 0.5) 
-#&amp;gt; {
-#&amp;gt;     stats::runif(n) &amp;gt; (1 - p)
-#&amp;gt; }
-#&amp;gt; &amp;lt;bytecode: 0x7fced0a71e48&amp;gt;
-#&amp;gt; &amp;lt;environment: namespace:purrr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Ah, it seems Hadley just wrapped &lt;code&gt;runif()&lt;/code&gt;; hence, because &lt;code&gt;set.seed()&lt;/code&gt; works with &lt;code&gt;runif()&lt;/code&gt;, it works with his implementation of &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;c-rng&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;C++ RNG&lt;/h1&gt;
-&lt;p&gt;The C++ standard library provides the &lt;code&gt;&amp;lt;random&amp;gt;&lt;/code&gt; header file, which includes Bernoulli RNG. Let’s give that a whirl.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;cpp_rbernoulli &amp;lt;- rcpp(c(n = &amp;quot;integer&amp;quot;, p = &amp;quot;numeric&amp;quot;, seed = &amp;quot;integer&amp;quot;), &amp;#39;
-                       int n_ = as&amp;lt;int&amp;gt;(n), seed_ = as&amp;lt;int&amp;gt;(seed);
-                       double p_ = as&amp;lt;double&amp;gt;(p);
+#&gt; [1] FALSE  TRUE  TRUE  TRUE FALSE</code></pre>
+<p>So it seems like Hadley managed to get <code>set.seed()</code> to work with <code>rbernoulli()</code>. How did he do this? Let’s take a closer look at <code>purrr::rbernoulli()</code>.</p>
+<pre class="r"><code>purrr::rbernoulli
+#&gt; function (n, p = 0.5) 
+#&gt; {
+#&gt;     stats::runif(n) &gt; (1 - p)
+#&gt; }
+#&gt; &lt;bytecode: 0x7fced0a71e48&gt;
+#&gt; &lt;environment: namespace:purrr&gt;</code></pre>
+<p>Ah, it seems Hadley just wrapped <code>runif()</code>; hence, because <code>set.seed()</code> works with <code>runif()</code>, it works with his implementation of <code>purrr::rbernoulli()</code>.</p>
+</div>
+<div id="c-rng" class="section level1">
+<h1>C++ RNG</h1>
+<p>The C++ standard library provides the <code>&lt;random&gt;</code> header file, which includes Bernoulli RNG. Let’s give that a whirl.</p>
+<pre class="r"><code>cpp_rbernoulli &lt;- rcpp(c(n = &quot;integer&quot;, p = &quot;numeric&quot;, seed = &quot;integer&quot;), &#39;
+                       int n_ = as&lt;int&gt;(n), seed_ = as&lt;int&gt;(seed);
+                       double p_ = as&lt;double&gt;(p);
                        std::default_random_engine generator(seed_);
                        std::bernoulli_distribution distribution(p_);
                        IntegerVector out(n_);
@@ -141,164 +61,173 @@ rbernoulli(5, 0.7)
                          out[i] = distribution(generator);
                        }
                        return out;
-                       &amp;#39;, includes = &amp;quot;#include &amp;lt;random&amp;gt;&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;cpp_rbernoulli(6, 0.7, seed = 1)
-#&amp;gt; [1] 1 0 1 1 0 1
+                       &#39;, includes = &quot;#include &lt;random&gt;&quot;)</code></pre>
+<pre class="r"><code>cpp_rbernoulli(6, 0.7, seed = 1)
+#&gt; [1] 1 0 1 1 0 1
 cpp_rbernoulli(6, 0.7, seed = 1)
-#&amp;gt; [1] 1 0 1 1 0 1
+#&gt; [1] 1 0 1 1 0 1
 cpp_rbernoulli(6, 0.7, seed = 2)
-#&amp;gt; [1] 1 0 1 0 1 1&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;OK, so now we have &lt;code&gt;cpp_rbernoulli()&lt;/code&gt; which is working, but the user has to pass the seed as an argument of the function, there’s no option to use &lt;code&gt;set.seed()&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;get_seed&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;&lt;code&gt;get_seed()&lt;/code&gt;&lt;/h1&gt;
-&lt;p&gt;If only there was a &lt;code&gt;get_seed()&lt;/code&gt; function that we could use. Well, here it is!&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;get_seed &amp;lt;- function() {
+#&gt; [1] 1 0 1 0 1 1</code></pre>
+<p>OK, so now we have <code>cpp_rbernoulli()</code> which is working, but the user has to pass the seed as an argument of the function, there’s no option to use <code>set.seed()</code>.</p>
+</div>
+<div id="get_seed" class="section level1">
+<h1><code>get_seed()</code></h1>
+<p>If only there was a <code>get_seed()</code> function that we could use. Well, here it is!</p>
+<pre class="r"><code>get_seed &lt;- function() {
   sample.int(.Machine$integer.max, 1)
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This gets a positive number in the unsigned 32-bit integer range (which is always a safe bet for a seed) and it is completely determined by &lt;code&gt;set.seed()&lt;/code&gt;. Therefore, it’s fine to use as a seed itself. Let’s take a look.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1)
+}</code></pre>
+<p>This gets a positive number in the unsigned 32-bit integer range (which is always a safe bet for a seed) and it is completely determined by <code>set.seed()</code>. Therefore, it’s fine to use as a seed itself. Let’s take a look.</p>
+<pre class="r"><code>set.seed(1)
 replicate(6, get_seed())
-#&amp;gt; [1]  570175513  799129990 1230193230 1950361378  433108649 1929277158
+#&gt; [1]  570175513  799129990 1230193230 1950361378  433108649 1929277158
 set.seed(1)
 replicate(6, get_seed())
-#&amp;gt; [1]  570175513  799129990 1230193230 1950361378  433108649 1929277158
+#&gt; [1]  570175513  799129990 1230193230 1950361378  433108649 1929277158
 set.seed(2)
 replicate(6, get_seed())
-#&amp;gt; [1]  397031630 1508336757 1231208929  360888751 2026879546 2026097046
+#&gt; [1]  397031630 1508336757 1231208929  360888751 2026879546 2026097046
 set.seed(2)
 replicate(6, get_seed())
-#&amp;gt; [1]  397031630 1508336757 1231208929  360888751 2026879546 2026097046&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So as we can see, setting a seed via &lt;code&gt;set.seed()&lt;/code&gt; determines the seeds that subsequently come out of &lt;code&gt;get_seed()&lt;/code&gt;, so all is well with the world. &lt;code&gt;get_seed()&lt;/code&gt; can now be used to create a version of &lt;code&gt;cpp_rbernoulli()&lt;/code&gt; which uses &lt;code&gt;set.seed()&lt;/code&gt;. For the sake of inflating my own ego, I’ll name this version after myself.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;rorybernoulli &amp;lt;- function(n, p) {
+#&gt; [1]  397031630 1508336757 1231208929  360888751 2026879546 2026097046</code></pre>
+<p>So as we can see, setting a seed via <code>set.seed()</code> determines the seeds that subsequently come out of <code>get_seed()</code>, so all is well with the world. <code>get_seed()</code> can now be used to create a version of <code>cpp_rbernoulli()</code> which uses <code>set.seed()</code>. For the sake of inflating my own ego, I’ll name this version after myself.</p>
+<pre class="r"><code>rorybernoulli &lt;- function(n, p) {
   cpp_rbernoulli(n, p, get_seed())
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Let’s check that it’s in working order.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1)
+}</code></pre>
+<p>Let’s check that it’s in working order.</p>
+<pre class="r"><code>set.seed(1)
 rorybernoulli(6, 0.7)
-#&amp;gt; [1] 1 1 0 0 1 0
+#&gt; [1] 1 1 0 0 1 0
 set.seed(1)
 rorybernoulli(6, 0.7)
-#&amp;gt; [1] 1 1 0 0 1 0
+#&gt; [1] 1 1 0 0 1 0
 set.seed(2)
 rorybernoulli(6, 0.7)
-#&amp;gt; [1] 0 1 1 1 1 1
+#&gt; [1] 0 1 1 1 1 1
 set.seed(2)
 rorybernoulli(6, 0.7)
-#&amp;gt; [1] 0 1 1 1 1 1&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Everything is awesome.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;benchmarking&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Benchmarking&lt;/h1&gt;
-&lt;p&gt;Lastly, let’s compare the two Bernoulli RNGs that we have now by asking them both to give us a million Bernoulli random numbers with &lt;code&gt;p = 0.5&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;microbenchmark(purrr::rbernoulli(1e6, p = 0.5),
+#&gt; [1] 0 1 1 1 1 1</code></pre>
+<p>Everything is awesome.</p>
+</div>
+<div id="benchmarking" class="section level1">
+<h1>Benchmarking</h1>
+<p>Lastly, let’s compare the two Bernoulli RNGs that we have now by asking them both to give us a million Bernoulli random numbers with <code>p = 0.5</code>.</p>
+<pre class="r"><code>microbenchmark(purrr::rbernoulli(1e6, p = 0.5),
                rorybernoulli(1e6, p = 0.5))
-#&amp;gt; Unit: milliseconds
-#&amp;gt;                               expr       min        lq     mean    median
-#&amp;gt;  purrr::rbernoulli(1e+06, p = 0.5) 27.649190 28.925436 30.72682 29.261647
-#&amp;gt;      rorybernoulli(1e+06, p = 0.5)  8.666218  9.358442 10.05507  9.451382
-#&amp;gt;         uq      max neval cld
-#&amp;gt;  33.057620 44.72999   100   b
-#&amp;gt;   9.744706 16.10007   100  a&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that the can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
-&lt;/div&gt;
-</description>
-  </item>
-  
-<item>
-  <title>Improved Algorithms for Detrending Images for FCS and FFS.</title>
-  <link>/talk/elmi2018/</link>
-  <pubDate>Wed, 25 Apr 2018 00:00:00 +0100</pubDate>
-  
-<guid>/talk/elmi2018/</guid>
-  <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
-</description>
-  </item>
-  
-<item>
-  <title>ijtiff: An R Package Providing Comprehensive TIFF I/O</title>
-  <link>/publication/ijtiff/</link>
-  <pubDate>Tue, 06 Mar 2018 00:00:00 +0000</pubDate>
-  
-<guid>/publication/ijtiff/</guid>
-  <description></description>
-  </item>
-  
-<item>
-  <title>Detecting Protein Aggregation and Interactions in Live Cells: a Guide to Number and Brightness</title>
-  <link>/publication/nbreview/</link>
-  <pubDate>Wed, 06 Dec 2017 00:00:00 +0000</pubDate>
-  
-<guid>/publication/nbreview/</guid>
-  <description></description>
-  </item>
-  
-<item>
-  <title>nandb — Number and Brightness in R with a Novel Automatic Detrending Algorithm</title>
-  <link>/publication/nandb/</link>
-  <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
-  
-<guid>/publication/nandb/</guid>
-  <description>&lt;p&gt;&lt;code&gt;nandb&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=nandb&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/nandb&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-</description>
-  </item>
-  
-<item>
-  <title>exampletestr - An Easy Start to Unit Testing R Packages</title>
-  <link>/publication/exampletestr/</link>
-  <pubDate>Wed, 21 Jun 2017 00:00:00 +0100</pubDate>
-  
-<guid>/publication/exampletestr/</guid>
-  <description>&lt;p&gt;&lt;code&gt;exampletestr&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=exampletestr&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/exampletestr&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-</description>
-  </item>
-  
-<item>
-  <title>Deep Learning</title>
-  <link>/project/deep-learning/</link>
-  <pubDate>Wed, 27 Apr 2016 00:00:00 +0100</pubDate>
-  
-<guid>/project/deep-learning/</guid>
-  <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+#&gt; Unit: milliseconds
+#&gt;                               expr       min        lq     mean    median
+#&gt;  purrr::rbernoulli(1e+06, p = 0.5) 27.649190 28.925436 30.72682 29.261647
+#&gt;      rorybernoulli(1e+06, p = 0.5)  8.666218  9.358442 10.05507  9.451382
+#&gt;         uq      max neval cld
+#&gt;  33.057620 44.72999   100   b
+#&gt;   9.744706 16.10007   100  a</code></pre>
+<p>Wow, <code>rorybernoulli()</code> is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as <code>purrr::rbernoulli()</code> does). The point of me writing this post was to share this <code>get_seed()</code> thing with people so that the can use <code>set.seed()</code> with <code>Rcpp</code> and the like; <code>purrr::rbernoulli()</code> was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to <code>purrr</code>!</p>
+</div>
+</content:encoded>
+    </item>
+    
+    <item>
+      <title>Improved Algorithms for Detrending Images for FCS and FFS.</title>
+      <link>/talk/elmi2018/</link>
+      <pubDate>Wed, 25 Apr 2018 00:00:00 +0100</pubDate>
+      
+      <guid>/talk/elmi2018/</guid>
+      <description>Embed your slides or video here using shortcodes. Further details can easily be added using Markdown and $\rm \LaTeX$ math code.</description>
+      <content:encoded><p>Embed your slides or video here using <a href="https://sourcethemes.com/academic/post/writing-markdown-latex/" target="_blank">shortcodes</a>. Further details can easily be added using <em>Markdown</em> and $\rm \LaTeX$ math code.</p>
+</content:encoded>
+    </item>
+    
+    <item>
+      <title>ijtiff: An R Package Providing Comprehensive TIFF I/O</title>
+      <link>/publication/ijtiff/</link>
+      <pubDate>Tue, 06 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/ijtiff/</guid>
+      <description></description>
+      <content:encoded></content:encoded>
+    </item>
+    
+    <item>
+      <title>Detecting Protein Aggregation and Interactions in Live Cells: a Guide to Number and Brightness</title>
+      <link>/publication/nbreview/</link>
+      <pubDate>Wed, 06 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/nbreview/</guid>
+      <description></description>
+      <content:encoded></content:encoded>
+    </item>
+    
+    <item>
+      <title>nandb — Number and Brightness in R with a Novel Automatic Detrending Algorithm</title>
+      <link>/publication/nandb/</link>
+      <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/nandb/</guid>
+      <description>nandb is available to download for free from CRAN and GitHub.</description>
+      <content:encoded><p><code>nandb</code> is available to download for free from <a href="https://cran.r-project.org/package=nandb" target="_blank">CRAN</a> and <a href="https://www.github.com/rorynolan/nandb" target="_blank">GitHub</a>.</p>
+</content:encoded>
+    </item>
+    
+    <item>
+      <title>exampletestr - An Easy Start to Unit Testing R Packages</title>
+      <link>/publication/exampletestr/</link>
+      <pubDate>Wed, 21 Jun 2017 00:00:00 +0100</pubDate>
+      
+      <guid>/publication/exampletestr/</guid>
+      <description>exampletestr is available to download for free from CRAN and GitHub.</description>
+      <content:encoded><p><code>exampletestr</code> is available to download for free from <a href="https://cran.r-project.org/package=exampletestr" target="_blank">CRAN</a> and <a href="https://www.github.com/rorynolan/exampletestr" target="_blank">GitHub</a>.</p>
+</content:encoded>
+    </item>
+    
+    <item>
+      <title>Deep Learning</title>
+      <link>/project/deep-learning/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0100</pubDate>
+      
+      <guid>/project/deep-learning/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus.</description>
+      <content:encoded><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.</p>
 
-&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+<p>Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.</p>
 
-&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+<p>Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.</p>
 
-&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+<p>Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.</p>
 
-&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
-</description>
-  </item>
-  
-<item>
-  <title>External Project</title>
-  <link>/project/example-external-project/</link>
-  <pubDate>Wed, 27 Apr 2016 00:00:00 +0100</pubDate>
-  
-<guid>/project/example-external-project/</guid>
-  <description></description>
-  </item>
-  
-<item>
-  <title>autothresholdr: An R Port of the &#39;ImageJ&#39; Plugin &#39;Auto Threshold&#39;</title>
-  <link>/publication/autothresholdr/</link>
-  <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
-  
-<guid>/publication/autothresholdr/</guid>
-  <description>&lt;p&gt;&lt;code&gt;autothresholdr&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=autothresholdr&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/autothresholdr&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-</description>
-  </item>
-  
-<item>
-  <title>filesstrings: An R Package for File and String Manipulation</title>
-  <link>/publication/filesstrings/</link>
-  <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-  
-<guid>/publication/filesstrings/</guid>
-  <description>&lt;p&gt;&lt;code&gt;filesstrings&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=filesstrings&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/filesstrings&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-</description>
-  </item>
-  
-</channel>
-  </rss>
+<p>Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.</p>
+</content:encoded>
+    </item>
+    
+    <item>
+      <title>External Project</title>
+      <link>/project/example-external-project/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0100</pubDate>
+      
+      <guid>/project/example-external-project/</guid>
+      <description></description>
+      <content:encoded></content:encoded>
+    </item>
+    
+    <item>
+      <title>autothresholdr: An R Port of the &#39;ImageJ&#39; Plugin &#39;Auto Threshold&#39;</title>
+      <link>/publication/autothresholdr/</link>
+      <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/autothresholdr/</guid>
+      <description>autothresholdr is available to download for free from CRAN and GitHub.</description>
+      <content:encoded><p><code>autothresholdr</code> is available to download for free from <a href="https://cran.r-project.org/package=autothresholdr" target="_blank">CRAN</a> and <a href="https://www.github.com/rorynolan/autothresholdr" target="_blank">GitHub</a>.</p>
+</content:encoded>
+    </item>
+    
+    <item>
+      <title>filesstrings: An R Package for File and String Manipulation</title>
+      <link>/publication/filesstrings/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/filesstrings/</guid>
+      <description>filesstrings is available to download for free from CRAN and GitHub.</description>
+      <content:encoded><p><code>filesstrings</code> is available to download for free from <a href="https://cran.r-project.org/package=filesstrings" target="_blank">CRAN</a> and <a href="https://www.github.com/rorynolan/filesstrings" target="_blank">GitHub</a>.</p>
+</content:encoded>
+    </item>
+    
+  </channel>
+</rss>
