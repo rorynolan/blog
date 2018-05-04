@@ -14,3 +14,8 @@ list_format = 1
 image = ""
 caption = ""
 +++
+
+
+## Blogroll
+
+* R-bloggers: https://www.r-bloggers.com/
