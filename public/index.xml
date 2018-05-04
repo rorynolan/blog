@@ -28,7 +28,7 @@ for (p in pkgs) if (!require(p, character.only = TRUE)) {
 #&amp;gt; Loading required package: microbenchmark&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;rbernoulli&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;&lt;code&gt;rbernoulli&lt;/code&gt;&lt;/h1&gt;
-&lt;p&gt;Base R (or technically the &lt;code&gt;stats&lt;/code&gt; package) provides no &lt;code&gt;rbernoulli()&lt;/code&gt;. It’s a pretty gaping hole in the pantheon of &lt;code&gt;rbeta()&lt;/code&gt;, &lt;code&gt;rbinom()&lt;/code&gt;, &lt;code&gt;rcauchy&lt;/code&gt;, &lt;code&gt;rchisq()&lt;/code&gt;, &lt;code&gt;rexp()&lt;/code&gt;, &lt;code&gt;rf()&lt;/code&gt;, &lt;code&gt;rgamma&lt;/code&gt;, etc. Thankfully, Hadley Wickham noticed this and gave us &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Base R (or technically the &lt;code&gt;stats&lt;/code&gt; package) provides no &lt;code&gt;rbernoulli()&lt;/code&gt;. It’s a pretty gaping hole in the pantheon of &lt;code&gt;rbeta()&lt;/code&gt;, &lt;code&gt;rbinom()&lt;/code&gt;, &lt;code&gt;rcauchy&lt;/code&gt;, &lt;code&gt;rchisq()&lt;/code&gt;, &lt;code&gt;rexp()&lt;/code&gt;, &lt;code&gt;rf()&lt;/code&gt;, &lt;code&gt;rgamma()&lt;/code&gt;, etc. Thankfully, Hadley Wickham noticed this and gave us &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1)
 rbernoulli(5, 0.7)
 #&amp;gt; [1] FALSE  TRUE  TRUE  TRUE FALSE
@@ -41,7 +41,7 @@ rbernoulli(5, 0.7)
 #&amp;gt; {
 #&amp;gt;     stats::runif(n) &amp;gt; (1 - p)
 #&amp;gt; }
-#&amp;gt; &amp;lt;bytecode: 0x7fd832470e48&amp;gt;
+#&amp;gt; &amp;lt;bytecode: 0x7fd98b6da448&amp;gt;
 #&amp;gt; &amp;lt;environment: namespace:purrr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Ah, it seems Hadley just wrapped &lt;code&gt;runif()&lt;/code&gt;; hence, because &lt;code&gt;set.seed()&lt;/code&gt; works with &lt;code&gt;runif()&lt;/code&gt;, it works with his implementation of &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -111,12 +111,12 @@ rorybernoulli(6, 0.7)
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;microbenchmark(purrr::rbernoulli(1e6, p = 0.5),
                rorybernoulli(1e6, p = 0.5))
 #&amp;gt; Unit: milliseconds
-#&amp;gt;                               expr       min        lq     mean    median
-#&amp;gt;  purrr::rbernoulli(1e+06, p = 0.5) 27.210860 28.800640 30.82682 29.443661
-#&amp;gt;      rorybernoulli(1e+06, p = 0.5)  8.657365  9.334546 10.03507  9.473817
+#&amp;gt;                               expr       min       lq     mean    median
+#&amp;gt;  purrr::rbernoulli(1e+06, p = 0.5) 27.746392 28.59405 30.50884 29.356782
+#&amp;gt;      rorybernoulli(1e+06, p = 0.5)  8.408874  9.21296 10.08756  9.484896
 #&amp;gt;         uq      max neval cld
-#&amp;gt;  32.542991 42.86972   100   b
-#&amp;gt;   9.718417 16.44893   100  a&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt;  32.543185 40.91353   100   b
+#&amp;gt;   9.992909 16.52791   100  a&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that the can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
 &lt;/div&gt;
 </description>

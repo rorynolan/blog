@@ -21,7 +21,7 @@ for (p in pkgs) if (!require(p, character.only = TRUE)) {
 #&gt; Loading required package: microbenchmark</code></pre>
 <div id="rbernoulli" class="section level1">
 <h1><code>rbernoulli</code></h1>
-<p>Base R (or technically the <code>stats</code> package) provides no <code>rbernoulli()</code>. It’s a pretty gaping hole in the pantheon of <code>rbeta()</code>, <code>rbinom()</code>, <code>rcauchy</code>, <code>rchisq()</code>, <code>rexp()</code>, <code>rf()</code>, <code>rgamma</code>, etc. Thankfully, Hadley Wickham noticed this and gave us <code>purrr::rbernoulli()</code>.</p>
+<p>Base R (or technically the <code>stats</code> package) provides no <code>rbernoulli()</code>. It’s a pretty gaping hole in the pantheon of <code>rbeta()</code>, <code>rbinom()</code>, <code>rcauchy</code>, <code>rchisq()</code>, <code>rexp()</code>, <code>rf()</code>, <code>rgamma()</code>, etc. Thankfully, Hadley Wickham noticed this and gave us <code>purrr::rbernoulli()</code>.</p>
 <pre class="r"><code>set.seed(1)
 rbernoulli(5, 0.7)
 #&gt; [1] FALSE  TRUE  TRUE  TRUE FALSE
@@ -34,7 +34,7 @@ rbernoulli(5, 0.7)
 #&gt; {
 #&gt;     stats::runif(n) &gt; (1 - p)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fd832470e48&gt;
+#&gt; &lt;bytecode: 0x7fd98b6da448&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 <p>Ah, it seems Hadley just wrapped <code>runif()</code>; hence, because <code>set.seed()</code> works with <code>runif()</code>, it works with his implementation of <code>purrr::rbernoulli()</code>.</p>
 </div>
@@ -104,11 +104,11 @@ rorybernoulli(6, 0.7)
 <pre class="r"><code>microbenchmark(purrr::rbernoulli(1e6, p = 0.5),
                rorybernoulli(1e6, p = 0.5))
 #&gt; Unit: milliseconds
-#&gt;                               expr       min        lq     mean    median
-#&gt;  purrr::rbernoulli(1e+06, p = 0.5) 27.210860 28.800640 30.82682 29.443661
-#&gt;      rorybernoulli(1e+06, p = 0.5)  8.657365  9.334546 10.03507  9.473817
+#&gt;                               expr       min       lq     mean    median
+#&gt;  purrr::rbernoulli(1e+06, p = 0.5) 27.746392 28.59405 30.50884 29.356782
+#&gt;      rorybernoulli(1e+06, p = 0.5)  8.408874  9.21296 10.08756  9.484896
 #&gt;         uq      max neval cld
-#&gt;  32.542991 42.86972   100   b
-#&gt;   9.718417 16.44893   100  a</code></pre>
+#&gt;  32.543185 40.91353   100   b
+#&gt;   9.992909 16.52791   100  a</code></pre>
 <p>Wow, <code>rorybernoulli()</code> is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as <code>purrr::rbernoulli()</code> does). The point of me writing this post was to share this <code>get_seed()</code> thing with people so that the can use <code>set.seed()</code> with <code>Rcpp</code> and the like; <code>purrr::rbernoulli()</code> was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to <code>purrr</code>!</p>
 </div>
