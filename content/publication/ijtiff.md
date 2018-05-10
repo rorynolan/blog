@@ -47,7 +47,7 @@ url_pdf = "https://www.theoj.org/joss-papers/joss.00633/10.21105.joss.00633.pdf"
 
 # Custom links (optional).
 #   Uncomment line below to enable. For multiple links, use the form `[{...}, {...}, {...}]`.
-url_custom = [{name = "Article", url = "https://doi.org/10.21105/joss.00633"}]
+url_custom = [{name = "Article", url = "https://doi.org/10.21105/joss.00633"}, {name = "CRAN", url = "https://cran.r-project.org/package=ijtiff"}, {name = "GitHub", url = "https://www.github.com/ropensci/ijtiff"}]
 
 # Does the content use math formatting?
 math = false
@@ -63,3 +63,4 @@ caption = "The `ijtiff` R package"
 
 +++
 
+`ijtiff` is available to download for free from [CRAN](https://cran.r-project.org/package=ijtiff) and [GitHub](https://www.github.com/ropensci/ijtiff).

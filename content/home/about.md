@@ -27,6 +27,11 @@ weight = 5
   course = "BA Mathematics"
   institution = "Trinity College Dublin"
   year = 2014
+  
+[[education.courses]]
+  course = "Foundation Scholarship, Theoretical Physics"
+  institution = "Trinity College Dublin"
+  year = 2012
  
 +++
 

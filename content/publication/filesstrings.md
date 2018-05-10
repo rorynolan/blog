@@ -14,7 +14,7 @@ authors = ["Rory Nolan", "Sergi Padilla-Parra"]
 # 4 = Technical report
 # 5 = Book
 # 6 = Book chapter
-publication_types = ["0"]
+publication_types = ["2"]
 
 # Publication name and optional abbreviated version.
 publication = "In *The Journal of Open Source Software*."

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>4 on roryverse</title>
+    <link>/publication_types/4/</link>
+    <description>Recent content in 4 on roryverse</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Sat, 02 Jan 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/publication_types/4/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>autothresholdr: An R Port of the &#39;ImageJ&#39; Plugin &#39;Auto Threshold&#39;</title>
+      <link>/publication/autothresholdr/</link>
+      <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/autothresholdr/</guid>
+      <description>&lt;p&gt;&lt;code&gt;autothresholdr&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=autothresholdr&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/autothresholdr&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

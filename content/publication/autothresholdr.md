@@ -14,7 +14,7 @@ authors = ["Rory Nolan", "Gabriel Landini", "Sergi Padilla-Parra"]
 # 4 = Technical report
 # 5 = Book
 # 6 = Book chapter
-publication_types = ["0"]
+publication_types = ["4"]
 
 # Publication name and optional abbreviated version.
 publication = "On *The Comprehensive R Archive Network*."
@@ -43,7 +43,7 @@ selected = false
 # url_slides = "#"
 # url_video = "#"
 # url_poster = "#"
-# url_source = "#"
+# url_source = """
 
 # Custom links (optional).
 #   Uncomment line below to enable. For multiple links, use the form `[{...}, {...}, {...}]`.
