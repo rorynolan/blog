@@ -11,7 +11,7 @@ tags: ["R", "seeds", "set.seed()", "C", "C++", "Rcpp"]
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
-In native R, the user sets the seed for random number generation (RNG) with `set.seed()`. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by `set.seed()`. Good news guys, it can be done.
+In native R, the user sets the seed for random number generation (RNG) with `set.seed()`. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by `set.seed()`. Good news! It can be done.
 
 We'll need the `inline`, `purrr` and `microbenchmark` packages. 
 ```{r load-libraries, warning=FALSE}
