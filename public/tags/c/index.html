@@ -92,7 +92,7 @@
   <meta property="og:description" content="PhD Student">
   <meta property="og:locale" content="en-us">
   
-  <meta property="og:updated_time" content="2018-05-08T00:00:00&#43;00:00">
+  <meta property="og:updated_time" content="2018-09-30T00:00:00&#43;00:00">
   
 
   
@@ -224,12 +224,11 @@
   
   
   <div>
-    <h2><a href="/2018/05/08/rcsetseed/">Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</a></h2>
+    <h2><a href="/2018/09/30/rcsetseed/">Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</a></h2>
     <div class="article-style">
       
       In native R, the user sets the seed for random number generation (RNG) with set.seed(). Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by set.seed(). Good news! It can be done.
-We’ll need the inline, purrr and microbenchmark packages.
-pkgs &lt;- c(&quot;inline&quot;, &quot;purrr&quot;, &quot;microbenchmark&quot;) for (p in pkgs) if (!require(p, character.only = TRUE)) { install.packages(p) library(p, character.only = TRUE) } #&gt; Loading required package: inline #&gt; Loading required package: purrr #&gt; Loading required package: microbenchmark rbernoulli Base R (or technically the stats package) provides no rbernoulli().
+pacman::p_load(inline, purrr) rbernoulli Base R (or technically the stats package) provides no rbernoulli(). It’s a pretty gaping hole in the pantheon of rbeta(), rbinom(), rcauchy, rchisq(), rexp(), rf(), rgamma(), etc.
       
     </div>
   </div>

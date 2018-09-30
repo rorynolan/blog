@@ -7,25 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Tue, 08 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 30 Sep 2018 00:00:00 +0000</lastBuildDate>
     <atom:link href="/tags/c&#43;&#43;/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</title>
-      <link>/2018/05/08/rcsetseed/</link>
-      <pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate>
+      <link>/2018/09/30/rcsetseed/</link>
+      <pubDate>Sun, 30 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/05/08/rcsetseed/</guid>
+      <guid>/2018/09/30/rcsetseed/</guid>
       <description>&lt;p&gt;In native R, the user sets the seed for random number generation (RNG) with &lt;code&gt;set.seed()&lt;/code&gt;. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by &lt;code&gt;set.seed()&lt;/code&gt;. Good news! It can be done.&lt;/p&gt;
-&lt;p&gt;We’ll need the &lt;code&gt;inline&lt;/code&gt;, &lt;code&gt;purrr&lt;/code&gt; and &lt;code&gt;microbenchmark&lt;/code&gt; packages.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pkgs &amp;lt;- c(&amp;quot;inline&amp;quot;, &amp;quot;purrr&amp;quot;, &amp;quot;microbenchmark&amp;quot;)
-for (p in pkgs) if (!require(p, character.only = TRUE)) {
-  install.packages(p)
-  library(p, character.only = TRUE)
-}
-#&amp;gt; Loading required package: inline
-#&amp;gt; Loading required package: purrr
-#&amp;gt; Loading required package: microbenchmark&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pacman::p_load(inline, purrr)&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;rbernoulli&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;&lt;code&gt;rbernoulli&lt;/code&gt;&lt;/h1&gt;
 &lt;p&gt;Base R (or technically the &lt;code&gt;stats&lt;/code&gt; package) provides no &lt;code&gt;rbernoulli()&lt;/code&gt;. It’s a pretty gaping hole in the pantheon of &lt;code&gt;rbeta()&lt;/code&gt;, &lt;code&gt;rbinom()&lt;/code&gt;, &lt;code&gt;rcauchy&lt;/code&gt;, &lt;code&gt;rchisq()&lt;/code&gt;, &lt;code&gt;rexp()&lt;/code&gt;, &lt;code&gt;rf()&lt;/code&gt;, &lt;code&gt;rgamma()&lt;/code&gt;, etc. Thankfully, Hadley Wickham noticed this and gave us &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
@@ -41,7 +33,7 @@ rbernoulli(5, 0.7)
 #&amp;gt; {
 #&amp;gt;     stats::runif(n) &amp;gt; (1 - p)
 #&amp;gt; }
-#&amp;gt; &amp;lt;bytecode: 0x7f9b1c716778&amp;gt;
+#&amp;gt; &amp;lt;bytecode: 0x7fb23720c540&amp;gt;
 #&amp;gt; &amp;lt;environment: namespace:purrr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Ah, it seems Hadley just wrapped &lt;code&gt;runif()&lt;/code&gt;; hence, because &lt;code&gt;set.seed()&lt;/code&gt; works with &lt;code&gt;runif()&lt;/code&gt;, it works with his implementation of &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -108,16 +100,16 @@ rorybernoulli(6, 0.7)
 &lt;div id=&#34;benchmarking&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Benchmarking&lt;/h1&gt;
 &lt;p&gt;Lastly, let’s compare the two Bernoulli RNGs that we have now by asking them both to give us a million Bernoulli random numbers with &lt;code&gt;p = 0.5&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;microbenchmark(purrr::rbernoulli(1e6, p = 0.5),
-               rorybernoulli(1e6, p = 0.5))
-#&amp;gt; Unit: milliseconds
-#&amp;gt;                               expr       min        lq     mean   median
-#&amp;gt;  purrr::rbernoulli(1e+06, p = 0.5) 27.238491 29.036677 30.83071 29.35566
-#&amp;gt;      rorybernoulli(1e+06, p = 0.5)  8.660844  9.338893 10.06795  9.46709
-#&amp;gt;         uq      max neval cld
-#&amp;gt;  32.957843 39.44020   100   b
-#&amp;gt;   9.803781 15.28896   100  a&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that the can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;bench::mark(purrr::rbernoulli(1e6, p = 0.5),
+            rorybernoulli(1e6, p = 0.5),
+            check = FALSE)
+#&amp;gt; # A tibble: 2 x 10
+#&amp;gt;   expression     min    mean  median    max `itr/sec` mem_alloc  n_gc n_itr
+#&amp;gt;   &amp;lt;chr&amp;gt;      &amp;lt;bch:t&amp;gt; &amp;lt;bch:t&amp;gt; &amp;lt;bch:t&amp;gt; &amp;lt;bch:&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;
+#&amp;gt; 1 purrr::rb…  26.9ms 29.45ms 28.57ms 32.7ms      34.0   11.45MB     4    13
+#&amp;gt; 2 roryberno…  8.55ms  9.61ms  9.38ms 12.7ms     104.     3.82MB     4    46
+#&amp;gt; # ... with 1 more variable: total_time &amp;lt;bch:tm&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). It’s also three times as efficient with memory, probably related to the time speedup. The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that the can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

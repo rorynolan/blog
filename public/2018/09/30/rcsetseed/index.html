@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.40.2" />
+  <meta name="author" content="Rory Nolan">
+
+  
+  
+  
+  
+    
+      
+    
+  
+  <meta name="description" content="In native R, the user sets the seed for random number generation (RNG) with set.seed(). Random number generators exist in C and C&#43;&#43; too; these need their own seeds, which are not obviously settable by set.seed(). Good news! It can be done.
+pacman::p_load(inline, purrr) rbernoulli Base R (or technically the stats package) provides no rbernoulli(). It’s a pretty gaping hole in the pantheon of rbeta(), rbinom(), rcauchy, rchisq(), rexp(), rf(), rgamma(), etc.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/2018/09/30/rcsetseed/">
+
+  
+
+
+  
+
+  
+  
+  <meta name="theme-color" content="#0095eb">
+  
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.1/css/academicons.min.css" integrity="sha512-NThgw3XKQ1absAahW6to7Ey42uycrVvfNfyjqcFNgCmOCQ5AR4AO0SiXrN+8ZtYeappp56lk1WtvjVmEa+VR6A==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-118655529-1', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="roryverse">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="roryverse">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/2018/09/30/rcsetseed/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@noolpost">
+  <meta property="twitter:creator" content="@noolpost">
+  
+  <meta property="og:site_name" content="roryverse">
+  <meta property="og:url" content="/2018/09/30/rcsetseed/">
+  <meta property="og:title" content="Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp) | roryverse">
+  <meta property="og:description" content="In native R, the user sets the seed for random number generation (RNG) with set.seed(). Random number generators exist in C and C&#43;&#43; too; these need their own seeds, which are not obviously settable by set.seed(). Good news! It can be done.
+pacman::p_load(inline, purrr) rbernoulli Base R (or technically the stats package) provides no rbernoulli(). It’s a pretty gaping hole in the pantheon of rbeta(), rbinom(), rcauchy, rchisq(), rexp(), rf(), rgamma(), etc.">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2018-09-30T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2018-09-30T00:00:00&#43;00:00">
+  
+
+  
+
+  
+
+  <title>Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp) | roryverse</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">roryverse</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/publication">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a href="/post">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</h1>
+
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2018-09-30 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      Sep 30, 2018
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Rory Nolan">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    4 min read
+  </span>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/2018/09/30/rcsetseed/#disqus_thread"></a>
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="/categories/r/">R</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Using%20R%27s%20set.seed%28%29%20to%20set%20seeds%20for%20use%20in%20C%2fC%2b%2b%20%28including%20Rcpp%29&amp;url=%2f2018%2f09%2f30%2frcsetseed%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2f2018%2f09%2f30%2frcsetseed%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2f2018%2f09%2f30%2frcsetseed%2f&amp;title=Using%20R%27s%20set.seed%28%29%20to%20set%20seeds%20for%20use%20in%20C%2fC%2b%2b%20%28including%20Rcpp%29"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2f2018%2f09%2f30%2frcsetseed%2f&amp;title=Using%20R%27s%20set.seed%28%29%20to%20set%20seeds%20for%20use%20in%20C%2fC%2b%2b%20%28including%20Rcpp%29"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Using%20R%27s%20set.seed%28%29%20to%20set%20seeds%20for%20use%20in%20C%2fC%2b%2b%20%28including%20Rcpp%29&amp;body=%2f2018%2f09%2f30%2frcsetseed%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      <p>In native R, the user sets the seed for random number generation (RNG) with <code>set.seed()</code>. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by <code>set.seed()</code>. Good news! It can be done.</p>
+<pre class="r"><code>pacman::p_load(inline, purrr)</code></pre>
+<div id="rbernoulli" class="section level1">
+<h1><code>rbernoulli</code></h1>
+<p>Base R (or technically the <code>stats</code> package) provides no <code>rbernoulli()</code>. It’s a pretty gaping hole in the pantheon of <code>rbeta()</code>, <code>rbinom()</code>, <code>rcauchy</code>, <code>rchisq()</code>, <code>rexp()</code>, <code>rf()</code>, <code>rgamma()</code>, etc. Thankfully, Hadley Wickham noticed this and gave us <code>purrr::rbernoulli()</code>.</p>
+<pre class="r"><code>set.seed(1)
+rbernoulli(5, 0.7)
+#&gt; [1] FALSE  TRUE  TRUE  TRUE FALSE
+set.seed(1)
+rbernoulli(5, 0.7)
+#&gt; [1] FALSE  TRUE  TRUE  TRUE FALSE</code></pre>
+<p>So it seems like Hadley managed to get <code>set.seed()</code> to work with <code>rbernoulli()</code>. How did he do this? Let’s take a closer look at <code>purrr::rbernoulli()</code>.</p>
+<pre class="r"><code>purrr::rbernoulli
+#&gt; function (n, p = 0.5) 
+#&gt; {
+#&gt;     stats::runif(n) &gt; (1 - p)
+#&gt; }
+#&gt; &lt;bytecode: 0x7fb23720c540&gt;
+#&gt; &lt;environment: namespace:purrr&gt;</code></pre>
+<p>Ah, it seems Hadley just wrapped <code>runif()</code>; hence, because <code>set.seed()</code> works with <code>runif()</code>, it works with his implementation of <code>purrr::rbernoulli()</code>.</p>
+</div>
+<div id="c-rng" class="section level1">
+<h1>C++ RNG</h1>
+<p>The C++ standard library provides the <code>&lt;random&gt;</code> header file, which includes Bernoulli RNG. Let’s give that a whirl.</p>
+<pre class="r"><code>cpp_rbernoulli &lt;- rcpp(c(n = &quot;integer&quot;, p = &quot;numeric&quot;, seed = &quot;integer&quot;), &#39;
+                       int n_ = as&lt;int&gt;(n), seed_ = as&lt;int&gt;(seed);
+                       double p_ = as&lt;double&gt;(p);
+                       std::default_random_engine generator(seed_);
+                       std::bernoulli_distribution distribution(p_);
+                       IntegerVector out(n_);
+                       for (std::size_t i = 0; i != n_; ++i) {
+                         out[i] = distribution(generator);
+                       }
+                       return out;
+                       &#39;, includes = &quot;#include &lt;random&gt;&quot;)</code></pre>
+<pre class="r"><code>cpp_rbernoulli(6, 0.7, seed = 1)
+#&gt; [1] 1 0 1 1 0 1
+cpp_rbernoulli(6, 0.7, seed = 1)
+#&gt; [1] 1 0 1 1 0 1
+cpp_rbernoulli(6, 0.7, seed = 2)
+#&gt; [1] 1 0 1 0 1 1</code></pre>
+<p>OK, so now we have <code>cpp_rbernoulli()</code> which is working, but the user has to pass the seed as an argument of the function, there’s no option to use <code>set.seed()</code>.</p>
+</div>
+<div id="get_seed" class="section level1">
+<h1><code>get_seed()</code></h1>
+<p>If only there was a <code>get_seed()</code> function that we could use. Well, here it is!</p>
+<pre class="r"><code>get_seed &lt;- function() {
+  sample.int(.Machine$integer.max, 1)
+}</code></pre>
+<p>This gets a positive number in the unsigned 32-bit integer range (which is always a safe bet for a seed) and it is completely determined by <code>set.seed()</code>. Therefore, it’s fine to use as a seed itself. Let’s take a look.</p>
+<pre class="r"><code>set.seed(1)
+replicate(6, get_seed())
+#&gt; [1]  570175513  799129990 1230193230 1950361378  433108649 1929277158
+set.seed(1)
+replicate(6, get_seed())
+#&gt; [1]  570175513  799129990 1230193230 1950361378  433108649 1929277158
+set.seed(2)
+replicate(6, get_seed())
+#&gt; [1]  397031630 1508336757 1231208929  360888751 2026879546 2026097046
+set.seed(2)
+replicate(6, get_seed())
+#&gt; [1]  397031630 1508336757 1231208929  360888751 2026879546 2026097046</code></pre>
+<p>So as we can see, setting a seed via <code>set.seed()</code> determines the seeds that subsequently come out of <code>get_seed()</code>, so all is well with the world. <code>get_seed()</code> can now be used to create a version of <code>cpp_rbernoulli()</code> which uses <code>set.seed()</code>. For the sake of inflating my own ego, I’ll name this version after myself.</p>
+<pre class="r"><code>rorybernoulli &lt;- function(n, p) {
+  cpp_rbernoulli(n, p, get_seed())
+}</code></pre>
+<p>Let’s check that it’s in working order.</p>
+<pre class="r"><code>set.seed(1)
+rorybernoulli(6, 0.7)
+#&gt; [1] 1 1 0 0 1 0
+set.seed(1)
+rorybernoulli(6, 0.7)
+#&gt; [1] 1 1 0 0 1 0
+set.seed(2)
+rorybernoulli(6, 0.7)
+#&gt; [1] 0 1 1 1 1 1
+set.seed(2)
+rorybernoulli(6, 0.7)
+#&gt; [1] 0 1 1 1 1 1</code></pre>
+<p>Everything is awesome.</p>
+</div>
+<div id="benchmarking" class="section level1">
+<h1>Benchmarking</h1>
+<p>Lastly, let’s compare the two Bernoulli RNGs that we have now by asking them both to give us a million Bernoulli random numbers with <code>p = 0.5</code>.</p>
+<pre class="r"><code>bench::mark(purrr::rbernoulli(1e6, p = 0.5),
+            rorybernoulli(1e6, p = 0.5),
+            check = FALSE)
+#&gt; # A tibble: 2 x 10
+#&gt;   expression     min    mean  median    max `itr/sec` mem_alloc  n_gc n_itr
+#&gt;   &lt;chr&gt;      &lt;bch:t&gt; &lt;bch:t&gt; &lt;bch:t&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt; &lt;dbl&gt; &lt;int&gt;
+#&gt; 1 purrr::rb…  26.9ms 29.45ms 28.57ms 32.7ms      34.0   11.45MB     4    13
+#&gt; 2 roryberno…  8.55ms  9.61ms  9.38ms 12.7ms     104.     3.82MB     4    46
+#&gt; # ... with 1 more variable: total_time &lt;bch:tm&gt;</code></pre>
+<p>Wow, <code>rorybernoulli()</code> is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as <code>purrr::rbernoulli()</code> does). It’s also three times as efficient with memory, probably related to the time speedup. The point of me writing this post was to share this <code>get_seed()</code> thing with people so that the can use <code>set.seed()</code> with <code>Rcpp</code> and the like; <code>purrr::rbernoulli()</code> was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to <code>purrr</code>!</p>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="/tags/r/">R</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/seeds/">seeds</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/set.seed/">set.seed()</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/c/">C</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/rcpp/">Rcpp</a>
+  
+</div>
+
+
+
+
+    
+    
+
+    
+
+    
+<section id="comments">
+  <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "rorynolan" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2018 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    <script id="dsq-count-scr" src="//rorynolan.disqus.com/count.js" async></script>
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+    
+    
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/R.min.js"></script>
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+
+  </body>
+</html>
+
