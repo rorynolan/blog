@@ -16,7 +16,7 @@
   <meta name="description" content="Data Scientist">
 
   
-  <link rel="alternate" hreflang="en-us" href="/post/">
+  <link rel="alternate" hreflang="en-us" href="http://rorynolan.rbind.io/post/">
 
   
 
@@ -64,23 +64,23 @@
   
 
   
-  <link rel="alternate" href="/post/index.xml" type="application/rss+xml" title="roryverse">
-  <link rel="feed" href="/post/index.xml" type="application/rss+xml" title="roryverse">
+  <link rel="alternate" href="http://rorynolan.rbind.io/post/index.xml" type="application/rss+xml" title="roryverse">
+  <link rel="feed" href="http://rorynolan.rbind.io/post/index.xml" type="application/rss+xml" title="roryverse">
   
 
   <link rel="manifest" href="/site.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/post/">
+  <link rel="canonical" href="http://rorynolan.rbind.io/post/">
 
   <meta property="twitter:card" content="summary_large_image">
   
-  <meta property="twitter:site" content="@noolpost">
-  <meta property="twitter:creator" content="@noolpost">
+  <meta property="twitter:site" content="@https://twitter.com/noolpost">
+  <meta property="twitter:creator" content="@https://twitter.com/noolpost">
   
   <meta property="og:site_name" content="roryverse">
-  <meta property="og:url" content="/post/">
+  <meta property="og:url" content="http://rorynolan.rbind.io/post/">
   <meta property="og:title" content="Posts | roryverse">
   <meta property="og:description" content="Data Scientist">
   <meta property="og:locale" content="en-us">
@@ -236,77 +236,6 @@
 
   <span class="article-date">
     
-    <time datetime="2019-06-30 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
-      Jun 30, 2019
-    </time>
-  </span>
-  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Rory Nolan">
-  </span>
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    3 min read
-  </span>
-  
-
-  
-  
-  <span class="middot-divider"></span>
-  <a href="/2019/06/30/strexgcc/#disqus_thread"></a>
-  
-
-  
-  
-  
-  <span class="middot-divider"></span>
-  <span class="article-categories">
-    <i class="fa fa-folder"></i>
-    
-    <a href="/categories/r/">R</a
-    >
-    
-  </span>
-  
-  
-
-  
-
-</div>
-
-
-  
-  
-  <h3 class="article-title" itemprop="headline">
-    <a href="/2019/06/30/strexgcc/" itemprop="url">Coping with varying `gcc` versions and capabilities in R packages</a>
-  </h3>
-  <div class="article-style" itemprop="articleBody">
-    
-    The problem I have a package called strex which is for string manipulation. In this package, I want to take advantage of the regex capabilities of C++11. The reason for this is that in strex, I find myself needing to do a calculation like
-x &lt;- list(c(&quot;1,000&quot;, &quot;2,000,000&quot;), c(&quot;1&quot;, &quot;50&quot;, &quot;3,455&quot;)) lapply(x, function(x) as.numeric(stringr::str_replace_all(x, &quot;,&quot;, &quot;&quot;))) #&gt; [[1]] #&gt; [1] 1e+03 2e+06 #&gt; #&gt; [[2]] #&gt; [1] 1 50 3455 A lapply like this can be done faster in C++11, so I’d like to have that speedup in my package.
-    
-  </div>
-  <p class="read-more" itemprop="mainEntityOfPage">
-    <a href="/2019/06/30/strexgcc/" class="btn btn-primary btn-outline">
-      CONTINUE READING
-    </a>
-  </p>
-</div>
-
-    
-  
-    
-    
-      
-
-<div class="card-simple" itemscope itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
-  
-
-<div class="article-metadata">
-
-  <span class="article-date">
-    
     <time datetime="2018-09-30 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
       Sep 30, 2018
     </time>
@@ -325,7 +254,7 @@ x &lt;- list(c(&quot;1,000&quot;, &quot;2,000,000&quot;), c(&quot;1&quot;, &quot
   
   
   <span class="middot-divider"></span>
-  <a href="/2018/09/30/rcsetseed/#disqus_thread"></a>
+  <a href="http://rorynolan.rbind.io/2018/09/30/rcsetseed/#disqus_thread"></a>
   
 
   
@@ -335,7 +264,7 @@ x &lt;- list(c(&quot;1,000&quot;, &quot;2,000,000&quot;), c(&quot;1&quot;, &quot
   <span class="article-categories">
     <i class="fa fa-folder"></i>
     
-    <a href="/categories/r/">R</a
+    <a href="http://rorynolan.rbind.io/categories/r/">R</a
     >
     
   </span>
@@ -350,7 +279,7 @@ x &lt;- list(c(&quot;1,000&quot;, &quot;2,000,000&quot;), c(&quot;1&quot;, &quot
   
   
   <h3 class="article-title" itemprop="headline">
-    <a href="/2018/09/30/rcsetseed/" itemprop="url">Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</a>
+    <a href="http://rorynolan.rbind.io/2018/09/30/rcsetseed/" itemprop="url">Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</a>
   </h3>
   <div class="article-style" itemprop="articleBody">
     
@@ -359,7 +288,7 @@ pacman::p_load(inline, purrr) rbernoulli Base R (or technically the stats packag
     
   </div>
   <p class="read-more" itemprop="mainEntityOfPage">
-    <a href="/2018/09/30/rcsetseed/" class="btn btn-primary btn-outline">
+    <a href="http://rorynolan.rbind.io/2018/09/30/rcsetseed/" class="btn btn-primary btn-outline">
       CONTINUE READING
     </a>
   </p>

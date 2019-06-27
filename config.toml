@@ -231,17 +231,17 @@ enableGitInfo = false
   [[params.social]]
     icon = "twitter"
     icon_pack = "fa"
-    link = "//twitter.com/noolpost"
+    link = "https://twitter.com/noolpost"
 
   [[params.social]]
     icon = "linkedin"
     icon_pack = "fa"
-    link = "https://www.linkedin.com/in/rory-nolan-1755b765/"
+    link = "https://www.linkedin.com/in/rorydnolan/"
 
   [[params.social]]
     icon = "github"
     icon_pack = "fa"
-    link = "//github.com/rorynolan"
+    link = "https://github.com/rorynolan"
 
   [[params.social]]
     icon = "google-scholar"

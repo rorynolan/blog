@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on roryverse</title>
-    <link>/post/</link>
+    <link>http://rorynolan.rbind.io/post/</link>
     <description>Recent content in Posts on roryverse</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,64 +11,11 @@
     <atom:link href="/post/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Coping with varying `gcc` versions and capabilities in R packages</title>
-      <link>/2019/06/30/strexgcc/</link>
-      <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/06/30/strexgcc/</guid>
-      <description>&lt;div id=&#34;the-problem&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;The problem&lt;/h1&gt;
-&lt;p&gt;I have a package called &lt;code&gt;strex&lt;/code&gt; which is for string manipulation. In this package, I want to take advantage of the regex capabilities of C++11. The reason for this is that in &lt;code&gt;strex&lt;/code&gt;, I find myself needing to do a calculation like&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;x &amp;lt;- list(c(&amp;quot;1,000&amp;quot;, &amp;quot;2,000,000&amp;quot;),
-          c(&amp;quot;1&amp;quot;, &amp;quot;50&amp;quot;, &amp;quot;3,455&amp;quot;))
-lapply(x, function(x) as.numeric(stringr::str_replace_all(x, &amp;quot;,&amp;quot;, &amp;quot;&amp;quot;)))
-#&amp;gt; [[1]]
-#&amp;gt; [1] 1e+03 2e+06
-#&amp;gt; 
-#&amp;gt; [[2]]
-#&amp;gt; [1]    1   50 3455&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;A &lt;code&gt;lapply&lt;/code&gt; like this can be done faster in C++11, so I’d like to have that speedup in my package. The problem is, this requires the regex capabilities of C++11, which are only supported in &lt;code&gt;gcc&lt;/code&gt; &amp;gt;= 4.9. Many people are using an older &lt;code&gt;gcc&lt;/code&gt;, e.g. the still popular Ubuntu 14.04 is on &lt;code&gt;gcc&lt;/code&gt; 4.8. If these people tried to install the &lt;code&gt;strex&lt;/code&gt; which relied on C++11 regex, they’d get a compile error.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;the-hope&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;The hope&lt;/h1&gt;
-&lt;p&gt;I wanted to provide the faster option to those with a capable &lt;code&gt;gcc&lt;/code&gt; and the slower &lt;code&gt;lapply&lt;/code&gt; option (which isn’t painfully slow, just a bit slower) to those with an old &lt;code&gt;gcc&lt;/code&gt;. This should all happen inside a seamless &lt;code&gt;install.packages()&lt;/code&gt; call; the user needn’t be bored by all of this.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;the-solution&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;The solution&lt;/h1&gt;
-&lt;div id=&#34;figuring-out-which-gcc-version-the-user-has&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Figuring out which &lt;code&gt;gcc&lt;/code&gt; version the user has&lt;/h2&gt;
-&lt;p&gt;The &lt;code&gt;configure&lt;/code&gt; step of package installation needed to do different things depending on the &lt;code&gt;gcc&lt;/code&gt; version. Kevin Ushey’s &lt;code&gt;configure&lt;/code&gt; package (&lt;a href=&#34;https://github.com/kevinushey/configure&#34; class=&#34;uri&#34;&gt;https://github.com/kevinushey/configure&lt;/a&gt;) allows you to use R to configure R packages (normally you have to use shell commands). This was a saviour. To get the &lt;code&gt;gcc&lt;/code&gt; version, I used the &lt;code&gt;processx&lt;/code&gt; package (so I had to add it to &lt;code&gt;Imports&lt;/code&gt; in &lt;code&gt;DESCRIPTION&lt;/code&gt;) to execute the shell command &lt;code&gt;gcc -v&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;gcc_version &amp;lt;- function() {
-  out &amp;lt;- tryCatch(processx::run(&amp;quot;gcc&amp;quot;, &amp;quot;-v&amp;quot;, stderr_to_stdout = TRUE),
-                  error = function(cnd) list(stdout = &amp;quot;&amp;quot;))
-  out &amp;lt;- stringr::str_match(out$stdout, &amp;quot;gcc version (\\d+(?:\\.\\d+)*)&amp;quot;)[1, 2]
-  if (!is.na(out)) out &amp;lt;- numeric_version(out)
-  out
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This returns the &lt;code&gt;gcc&lt;/code&gt; version if &lt;code&gt;gcc&lt;/code&gt; is installed and &lt;code&gt;NA&lt;/code&gt; otherwise. Then, the statement &lt;code&gt;!is.na(gcc_version()) &amp;amp;&amp;amp; gcc_version() &amp;lt; &amp;quot;4.9&amp;quot;&lt;/code&gt; returns &lt;code&gt;TRUE&lt;/code&gt; if the user’s &lt;code&gt;gcc&lt;/code&gt; does &lt;em&gt;not&lt;/em&gt; support C++11 regex and &lt;code&gt;FALSE&lt;/code&gt; otherwise.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;dealing-with-the-gcc-version&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Dealing with the &lt;code&gt;gcc&lt;/code&gt; version&lt;/h2&gt;
-&lt;p&gt;I decided that the default code in the package would be for people with an up to date &lt;code&gt;gcc&lt;/code&gt; and that the &lt;code&gt;configure&lt;/code&gt; step would make alterations to the code for people with an old &lt;code&gt;gcc&lt;/code&gt;. Hence, for people with an old &lt;code&gt;gcc&lt;/code&gt;, &lt;code&gt;configure&lt;/code&gt; needed to remove all of the C++ code that required C++ regex and then replace the body of the R function which &lt;code&gt;.Call()&lt;/code&gt;ed that (now removed) C++ code with R code that performed the same function. It took a long time (many days) and a lot of testing on Travis but this was the right strategy and now &lt;code&gt;strex&lt;/code&gt; is installing beautifully with new and old &lt;code&gt;gcc&lt;/code&gt;s.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;the-code&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;The code&lt;/h1&gt;
-&lt;p&gt;There’s a little too much code to walk through the steps in this blog post (and the steps are specific to this package), but if you’re curious as to how this was done, first familiarize yourself with Kevin Ushey’s amazing &lt;code&gt;configure&lt;/code&gt; package and then read the configuration steps in &lt;code&gt;strex&lt;/code&gt; at &lt;a href=&#34;https://github.com/rorynolan/strex&#34; class=&#34;uri&#34;&gt;https://github.com/rorynolan/strex&lt;/a&gt;. This includes useful functions like &lt;code&gt;file_replace_R_fun()&lt;/code&gt; to change the body of an R function in a file, &lt;code&gt;file_remove_C_fun()&lt;/code&gt; to remove a C/C++ function from a file and &lt;code&gt;file_remove_matching_lines()&lt;/code&gt; to remove certain lines from a file.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;conclusion&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;This post is intended to give people an &lt;em&gt;idea&lt;/em&gt; of how to deal with this type of problem. If &lt;em&gt;you&lt;/em&gt; are struggling with this problem, feel free to contact me; I’m happy to share the limited knowledge that I have.&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</title>
-      <link>/2018/09/30/rcsetseed/</link>
+      <link>http://rorynolan.rbind.io/2018/09/30/rcsetseed/</link>
       <pubDate>Sun, 30 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/09/30/rcsetseed/</guid>
+      <guid>http://rorynolan.rbind.io/2018/09/30/rcsetseed/</guid>
       <description>&lt;p&gt;In native R, the user sets the seed for random number generation (RNG) with &lt;code&gt;set.seed()&lt;/code&gt;. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by &lt;code&gt;set.seed()&lt;/code&gt;. Good news! It can be done.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pacman::p_load(inline, purrr)&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;rbernoulli&#34; class=&#34;section level1&#34;&gt;
@@ -86,7 +33,7 @@ rbernoulli(5, 0.7)
 #&amp;gt; {
 #&amp;gt;     stats::runif(n) &amp;gt; (1 - p)
 #&amp;gt; }
-#&amp;gt; &amp;lt;bytecode: 0x7fdf736e3378&amp;gt;
+#&amp;gt; &amp;lt;bytecode: 0x7fe53b2a8178&amp;gt;
 #&amp;gt; &amp;lt;environment: namespace:purrr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Ah, it seems Hadley just wrapped &lt;code&gt;runif()&lt;/code&gt;; hence, because &lt;code&gt;set.seed()&lt;/code&gt; works with &lt;code&gt;runif()&lt;/code&gt;, it works with his implementation of &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -157,10 +104,10 @@ rorybernoulli(6, 0.7)
             rorybernoulli(1e6, p = 0.5),
             check = FALSE)
 #&amp;gt; # A tibble: 2 x 6
-#&amp;gt;   expression                            min  median `itr/sec` mem_alloc
-#&amp;gt;   &amp;lt;bch:expr&amp;gt;                        &amp;lt;bch:t&amp;gt; &amp;lt;bch:t&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;
-#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 26.82ms 27.54ms      35.2   11.45MB
-#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.75ms  8.96ms     109.     3.82MB
+#&amp;gt;   expression                            min median `itr/sec` mem_alloc
+#&amp;gt;   &amp;lt;bch:expr&amp;gt;                        &amp;lt;bch:t&amp;gt; &amp;lt;bch:&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;
+#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 27.78ms   29ms      33.1   11.45MB
+#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.78ms  9.1ms     107.     3.82MB
 #&amp;gt; # … with 1 more variable: `gc/sec` &amp;lt;dbl&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). It’s also three times as efficient with memory; the memory and time improvements probably have the same underlying reason. The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that they can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
 &lt;/div&gt;
