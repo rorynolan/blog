@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>C&#43;&#43; on roryverse</title>
-    <link>/tags/c&#43;&#43;/</link>
+    <link>http://rorynolan.rbind.io/tags/c&#43;&#43;/</link>
     <description>Recent content in C&#43;&#43; on roryverse</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,10 +12,10 @@
     
     <item>
       <title>Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</title>
-      <link>/2018/09/30/rcsetseed/</link>
+      <link>http://rorynolan.rbind.io/2018/09/30/rcsetseed/</link>
       <pubDate>Sun, 30 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/09/30/rcsetseed/</guid>
+      <guid>http://rorynolan.rbind.io/2018/09/30/rcsetseed/</guid>
       <description>&lt;p&gt;In native R, the user sets the seed for random number generation (RNG) with &lt;code&gt;set.seed()&lt;/code&gt;. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by &lt;code&gt;set.seed()&lt;/code&gt;. Good news! It can be done.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pacman::p_load(inline, purrr)&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;rbernoulli&#34; class=&#34;section level1&#34;&gt;
@@ -33,7 +33,7 @@ rbernoulli(5, 0.7)
 #&amp;gt; {
 #&amp;gt;     stats::runif(n) &amp;gt; (1 - p)
 #&amp;gt; }
-#&amp;gt; &amp;lt;bytecode: 0x7fc591364740&amp;gt;
+#&amp;gt; &amp;lt;bytecode: 0x7fdc350ff978&amp;gt;
 #&amp;gt; &amp;lt;environment: namespace:purrr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Ah, it seems Hadley just wrapped &lt;code&gt;runif()&lt;/code&gt;; hence, because &lt;code&gt;set.seed()&lt;/code&gt; works with &lt;code&gt;runif()&lt;/code&gt;, it works with his implementation of &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -68,16 +68,16 @@ cpp_rbernoulli(6, 0.7, seed = 2)
 &lt;p&gt;This gets a positive number in the unsigned 32-bit integer range (which is always a safe bet for a seed) and it is completely determined by &lt;code&gt;set.seed()&lt;/code&gt;. Therefore, it’s fine to use as a seed itself. Let’s take a look.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1)
 replicate(6, get_seed())
-#&amp;gt; [1]  570175513  799129990 1230193230 1950361378  433108649 1929277158
+#&amp;gt; [1] 1140350788  312928385  866248189 1909893419  554504146  884616499
 set.seed(1)
 replicate(6, get_seed())
-#&amp;gt; [1]  570175513  799129990 1230193230 1950361378  433108649 1929277158
+#&amp;gt; [1] 1140350788  312928385  866248189 1909893419  554504146  884616499
 set.seed(2)
 replicate(6, get_seed())
-#&amp;gt; [1]  397031630 1508336757 1231208929  360888751 2026879546 2026097046
+#&amp;gt; [1]  794080207  314911494 1906307464  554751325 2010156236  226245929
 set.seed(2)
 replicate(6, get_seed())
-#&amp;gt; [1]  397031630 1508336757 1231208929  360888751 2026879546 2026097046&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; [1]  794080207  314911494 1906307464  554751325 2010156236  226245929&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;So as we can see, setting a seed via &lt;code&gt;set.seed()&lt;/code&gt; determines the seeds that subsequently come out of &lt;code&gt;get_seed()&lt;/code&gt;, so all is well with the world. &lt;code&gt;get_seed()&lt;/code&gt; can now be used to create a version of &lt;code&gt;cpp_rbernoulli()&lt;/code&gt; which uses &lt;code&gt;set.seed()&lt;/code&gt;. For the sake of inflating my own ego, I’ll name this version after myself.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;rorybernoulli &amp;lt;- function(n, p) {
   cpp_rbernoulli(n, p, get_seed())
@@ -85,10 +85,10 @@ replicate(6, get_seed())
 &lt;p&gt;Let’s check that it’s in working order.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1)
 rorybernoulli(6, 0.7)
-#&amp;gt; [1] 1 1 0 0 1 0
+#&amp;gt; [1] 1 1 0 1 0 1
 set.seed(1)
 rorybernoulli(6, 0.7)
-#&amp;gt; [1] 1 1 0 0 1 0
+#&amp;gt; [1] 1 1 0 1 0 1
 set.seed(2)
 rorybernoulli(6, 0.7)
 #&amp;gt; [1] 0 1 1 1 1 1
@@ -103,12 +103,12 @@ rorybernoulli(6, 0.7)
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;bench::mark(purrr::rbernoulli(1e6, p = 0.5),
             rorybernoulli(1e6, p = 0.5),
             check = FALSE)
-#&amp;gt; # A tibble: 2 x 10
-#&amp;gt;   expression     min    mean median    max `itr/sec` mem_alloc  n_gc n_itr
-#&amp;gt;   &amp;lt;chr&amp;gt;      &amp;lt;bch:t&amp;gt; &amp;lt;bch:t&amp;gt; &amp;lt;bch:&amp;gt; &amp;lt;bch:&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;
-#&amp;gt; 1 purrr::rb…  28.6ms 30.36ms 29.3ms 34.3ms      32.9   11.45MB     4    12
-#&amp;gt; 2 roryberno…  8.98ms  9.96ms  9.7ms 12.4ms     100.     3.82MB     4    44
-#&amp;gt; # ... with 1 more variable: total_time &amp;lt;bch:tm&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; # A tibble: 2 x 6
+#&amp;gt;   expression                            min  median `itr/sec` mem_alloc
+#&amp;gt;   &amp;lt;bch:expr&amp;gt;                        &amp;lt;bch:t&amp;gt; &amp;lt;bch:t&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;
+#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 26.86ms 27.41ms      35.2   11.45MB
+#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.75ms  8.91ms     109.     3.82MB
+#&amp;gt; # … with 1 more variable: `gc/sec` &amp;lt;dbl&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). It’s also three times as efficient with memory; the memory and time improvements probably have the same underlying reason. The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that they can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
 &lt;/div&gt;
 </description>

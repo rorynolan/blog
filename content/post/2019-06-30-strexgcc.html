@@ -1,0 +1,55 @@
+---
+slug: "strexgcc"
+title: "Coping with varying `gcc` versions and capabilities in R packages"
+author: "Rory Nolan"
+date: 2019-06-30
+categories: ["R"]
+tags: ["R", "C++", "C++11", "Rcpp"]
+---
+
+
+
+<div id="the-problem" class="section level1">
+<h1>The problem</h1>
+<p>I have a package called <code>strex</code> which is for string manipulation. In this package, I want to take advantage of the regex capabilities of C++11. The reason for this is that in <code>strex</code>, I find myself needing to do a calculation like</p>
+<pre class="r"><code>x &lt;- list(c(&quot;1,000&quot;, &quot;2,000,000&quot;),
+          c(&quot;1&quot;, &quot;50&quot;, &quot;3,455&quot;))
+lapply(x, function(x) as.numeric(stringr::str_replace_all(x, &quot;,&quot;, &quot;&quot;)))
+#&gt; [[1]]
+#&gt; [1] 1e+03 2e+06
+#&gt; 
+#&gt; [[2]]
+#&gt; [1]    1   50 3455</code></pre>
+<p>A <code>lapply</code> like this can be done faster in C++11, so I’d like to have that speedup in my package. The problem is, this requires the regex capabilities of C++11, which are only supported in <code>gcc</code> &gt;= 4.9. Many people are using an older <code>gcc</code>, e.g. the still popular Ubuntu 14.04 is on <code>gcc</code> 4.8. If these people tried to install the <code>strex</code> which relied on C++11 regex, they’d get a compile error.</p>
+</div>
+<div id="the-hope" class="section level1">
+<h1>The hope</h1>
+<p>I wanted to provide the faster option to those with a capable <code>gcc</code> and the slower <code>lapply</code> option (which isn’t painfully slow, just a bit slower) to those with an old <code>gcc</code>. This should all happen inside a seamless <code>install.packages()</code> call; the user needn’t be bored by all of this.</p>
+</div>
+<div id="the-solution" class="section level1">
+<h1>The solution</h1>
+<div id="figuring-out-which-gcc-version-the-user-has" class="section level2">
+<h2>Figuring out which <code>gcc</code> version the user has</h2>
+<p>The <code>configure</code> step of package installation needed to do different things depending on the <code>gcc</code> version. Kevin Ushey’s <code>configure</code> package (<a href="https://github.com/kevinushey/configure" class="uri">https://github.com/kevinushey/configure</a>) allows you to use R to configure R packages (normally you have to use shell commands). This was a saviour. To get the <code>gcc</code> version, I used the <code>processx</code> package (so I had to add it to <code>Imports</code> in <code>DESCRIPTION</code>) to execute the shell command <code>gcc -v</code>.</p>
+<pre class="r"><code>gcc_version &lt;- function() {
+  out &lt;- tryCatch(processx::run(&quot;gcc&quot;, &quot;-v&quot;, stderr_to_stdout = TRUE),
+                  error = function(cnd) list(stdout = &quot;&quot;))
+  out &lt;- stringr::str_match(out$stdout, &quot;gcc version (\\d+(?:\\.\\d+)*)&quot;)[1, 2]
+  if (!is.na(out)) out &lt;- numeric_version(out)
+  out
+}</code></pre>
+<p>This returns the <code>gcc</code> version if <code>gcc</code> is installed and <code>NA</code> otherwise. Then, the statement <code>!is.na(gcc_version()) &amp;&amp; gcc_version() &lt; &quot;4.9&quot;</code> returns <code>TRUE</code> if the user’s <code>gcc</code> does <em>not</em> support C++11 regex and <code>FALSE</code> otherwise.</p>
+</div>
+<div id="dealing-with-the-gcc-version" class="section level2">
+<h2>Dealing with the <code>gcc</code> version</h2>
+<p>I decided that the default code in the package would be for people with an up to date <code>gcc</code> and that the <code>configure</code> step would make alterations to the code for people with an old <code>gcc</code>. Hence, for people with an old <code>gcc</code>, <code>configure</code> needed to remove all of the C++ code that required C++ regex and then replace the body of the R function which <code>.Call()</code>ed that (now removed) C++ code with R code that performed the same function. It took a long time (many days) and a lot of testing on Travis but this was the right strategy and now <code>strex</code> is installing beautifully with new and old <code>gcc</code>s.</p>
+</div>
+</div>
+<div id="the-code" class="section level1">
+<h1>The code</h1>
+<p>There’s a little too much code to walk through the steps in this blog post (and the steps are specific to this package), but if you’re curious as to how this was done, first familiarize yourself with Kevin Ushey’s amazing <code>configure</code> package and then read the configuration steps in <code>strex</code> at <a href="https://github.com/rorynolan/strex" class="uri">https://github.com/rorynolan/strex</a>. This includes useful functions like <code>file_replace_R_fun()</code> to change the body of an R function in a file, <code>file_remove_C_fun()</code> to remove a C/C++ function from a file and <code>file_remove_matching_lines()</code> to remove certain lines from a file.</p>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>This post is intended to give people an <em>idea</em> of how to deal with this type of problem. If <em>you</em> are struggling with this problem, feel free to contact me; I’m happy to share the limited knowledge that I have.</p>
+</div>
