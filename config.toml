@@ -63,7 +63,7 @@ enableGitInfo = false
 
   gravatar = false  # Get your avatar from Gravatar.com? (true/false)
   avatar = "mepic.jpg"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
-  email = "rnolan@well.ox.ac.uk"
+  email = "rorynoolan@gmail.com"
   address = "Wellcome Centre Human Genetics, University of Oxford, OX3 7BN, UK"
   # office_hours = "Monday 10:00 to 13:00 or email for appointment"
   # phone = "888 888 88 88"
@@ -226,7 +226,7 @@ enableGitInfo = false
   [[params.social]]
     icon = "envelope"
     icon_pack = "fa"
-    link = "mailto:rnolan@well.ox.ac.uk"
+    link = "mailto:rorynoolan@gmail.com"
 
   [[params.social]]
     icon = "twitter"
@@ -237,6 +237,11 @@ enableGitInfo = false
     icon = "linkedin"
     icon_pack = "fa"
     link = "https://www.linkedin.com/in/rory-nolan-1755b765/"
+
+  [[params.social]]
+    icon = "github"
+    icon_pack = "fa"
+    link = "//github.com/rorynolan"
 
   [[params.social]]
     icon = "google-scholar"
@@ -253,10 +258,6 @@ enableGitInfo = false
     icon_pack = "ai"
     link = "https://orcid.org/0000-0002-5239-4043"
 
-  [[params.social]]
-    icon = "github"
-    icon_pack = "fa"
-    link = "//github.com/rorynolan"
 
 
 # Navigation Links

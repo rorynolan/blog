@@ -20,7 +20,7 @@ pacman::p_load(inline, purrr)
 
 # `rbernoulli`
 
-Base R (or technically the `stats` package) provides no `rbernoulli()`. It's a pretty gaping hole in the pantheon of   `rbeta()`, `rbinom()`, `rcauchy`, `rchisq()`, `rexp()`, `rf()`, `rgamma()`, etc. Thankfully, Hadley Wickham noticed this and gave us `purrr::rbernoulli()`.
+Base R (or technically the `stats` package) provides no `rbernoulli()`. It's a pretty gaping hole in the pantheon of   `rbeta()`, `rbinom()`, `rcauchy()`, `rchisq()`, `rexp()`, `rf()`, `rgamma()`, etc. Thankfully, Hadley Wickham noticed this and gave us `purrr::rbernoulli()`.
 
 ```{r first-glance-rbernoulli}
 set.seed(1)

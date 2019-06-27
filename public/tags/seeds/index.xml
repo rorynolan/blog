@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Seeds on roryverse</title>
-    <link>/tags/seeds/</link>
+    <link>http://rorynolan.rbind.io/tags/seeds/</link>
     <description>Recent content in Seeds on roryverse</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,15 +12,15 @@
     
     <item>
       <title>Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</title>
-      <link>/2018/09/30/rcsetseed/</link>
+      <link>http://rorynolan.rbind.io/2018/09/30/rcsetseed/</link>
       <pubDate>Sun, 30 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/09/30/rcsetseed/</guid>
+      <guid>http://rorynolan.rbind.io/2018/09/30/rcsetseed/</guid>
       <description>&lt;p&gt;In native R, the user sets the seed for random number generation (RNG) with &lt;code&gt;set.seed()&lt;/code&gt;. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by &lt;code&gt;set.seed()&lt;/code&gt;. Good news! It can be done.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pacman::p_load(inline, purrr)&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;rbernoulli&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;&lt;code&gt;rbernoulli&lt;/code&gt;&lt;/h1&gt;
-&lt;p&gt;Base R (or technically the &lt;code&gt;stats&lt;/code&gt; package) provides no &lt;code&gt;rbernoulli()&lt;/code&gt;. It’s a pretty gaping hole in the pantheon of &lt;code&gt;rbeta()&lt;/code&gt;, &lt;code&gt;rbinom()&lt;/code&gt;, &lt;code&gt;rcauchy&lt;/code&gt;, &lt;code&gt;rchisq()&lt;/code&gt;, &lt;code&gt;rexp()&lt;/code&gt;, &lt;code&gt;rf()&lt;/code&gt;, &lt;code&gt;rgamma()&lt;/code&gt;, etc. Thankfully, Hadley Wickham noticed this and gave us &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Base R (or technically the &lt;code&gt;stats&lt;/code&gt; package) provides no &lt;code&gt;rbernoulli()&lt;/code&gt;. It’s a pretty gaping hole in the pantheon of &lt;code&gt;rbeta()&lt;/code&gt;, &lt;code&gt;rbinom()&lt;/code&gt;, &lt;code&gt;rcauchy()&lt;/code&gt;, &lt;code&gt;rchisq()&lt;/code&gt;, &lt;code&gt;rexp()&lt;/code&gt;, &lt;code&gt;rf()&lt;/code&gt;, &lt;code&gt;rgamma()&lt;/code&gt;, etc. Thankfully, Hadley Wickham noticed this and gave us &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1)
 rbernoulli(5, 0.7)
 #&amp;gt; [1] FALSE  TRUE  TRUE  TRUE FALSE
@@ -33,7 +33,7 @@ rbernoulli(5, 0.7)
 #&amp;gt; {
 #&amp;gt;     stats::runif(n) &amp;gt; (1 - p)
 #&amp;gt; }
-#&amp;gt; &amp;lt;bytecode: 0x7fdc350ff978&amp;gt;
+#&amp;gt; &amp;lt;bytecode: 0x7fdf736e3378&amp;gt;
 #&amp;gt; &amp;lt;environment: namespace:purrr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Ah, it seems Hadley just wrapped &lt;code&gt;runif()&lt;/code&gt;; hence, because &lt;code&gt;set.seed()&lt;/code&gt; works with &lt;code&gt;runif()&lt;/code&gt;, it works with his implementation of &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -106,8 +106,8 @@ rorybernoulli(6, 0.7)
 #&amp;gt; # A tibble: 2 x 6
 #&amp;gt;   expression                            min  median `itr/sec` mem_alloc
 #&amp;gt;   &amp;lt;bch:expr&amp;gt;                        &amp;lt;bch:t&amp;gt; &amp;lt;bch:t&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;
-#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 26.86ms 27.41ms      35.2   11.45MB
-#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.75ms  8.91ms     109.     3.82MB
+#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 26.82ms 27.54ms      35.2   11.45MB
+#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.75ms  8.96ms     109.     3.82MB
 #&amp;gt; # … with 1 more variable: `gc/sec` &amp;lt;dbl&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). It’s also three times as efficient with memory; the memory and time improvements probably have the same underlying reason. The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that they can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
 &lt;/div&gt;

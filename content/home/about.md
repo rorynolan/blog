@@ -10,11 +10,12 @@ weight = 5
 # List your academic interests.
 [interests]
   interests = [
-    "R",
+    "R, Python, C++, Java",
     "Data Science",
-    "Machine Learning",
+    "Machine Learning, Deep Learning",
     "Statistics",
-    "Image Analysis"
+    "Image Analysis",
+    "Cryptography"
   ]
 
 # List your qualifications (such as academic degrees).
@@ -37,4 +38,4 @@ weight = 5
 
 # Biography
 
-Rory Nolan is a PhD student at oxford supervised by Sergi Padilla. His research focuses on algorithms for the correction of photobleaching, a process which causes fluorescence microscopy images to get dimmer over time. He develops software in the R language for image analysis, TIFF file I/O and file and string manipulation. 
+Rory Nolan is a data scientist living in Oakland, California. He has a PhD in statistical image analysis and has worked at Paddy Power PLC as an A/B testing expert. He develops software in the R language for image analysis, TIFF file I/O and file and string manipulation. 
