@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Publications on roryverse</title>
-    <link>http://rorynolan.rbind.io/publication/</link>
+    <link>/publication/</link>
     <description>Recent content in Publications on roryverse</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,59 +12,59 @@
     
     <item>
       <title>ijtiff: An R Package Providing Comprehensive TIFF I/O</title>
-      <link>http://rorynolan.rbind.io/publication/ijtiff/</link>
+      <link>/publication/ijtiff/</link>
       <pubDate>Tue, 06 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/publication/ijtiff/</guid>
+      <guid>/publication/ijtiff/</guid>
       <description>&lt;p&gt;&lt;code&gt;ijtiff&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=ijtiff&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/ropensci/ijtiff&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Detecting Protein Aggregation and Interactions in Live Cells: a Guide to Number and Brightness</title>
-      <link>http://rorynolan.rbind.io/publication/nbreview/</link>
+      <link>/publication/nbreview/</link>
       <pubDate>Wed, 06 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/publication/nbreview/</guid>
+      <guid>/publication/nbreview/</guid>
       <description></description>
     </item>
     
     <item>
       <title>nandb — Number and Brightness in R with a Novel Automatic Detrending Algorithm</title>
-      <link>http://rorynolan.rbind.io/publication/nandb/</link>
+      <link>/publication/nandb/</link>
       <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/publication/nandb/</guid>
+      <guid>/publication/nandb/</guid>
       <description>&lt;p&gt;&lt;code&gt;nandb&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=nandb&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/nandb&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>exampletestr - An Easy Start to Unit Testing R Packages</title>
-      <link>http://rorynolan.rbind.io/publication/exampletestr/</link>
+      <link>/publication/exampletestr/</link>
       <pubDate>Wed, 21 Jun 2017 00:00:00 +0100</pubDate>
       
-      <guid>http://rorynolan.rbind.io/publication/exampletestr/</guid>
+      <guid>/publication/exampletestr/</guid>
       <description>&lt;p&gt;&lt;code&gt;exampletestr&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=exampletestr&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/exampletestr&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>autothresholdr: An R Port of the &#39;ImageJ&#39; Plugin &#39;Auto Threshold&#39;</title>
-      <link>http://rorynolan.rbind.io/publication/autothresholdr/</link>
+      <link>/publication/autothresholdr/</link>
       <pubDate>Sat, 02 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/publication/autothresholdr/</guid>
+      <guid>/publication/autothresholdr/</guid>
       <description>&lt;p&gt;&lt;code&gt;autothresholdr&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=autothresholdr&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/autothresholdr&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>filesstrings: An R Package for File and String Manipulation</title>
-      <link>http://rorynolan.rbind.io/publication/filesstrings/</link>
+      <link>/publication/filesstrings/</link>
       <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/publication/filesstrings/</guid>
+      <guid>/publication/filesstrings/</guid>
       <description>&lt;p&gt;&lt;code&gt;filesstrings&lt;/code&gt; is available to download for free from &lt;a href=&#34;https://cran.r-project.org/package=filesstrings&#34; target=&#34;_blank&#34;&gt;CRAN&lt;/a&gt; and &lt;a href=&#34;https://www.github.com/rorynolan/filesstrings&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>

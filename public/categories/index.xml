@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on roryverse</title>
-    <link>http://rorynolan.rbind.io/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on roryverse</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,10 +11,10 @@
     
     <item>
       <title>R</title>
-      <link>http://rorynolan.rbind.io/categories/r/</link>
-      <pubDate>Sun, 30 Sep 2018 00:00:00 +0000</pubDate>
+      <link>/categories/r/</link>
+      <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/categories/r/</guid>
+      <guid>/categories/r/</guid>
       <description></description>
     </item>
     
