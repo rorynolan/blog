@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on roryverse</title>
-    <link>http://rorynolan.rbind.io/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on roryverse</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,65 +12,74 @@
     
     <item>
       <title>Content tagged as &#39;Academic&#39;</title>
-      <link>http://rorynolan.rbind.io/tags/academic/</link>
+      <link>/tags/academic/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/tags/academic/</guid>
+      <guid>/tags/academic/</guid>
       <description>&lt;p&gt;Here is a list of all the content that has been tagged as &lt;em&gt;academic&lt;/em&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>C</title>
-      <link>http://rorynolan.rbind.io/tags/c/</link>
+      <link>/tags/c/</link>
       <pubDate>Sun, 30 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/tags/c/</guid>
+      <guid>/tags/c/</guid>
       <description></description>
     </item>
     
     <item>
       <title>C&#43;&#43;</title>
-      <link>http://rorynolan.rbind.io/tags/c&#43;&#43;/</link>
-      <pubDate>Sun, 30 Sep 2018 00:00:00 +0000</pubDate>
+      <link>/tags/c&#43;&#43;/</link>
+      <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/tags/c&#43;&#43;/</guid>
+      <guid>/tags/c&#43;&#43;/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;11</title>
+      <link>/tags/c&#43;&#43;11/</link>
+      <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/c&#43;&#43;11/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>http://rorynolan.rbind.io/tags/r/</link>
-      <pubDate>Sun, 30 Sep 2018 00:00:00 +0000</pubDate>
+      <link>/tags/r/</link>
+      <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/tags/r/</guid>
+      <guid>/tags/r/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rcpp</title>
-      <link>http://rorynolan.rbind.io/tags/rcpp/</link>
-      <pubDate>Sun, 30 Sep 2018 00:00:00 +0000</pubDate>
+      <link>/tags/rcpp/</link>
+      <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/tags/rcpp/</guid>
+      <guid>/tags/rcpp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Seeds</title>
-      <link>http://rorynolan.rbind.io/tags/seeds/</link>
+      <link>/tags/seeds/</link>
       <pubDate>Sun, 30 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/tags/seeds/</guid>
+      <guid>/tags/seeds/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Set.seed()</title>
-      <link>http://rorynolan.rbind.io/tags/set.seed/</link>
+      <link>/tags/set.seed/</link>
       <pubDate>Sun, 30 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/tags/set.seed/</guid>
+      <guid>/tags/set.seed/</guid>
       <description></description>
     </item>
     
