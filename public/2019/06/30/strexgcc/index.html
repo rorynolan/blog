@@ -21,7 +21,7 @@
 x &lt;- list(c(&quot;1,000&quot;, &quot;2,000,000&quot;), c(&quot;1&quot;, &quot;50&quot;, &quot;3,455&quot;)) lapply(x, function(x) as.numeric(stringr::str_replace_all(x, &quot;,&quot;, &quot;&quot;))) #&gt; [[1]] #&gt; [1] 1e&#43;03 2e&#43;06 #&gt; #&gt; [[2]] #&gt; [1] 1 50 3455 A lapply like this can be done faster in C&#43;&#43;11, so I’d like to have that speedup in my package.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/2019/06/30/strexgcc/">
+  <link rel="alternate" hreflang="en-us" href="http://rorynolan.rbind.io/2019/06/30/strexgcc/">
 
   
 
@@ -74,15 +74,15 @@ x &lt;- list(c(&quot;1,000&quot;, &quot;2,000,000&quot;), c(&quot;1&quot;, &quot
   
 
   
-  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="roryverse">
-  <link rel="feed" href="/index.xml" type="application/rss+xml" title="roryverse">
+  <link rel="alternate" href="http://rorynolan.rbind.io/index.xml" type="application/rss+xml" title="roryverse">
+  <link rel="feed" href="http://rorynolan.rbind.io/index.xml" type="application/rss+xml" title="roryverse">
   
 
   <link rel="manifest" href="/site.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/2019/06/30/strexgcc/">
+  <link rel="canonical" href="http://rorynolan.rbind.io/2019/06/30/strexgcc/">
 
   <meta property="twitter:card" content="summary_large_image">
   
@@ -90,7 +90,7 @@ x &lt;- list(c(&quot;1,000&quot;, &quot;2,000,000&quot;), c(&quot;1&quot;, &quot
   <meta property="twitter:creator" content="@https://twitter.com/noolpost">
   
   <meta property="og:site_name" content="roryverse">
-  <meta property="og:url" content="/2019/06/30/strexgcc/">
+  <meta property="og:url" content="http://rorynolan.rbind.io/2019/06/30/strexgcc/">
   <meta property="og:title" content="Coping with varying `gcc` versions and capabilities in R packages | roryverse">
   <meta property="og:description" content="The problem I have a package called strex which is for string manipulation. In this package, I want to take advantage of the regex capabilities of C&#43;&#43;11. The reason for this is that in strex, I find myself needing to do a calculation like
 x &lt;- list(c(&quot;1,000&quot;, &quot;2,000,000&quot;), c(&quot;1&quot;, &quot;50&quot;, &quot;3,455&quot;)) lapply(x, function(x) as.numeric(stringr::str_replace_all(x, &quot;,&quot;, &quot;&quot;))) #&gt; [[1]] #&gt; [1] 1e&#43;03 2e&#43;06 #&gt; #&gt; [[2]] #&gt; [1] 1 50 3455 A lapply like this can be done faster in C&#43;&#43;11, so I’d like to have that speedup in my package.">
@@ -250,7 +250,7 @@ x &lt;- list(c(&quot;1,000&quot;, &quot;2,000,000&quot;), c(&quot;1&quot;, &quot
   
   
   <span class="middot-divider"></span>
-  <a href="/2019/06/30/strexgcc/#disqus_thread"></a>
+  <a href="http://rorynolan.rbind.io/2019/06/30/strexgcc/#disqus_thread"></a>
   
 
   
@@ -260,7 +260,7 @@ x &lt;- list(c(&quot;1,000&quot;, &quot;2,000,000&quot;), c(&quot;1&quot;, &quot
   <span class="article-categories">
     <i class="fa fa-folder"></i>
     
-    <a href="/categories/r/">R</a
+    <a href="http://rorynolan.rbind.io/categories/r/">R</a
     >
     
   </span>
@@ -273,35 +273,35 @@ x &lt;- list(c(&quot;1,000&quot;, &quot;2,000,000&quot;), c(&quot;1&quot;, &quot
   <ul class="share">
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=Coping%20with%20varying%20%60gcc%60%20versions%20and%20capabilities%20in%20R%20packages&amp;url=%2f2019%2f06%2f30%2fstrexgcc%2f"
+         href="https://twitter.com/intent/tweet?text=Coping%20with%20varying%20%60gcc%60%20versions%20and%20capabilities%20in%20R%20packages&amp;url=http%3a%2f%2frorynolan.rbind.io%2f2019%2f06%2f30%2fstrexgcc%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-twitter"></i>
       </a>
     </li>
     <li>
       <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=%2f2019%2f06%2f30%2fstrexgcc%2f"
+         href="https://www.facebook.com/sharer.php?u=http%3a%2f%2frorynolan.rbind.io%2f2019%2f06%2f30%2fstrexgcc%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-facebook"></i>
       </a>
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2f2019%2f06%2f30%2fstrexgcc%2f&amp;title=Coping%20with%20varying%20%60gcc%60%20versions%20and%20capabilities%20in%20R%20packages"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2frorynolan.rbind.io%2f2019%2f06%2f30%2fstrexgcc%2f&amp;title=Coping%20with%20varying%20%60gcc%60%20versions%20and%20capabilities%20in%20R%20packages"
          target="_blank" rel="noopener">
         <i class="fa fa-linkedin"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=%2f2019%2f06%2f30%2fstrexgcc%2f&amp;title=Coping%20with%20varying%20%60gcc%60%20versions%20and%20capabilities%20in%20R%20packages"
+         href="http://service.weibo.com/share/share.php?url=http%3a%2f%2frorynolan.rbind.io%2f2019%2f06%2f30%2fstrexgcc%2f&amp;title=Coping%20with%20varying%20%60gcc%60%20versions%20and%20capabilities%20in%20R%20packages"
          target="_blank" rel="noopener">
         <i class="fa fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=Coping%20with%20varying%20%60gcc%60%20versions%20and%20capabilities%20in%20R%20packages&amp;body=%2f2019%2f06%2f30%2fstrexgcc%2f">
+         href="mailto:?subject=Coping%20with%20varying%20%60gcc%60%20versions%20and%20capabilities%20in%20R%20packages&amp;body=http%3a%2f%2frorynolan.rbind.io%2f2019%2f06%2f30%2fstrexgcc%2f">
         <i class="fa fa-envelope"></i>
       </a>
     </li>
@@ -367,13 +367,13 @@ lapply(x, function(x) as.numeric(stringr::str_replace_all(x, &quot;,&quot;, &quo
 
 <div class="article-tags">
   
-  <a class="btn btn-primary btn-outline" href="/tags/r/">R</a>
+  <a class="btn btn-primary btn-outline" href="http://rorynolan.rbind.io/tags/r/">R</a>
   
-  <a class="btn btn-primary btn-outline" href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+  <a class="btn btn-primary btn-outline" href="http://rorynolan.rbind.io/tags/c&#43;&#43;/">C&#43;&#43;</a>
   
-  <a class="btn btn-primary btn-outline" href="/tags/c&#43;&#43;11/">C&#43;&#43;11</a>
+  <a class="btn btn-primary btn-outline" href="http://rorynolan.rbind.io/tags/c&#43;&#43;11/">C&#43;&#43;11</a>
   
-  <a class="btn btn-primary btn-outline" href="/tags/rcpp/">Rcpp</a>
+  <a class="btn btn-primary btn-outline" href="http://rorynolan.rbind.io/tags/rcpp/">Rcpp</a>
   
 </div>
 

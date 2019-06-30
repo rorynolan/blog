@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R on roryverse</title>
-    <link>/categories/r/</link>
+    <link>http://rorynolan.rbind.io/categories/r/</link>
     <description>Recent content in R on roryverse</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,10 +12,10 @@
     
     <item>
       <title>Coping with varying `gcc` versions and capabilities in R packages</title>
-      <link>/2019/06/30/strexgcc/</link>
+      <link>http://rorynolan.rbind.io/2019/06/30/strexgcc/</link>
       <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/06/30/strexgcc/</guid>
+      <guid>http://rorynolan.rbind.io/2019/06/30/strexgcc/</guid>
       <description>&lt;div id=&#34;the-problem&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;The problem&lt;/h1&gt;
 &lt;p&gt;I have a package called &lt;code&gt;strex&lt;/code&gt; which is for string manipulation. In this package, I want to take advantage of the regex capabilities of C++11. The reason for this is that in &lt;code&gt;strex&lt;/code&gt;, I find myself needing to do a calculation like&lt;/p&gt;
@@ -65,10 +65,10 @@ lapply(x, function(x) as.numeric(stringr::str_replace_all(x, &amp;quot;,&amp;quo
     
     <item>
       <title>Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</title>
-      <link>/2018/09/30/rcsetseed/</link>
+      <link>http://rorynolan.rbind.io/2018/09/30/rcsetseed/</link>
       <pubDate>Sun, 30 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/09/30/rcsetseed/</guid>
+      <guid>http://rorynolan.rbind.io/2018/09/30/rcsetseed/</guid>
       <description>&lt;p&gt;In native R, the user sets the seed for random number generation (RNG) with &lt;code&gt;set.seed()&lt;/code&gt;. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by &lt;code&gt;set.seed()&lt;/code&gt;. Good news! It can be done.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pacman::p_load(inline, purrr)&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;rbernoulli&#34; class=&#34;section level1&#34;&gt;
@@ -86,7 +86,7 @@ rbernoulli(5, 0.7)
 #&amp;gt; {
 #&amp;gt;     stats::runif(n) &amp;gt; (1 - p)
 #&amp;gt; }
-#&amp;gt; &amp;lt;bytecode: 0x7fe53b2a8178&amp;gt;
+#&amp;gt; &amp;lt;bytecode: 0x7fe62e591178&amp;gt;
 #&amp;gt; &amp;lt;environment: namespace:purrr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Ah, it seems Hadley just wrapped &lt;code&gt;runif()&lt;/code&gt;; hence, because &lt;code&gt;set.seed()&lt;/code&gt; works with &lt;code&gt;runif()&lt;/code&gt;, it works with his implementation of &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -157,10 +157,10 @@ rorybernoulli(6, 0.7)
             rorybernoulli(1e6, p = 0.5),
             check = FALSE)
 #&amp;gt; # A tibble: 2 x 6
-#&amp;gt;   expression                            min median `itr/sec` mem_alloc
-#&amp;gt;   &amp;lt;bch:expr&amp;gt;                        &amp;lt;bch:t&amp;gt; &amp;lt;bch:&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;
-#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 27.78ms   29ms      33.1   11.45MB
-#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.78ms  9.1ms     107.     3.82MB
+#&amp;gt;   expression                            min  median `itr/sec` mem_alloc
+#&amp;gt;   &amp;lt;bch:expr&amp;gt;                        &amp;lt;bch:t&amp;gt; &amp;lt;bch:t&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;
+#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 26.05ms  26.7ms      36.2   11.45MB
+#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.37ms  8.95ms     111.     3.82MB
 #&amp;gt; # … with 1 more variable: `gc/sec` &amp;lt;dbl&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). It’s also three times as efficient with memory; the memory and time improvements probably have the same underlying reason. The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that they can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
 &lt;/div&gt;
