@@ -59,10 +59,14 @@ enableGitInfo = false
 
   # Organizations/Affiliations.
   #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
-  # organizations = [ { name = "Oxford University", url = "" } ]
+  organizations = [
+                   {name = "Facebook", url = "https://about.fb.com/"},
+                   #{name = "Crystal Equation", url = "https://www.crystalequation.com/"},
+                   #{name = "Oxford University", url = "http://www.ox.ac.uk/"}
+                  ]
 
   gravatar = false  # Get your avatar from Gravatar.com? (true/false)
-  avatar = "mepic.jpg"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
+  avatar = "mepic2.jpg"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
   email = "rorynoolan@gmail.com"
   address = "Wellcome Centre Human Genetics, University of Oxford, OX3 7BN, UK"
   # office_hours = "Monday 10:00 to 13:00 or email for appointment"
