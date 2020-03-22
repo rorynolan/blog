@@ -118,7 +118,7 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-We can see that Spain and Italy are in a really bad way and still showing exponential growth in the number of deaths. This does not bode well for them.
+We can see that Spain and Italy are in a really bad way and still showing exponential growth in the number of deaths. This does not bode well for them. Spain looks to be in worse shape than Italy. 17 days after its first death, it's up to 6 deaths per million that day, whereas Italy was on 2 deaths per million on its equivalent day. I am very, very worried about Spain.
 
 The other countries are a bit bunched so next I'll limit the plot to countries with less than 3 deaths per million yesterday.
 
@@ -144,7 +144,7 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-Belgium, Switzerland, The Netherlands and France are all in exponential growth and near or above 2 deaths per million. They look to be on their way to where Spain is now; Belgium's rate of increase is particularly alarming and 10 days after their first death, they have more deaths per capita than any other country did at that stage. Interestingly, Iran looks to be turning the corner and lowering its fatalities. We'll need another week of data to see if they can sustain this. 
+Belgium, Switzerland, The Netherlands and France are all in exponential growth and near or above 2 deaths per million. They look to be on their way to where Spain is now; Belgium's rate of increase is particularly alarming and 10 days after their first death, they have more deaths per capita than any other country did at that stage. It's possible that Belgium could end up worse than Spain or Italy, but the overall rate (less than 3 deaths per million per day) might be low enough for them to turn things around before they become overwhelmed. Interestingly, Iran looks to be turning the corner and lowering its fatalities. We'll need another week of data to see if they can sustain this. 
 
 
 ## Countries with less than 1 death per million yesterday
