@@ -159,7 +159,7 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-Belgium, Switzerland, The Netherlands and France are all growing at alarming rates and near or above 2 deaths per million. It would be surprising if they don't breach 10 deaths per million per day soon, which would be horrific. Belgium's rate of increase is particularly alarming and 10 days after their first death, they have more deaths per capita than any other country did at that stage. It's possible that Belgium could end up worse than Spain or Italy, but the overall rate (less than 3 deaths per million per day) might be low enough for them to turn things around before they become overwhelmed. Similarly, Portugal could be worse than Belgium. Interestingly, Iran looks to be turning the corner and lowering its fatalities. We'll need another week of data to see if they can sustain this. 
+Belgium, Switzerland, The Netherlands and France are all growing at alarming rates and are currently near or above 2 deaths per million. It would be surprising if they don't breach 10 deaths per million per day soon, which would be horrific. Belgium's rate of increase is particularly alarming and 10 days after their first death, they have more deaths per capita than any other country did at that stage. It's possible that Belgium could end up worse than Spain or Italy, but the overall rate (less than 3 deaths per million per day) might be low enough for them to turn things around before they become overwhelmed. Similarly, Portugal could be worse than Belgium. Interestingly, Iran looks to be turning the corner and lowering its fatalities. We'll need another week of data to see if they can sustain this. 
 
 
 ## Countries with less than 1 death per million yesterday
