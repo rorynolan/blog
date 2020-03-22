@@ -97,7 +97,7 @@ I'm about do dive in and show you this data now. Brace yourself, not many countr
 
 ## All countries
 
-I'm going to limit the data to countries with over 10 million people that have reported at least 10 deaths. First up, I'll just plot all of the countries. I'll give a table of country codes at the end of this article. For me, the most confusing are DZA (Algeria) and CHE (Switzerland). Note that the data is not cumulative. Each data point is deaths on that day. The lines are colored by how bad the situation is in that country is right now: how many deaths there were there yesterday.
+I'm going to limit the data to countries with over 10 million people that have reported at least 10 deaths. First up, I'll just plot all of the countries. I'll give a table of country codes at the end of this article. For me, the most confusing are DZA (Algeria) and CHE (Switzerland). Note that the data is not cumulative: each data point is deaths on that day. The lines are colored by how bad the situation is in that country is right now: how many deaths there were there yesterday.
 
 ```{r all-countries}
 ggplot(

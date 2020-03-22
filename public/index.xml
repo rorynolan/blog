@@ -29,7 +29,7 @@
 &lt;p&gt;I’m about do dive in and show you this data now. Brace yourself, not many countries appear to be on a good trajectory. Social distancing is new (where it exists at all) and due to the long (approximately 2 week) latency period of the virus (&lt;em&gt;latency&lt;/em&gt; is roughly the period between a person encountering the virus and showing symptoms of infection), we probably won’t see the benefit of social distancing in these statistics for at least another week. If by then there’s still no improvement, that would be cause for huge concern. In China, they had more enforced social distancing, whereby households were forbidden to have any visitors at all, no exceptions. They also had a system of food delivery so that people didn’t need to go to supermarkets. I was in a crowded supermarket yesterday in Oakland, California. I’d be surprised if there wasn’t a single transmission in there that day. We’re nowhere near China’s level of lockdown in the western world, even though it feels that our lives are at standstill. Are we doing &lt;em&gt;enough&lt;/em&gt;? We’ll have a better idea in a few weeks.&lt;/p&gt;
 &lt;div id=&#34;all-countries&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;All countries&lt;/h2&gt;
-&lt;p&gt;I’m going to limit the data to countries with over 10 million people that have reported at least 10 deaths. First up, I’ll just plot all of the countries. I’ll give a table of country codes at the end of this article. For me, the most confusing are DZA (Algeria) and CHE (Switzerland). Note that the data is not cumulative. Each data point is deaths on that day. The lines are colored by how bad the situation is in that country is right now: how many deaths there were there yesterday.&lt;/p&gt;
+&lt;p&gt;I’m going to limit the data to countries with over 10 million people that have reported at least 10 deaths. First up, I’ll just plot all of the countries. I’ll give a table of country codes at the end of this article. For me, the most confusing are DZA (Algeria) and CHE (Switzerland). Note that the data is not cumulative: each data point is deaths on that day. The lines are colored by how bad the situation is in that country is right now: how many deaths there were there yesterday.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-03-21-covid19deaths_files/figure-html/all-countries-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;We can see that Spain and Italy are in a really bad way and still showing exponential growth in the number of deaths. This does not bode well for them. Spain looks to be in worse shape than Italy. 17 days after its first death, it’s up to 6 deaths per million that day, whereas Italy was on 2 deaths per million on its equivalent day. I am very, very worried about Spain.&lt;/p&gt;
 &lt;p&gt;The other countries are a bit bunched so next I’ll limit the plot to countries with less than 3 deaths per million yesterday.&lt;/p&gt;
@@ -790,7 +790,7 @@ rbernoulli(5, 0.7)
 #&amp;gt; {
 #&amp;gt;     stats::runif(n) &amp;gt; (1 - p)
 #&amp;gt; }
-#&amp;gt; &amp;lt;bytecode: 0x7fd43ce8deb0&amp;gt;
+#&amp;gt; &amp;lt;bytecode: 0x7fcfadaba4b0&amp;gt;
 #&amp;gt; &amp;lt;environment: namespace:purrr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Ah, it seems Hadley just wrapped &lt;code&gt;runif()&lt;/code&gt;; hence, because &lt;code&gt;set.seed()&lt;/code&gt; works with &lt;code&gt;runif()&lt;/code&gt;, it works with his implementation of &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -863,8 +863,8 @@ rorybernoulli(6, 0.7)
 #&amp;gt; # A tibble: 2 x 6
 #&amp;gt;   expression                            min  median `itr/sec` mem_alloc `gc/sec`
 #&amp;gt;   &amp;lt;bch:expr&amp;gt;                        &amp;lt;bch:t&amp;gt; &amp;lt;bch:t&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;    &amp;lt;dbl&amp;gt;
-#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5)  28.1ms  28.6ms      32.8   11.45MB    10.1 
-#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.86ms  9.29ms     105.     3.82MB     8.94&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5)  28.1ms 28.67ms      33.7   11.45MB    10.4 
+#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)       8.8ms  9.21ms     106.     3.82MB     8.98&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). It’s also three times as efficient with memory; the memory and time improvements probably have the same underlying reason. The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that they can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
 &lt;/div&gt;
 </description>
