@@ -17,7 +17,7 @@
       
     
   
-  <meta name="description" content="So right now the rate of testing for COVID-19 is increasing in many countries. As such, there are many articles and posts that correctly point out that using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. However, many articles—including this one in the Financial Times—still use the number of confirmed cases, for lack of something better.
+  <meta name="description" content="Right now the rate of testing for COVID-19 is increasing in many countries. As such, there are many articles and posts that correctly point out that using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. However, many articles—including this one in the Financial Times—still use the number of confirmed cases, for lack of something better.
 We should be using deaths per capita First of all, we should be using per capita statistics.">
 
   
@@ -92,7 +92,7 @@ We should be using deaths per capita First of all, we should be using per capita
   <meta property="og:site_name" content="roryverse">
   <meta property="og:url" content="http://rorynolan.rbind.io/2020/03/22/covid19deaths/">
   <meta property="og:title" content="Deaths from COVID-19 are more informative than confirmed cases | roryverse">
-  <meta property="og:description" content="So right now the rate of testing for COVID-19 is increasing in many countries. As such, there are many articles and posts that correctly point out that using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. However, many articles—including this one in the Financial Times—still use the number of confirmed cases, for lack of something better.
+  <meta property="og:description" content="Right now the rate of testing for COVID-19 is increasing in many countries. As such, there are many articles and posts that correctly point out that using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. However, many articles—including this one in the Financial Times—still use the number of confirmed cases, for lack of something better.
 We should be using deaths per capita First of all, we should be using per capita statistics.">
   <meta property="og:locale" content="en-us">
   
@@ -243,7 +243,7 @@ We should be using deaths per capita First of all, we should be using per capita
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    7 min read
+    8 min read
   </span>
   
 
@@ -315,33 +315,34 @@ We should be using deaths per capita First of all, we should be using per capita
 
 
     <div class="article-style" itemprop="articleBody">
-      <p>So right now the rate of testing for COVID-19 is increasing in many countries. As such, there are many articles and posts that correctly point out that using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. However, many articles—including <a href="https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441">this one</a> in the <em>Financial Times</em>—still use the number of confirmed cases, for lack of something better.</p>
+      <p>Right now the rate of testing for COVID-19 is increasing in many countries. As such, there are many articles and posts that correctly point out that using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. However, many articles—including <a href="https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441">this one</a> in the <em>Financial Times</em>—still use the number of confirmed cases, for lack of something better.</p>
 <div id="we-should-be-using-deaths-per-capita" class="section level1">
 <h1>We should be using deaths per capita</h1>
 <p>First of all, we should be using per capita statistics. For example 100,000 cases in China vs 100,000 cases in Ireland would be very different things, because of what they imply for concentration of cases. Per capita (assuming a billion people in China and 5 million in Ireland), this would mean 1% of people in Ireland have the disease, whereas 0.01% of people in China would; 1 in 100 vs 1 in 10,000. You get the idea, different things. Of course, just using per capita by country, you miss a lot of things too. Most of the cases being in Wuhan is not the same as a more even spread of cases throughout China. You can fix this by dividing by province or county (if you have that level of granularity in your data), but I won’t be doing that here.</p>
 <p>Second, reported deaths from the virus are more reliable than confirmed cases. That’s because the more ill you are, the more likely you are to get a test. The number of people reported to have died of COVID-19 infection will be closer to the true number than the number of people reported to be infected will be to the true number of infected individuals.</p>
-<p>For timelining the virus in a particular country, the <em>Financial Times</em> article uses days since first confirmed case in that country. In that spirit, I’ll use days since first confirmed death.</p>
+<p>For timelining the virus in a particular country, the <em>Financial Times</em> article uses days since first confirmed case in that country. In that spirit, I’ll use days since first confirmed death. This is imperfect because there’s a lot of randomness associated with when exactly that first death occurs, so keep that in mind as you read on.</p>
 </div>
 <div id="the-data" class="section level1">
 <h1>The data</h1>
 <p>Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE) has put together a great <a href="https://github.com/CSSEGISandData/COVID-19">COVID-19 data repository</a>.</p>
 <p>I’m about do dive in and show you this data now. Brace yourself, not many countries appear to be on a good trajectory. Social distancing is new (where it exists at all) and due to the long (approximately 2 week) latency period of the virus (<em>latency</em> is roughly the period between a person encountering the virus and showing symptoms of infection), we probably won’t see the benefit of social distancing in these statistics for at least another week. If by then there’s still no improvement, that would be cause for huge concern. In China, they had more enforced social distancing, whereby households were forbidden to have any visitors at all, no exceptions. They also had a system of food delivery so that people didn’t need to go to supermarkets. I was in a crowded supermarket yesterday in Oakland, California. I’d be surprised if there wasn’t a single transmission in there that day. We’re nowhere near China’s level of lockdown in the western world, even though it feels that our lives are at standstill. Are we doing <em>enough</em>? We’ll have a better idea in a few weeks.</p>
+<p>Note that I’ve smoothed the data to make the plots more readable.</p>
 <div id="all-countries" class="section level2">
 <h2>All countries</h2>
-<p>I’m going to limit the data to countries with over 10 million people that have reported at least 10 deaths. First up, I’ll just plot all of the countries. I’ll give a table of country codes at the end of this article. For me, the most confusing are DZA (Algeria) and CHE (Switzerland). Note that the data is not cumulative: each data point is deaths on that day. The lines are colored by how bad the situation is in that country is right now: how many deaths there were there yesterday.</p>
+<p>I’m going to limit the data to countries with over 8 million people that have reported at least 10 deaths. First up, I’ll just plot all of the countries. I’ll give a table of country codes at the end of this article. For me, the most confusing are DZA (Algeria) and CHE (Switzerland). Note that the data is not cumulative: each data point is deaths on that day. The lines are colored by how bad the situation is in that country is right now: how many deaths there were there yesterday.</p>
 <p><img src="/post/2020-03-21-covid19deaths_files/figure-html/all-countries-1.png" width="960" /></p>
-<p>We can see that Spain and Italy are in a really bad way and still showing exponential growth in the number of deaths. This does not bode well for them. Spain looks to be in worse shape than Italy. 17 days after its first death, it’s up to 6 deaths per million that day, whereas Italy was on 2 deaths per million on its equivalent day. I am very, very worried about Spain.</p>
+<p>We can see that Spain and Italy are in a really bad way and still showing exponential growth in the number of deaths. This does not bode well for them. Spain looks to be in worse shape than Italy. 18 days after its first death, it’s up to 6 deaths per million that day, whereas Italy was on 2 deaths per million on its equivalent day. I am very, very worried about Spain. The Netherlands is somewhere between Spain and Italy right now, but it appears to have a flatter trajectory than both of those, so it looks like it won’t be as bad as Italy. That’s a low bar though, it could get pretty bad there too at this rate.</p>
 <p>The other countries are a bit bunched so next I’ll limit the plot to countries with less than 3 deaths per million yesterday.</p>
 </div>
 <div id="countries-with-less-than-3-deaths-per-million-yesterday" class="section level2">
 <h2>Countries with less than 3 deaths per million yesterday</h2>
 <p><img src="/post/2020-03-21-covid19deaths_files/figure-html/lt3-deaths-per-mil-1.png" width="960" /></p>
-<p>Belgium, Switzerland, The Netherlands and France are all in exponential growth and near or above 2 deaths per million. They look to be on their way to where Spain is now; Belgium’s rate of increase is particularly alarming and 10 days after their first death, they have more deaths per capita than any other country did at that stage. It’s possible that Belgium could end up worse than Spain or Italy, but the overall rate (less than 3 deaths per million per day) might be low enough for them to turn things around before they become overwhelmed. Interestingly, Iran looks to be turning the corner and lowering its fatalities. We’ll need another week of data to see if they can sustain this.</p>
+<p>Belgium, Switzerland, The Netherlands and France are all growing at alarming rates and near or above 2 deaths per million. It would be surprising if they don’t breach 10 deaths per million per day soon, which would be horrific. Belgium’s rate of increase is particularly alarming and 10 days after their first death, they have more deaths per capita than any other country did at that stage. It’s possible that Belgium could end up worse than Spain or Italy, but the overall rate (less than 3 deaths per million per day) might be low enough for them to turn things around before they become overwhelmed. Similarly, Portugal could be worse than Belgium. Interestingly, Iran looks to be turning the corner and lowering its fatalities. We’ll need another week of data to see if they can sustain this.</p>
 </div>
 <div id="countries-with-less-than-1-death-per-million-yesterday" class="section level2">
 <h2>Countries with less than 1 death per million yesterday</h2>
 <p><img src="/post/2020-03-21-covid19deaths_files/figure-html/lt1-death-per-mil-1.png" width="960" /></p>
-<p>We see Portugal, Denmark and Great Britain rising sharply here. The British prime minister said today he thinks it will be 12 weeks before they see a drop in the number of cases. Social distancing is only coming into effect in Great Britain now and is being widely flouted. It looks like dire times lie ahead there. The Swedish curve looks like the British one with a few days’ lag.</p>
+<p>We see Portugal and Great Britain rising sharply here. The British prime minister said today he thinks it will be 12 weeks before they see a drop in the number of cases. Social distancing is only coming into effect in Great Britain now and is being widely flouted. It looks like dire times lie ahead there.</p>
 </div>
 <div id="countries-with-less-than-0.2-deaths-per-million-yesterday" class="section level2">
 <h2>Countries with less than 0.2 deaths per million yesterday</h2>
