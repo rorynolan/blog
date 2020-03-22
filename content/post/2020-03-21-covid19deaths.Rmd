@@ -1,0 +1,198 @@
+---
+slug: "covid19deaths"
+title: "Deaths from COVID-19 are more informative than confirmed cases"
+author: "Rory Nolan"
+date: 2020-03-22
+categories: ["COVID-19"]
+tags: ["COVID-19", "coronavirus"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", echo = FALSE,
+                      fig.height = 5, fig.width = 10)
+```
+
+So right now the rate of testing for COVID-19 is increasing in many countries. As such, there are many articles and posts that correctly point out that using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. However, many articles---including [this one](https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441) in the _Financial Times_---still use the number of confirmed cases, for lack of something better. 
+
+
+# We should be using deaths per capita
+
+First of all, we should be using per capita statistics. For example 100,000 cases in China vs 100,000 cases in Ireland would be very different things, because of what they imply for concentration of cases. Per capita (assuming a billion people in China and 5 million in Ireland), this would mean 1% of people in Ireland have the disease, whereas 0.01% of people in China would; 1 in 100 vs 1 in 10,000. You get the idea, different things. Of course, just using per capita by country, you miss a lot of things too. Most of the cases being in Wuhan is not the same as a more even spread of cases throughout China. You can fix this by dividing by province or county (if you have that level of granularity in your data), but I won't be doing that here.
+
+Second, reported deaths from the virus are more reliable than confirmed cases. That's because the more ill you are, the more likely you are to get a test. The number of people reported to have died of COVID-19 infection will be closer to the true number than the number of people reported to be infected will be to the true number of infected individuals.
+
+For timelining the virus in a particular country, the FT article uses days since first confirmed case in that country. In that spirit, I'll use days since first confirmed death.
+
+
+# The data
+
+Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE) has put together a great [COVID-19 data repository](https://github.com/CSSEGISandData/COVID-19).
+
+```{r prep-data}
+pacman::p_load(tidyverse, coronavirus, countrycode, wbstats, directlabels)
+
+countries_iso3c <- tibble(
+  country = sort(unique(coronavirus$Country.Region))
+) %>% 
+  filter(!is.element(country, c("Kosovo", "Cruise Ship"))) %>%  # not recognised by countrycodes package
+  mutate(iso3c = countrycode(country, "country.name", "iso3c")) %>% 
+  filter(!is.element(iso3c, c("VAT", "MTQ")))  # not included in world bank data
+
+country_pops <- wb(
+  country = countries_iso3c$iso3c,
+  indicator = "SP.POP.TOTL", 
+  startdate = 2018, enddate = 2018
+) %>% 
+  select(iso3c, value) %>% 
+  inner_join(countries_iso3c, by = c("iso3c" = "iso3c")) %>% 
+  select(country, value) %>% 
+  rename(population = value)
+
+data <- coronavirus %>% 
+  janitor::clean_names() %>% 
+  dplyr::filter(type == "death") %>% 
+  rename(country = country_region, deaths = cases) %>% 
+  group_by(country, date) %>% 
+  summarise_at("deaths", sum) %>% 
+  ungroup() %>% 
+  add_count(country, wt = deaths, name = "total_deaths") %>% 
+  filter(total_deaths > 0) %>% 
+  inner_join(country_pops, by = c("country" = "country")) %>% 
+  group_by(country) %>% 
+  mutate(
+    first_death_date = date[deaths > 0][[1]],
+    days_since_first_death = as.integer(date - first_death_date),
+    deaths_smoothed = smooth.spline(deaths, cv = TRUE)$y,
+    deaths_per_capita_smoothed = deaths_smoothed / population,
+    total_deaths_per_capita = total_deaths / population,
+    deaths_per_million_smoothed = deaths_per_capita_smoothed * 1e6,
+    total_deaths_per_million = total_deaths_per_capita * 1e6,
+    deaths_per_million_yesterday_smoothed = 
+      deaths_per_million_smoothed[
+        days_since_first_death = which.max(days_since_first_death)
+      ]
+  ) %>% 
+  filter(
+    total_deaths_per_capita > 1 / 5e6, 
+    total_deaths >= 10,
+    population > 10e6,
+    between(days_since_first_death, 0, 40)
+  ) %>% 
+  inner_join(countries_iso3c, by = c("country" = "country")) %>% 
+  select(
+    country, 
+    iso3c,
+    days_since_first_death, 
+    deaths_per_capita_smoothed, 
+    deaths_per_million_smoothed,
+    total_deaths_per_capita,
+    total_deaths_per_million,
+    deaths_per_million_yesterday_smoothed
+  ) %>% 
+  arrange(total_deaths_per_capita, country, days_since_first_death)
+```
+
+I'm about do dive in and show you this data now. Brace yourself, not many countries appear to be on a good trajectory. Social distancing is new (where it exists at all) and due to the long (approximately 2 week) latency period of the virus (_latency_ is roughly the period between a person encountering the virus and showing symptoms of infection), we probably won't see the benefit of social distancing in these statistics for at least another week. If by then there's still no improvement, that would be cause for huge concern. In China, they had more enforced social distancing, whereby households were forbidden to have any visitors at all, no exceptions. They also had a system of food delivery so that people didn't need to go to supermarkets. I was in a crowded supermarket yesterday in Oakland, California. I'd be surprised if there wasn't a single transmission in there that day. We're nowhere near China's level in the western world, even though it feels that our lives are at standstill. Are we doing _enough_? We'll have a better idea in a few weeks.
+
+
+## All countries
+
+I'm going to limit the data to countries with over 10 million people that have reported at least 10 deaths. First up, I'll just plot all of the countries. I'll give a table of country codes at the end of this article. For me, the most confusing are DZA (Algeria) and CHE (Switzerland). Note that the data is not cumulative. Each data point is deaths on that day. The lines are colored by how bad the situation is in that country is right now: how many deaths there were there yesterday.
+
+```{r all-countries}
+ggplot(
+  data, 
+  aes(
+    x = days_since_first_death,
+    y = deaths_per_million_smoothed,
+    colour = deaths_per_million_yesterday_smoothed,
+    group = iso3c
+  )
+) + 
+  geom_line() + 
+  geom_dl(aes(label = iso3c), method = "last.points", cex = 0.8) +
+  labs(x = "days since first death", y = "deaths per million",
+       colour = "deaths per million yesterday") +
+  scale_colour_gradient(low = "blue", high = "red") + 
+  xlim(0, max(data$days_since_first_death) + 2)
+```
+
+We can see that Spain and Italy are in a really bad way and still showing exponential growth in the number of deaths. This does not bode well for them.
+
+The other countries are a bit bunched so next I'll limit the plot to countries with less than 3 deaths per million yesterday.
+
+
+## Countries with less than 3 deaths per million yesterday
+
+```{r lt3-deaths-per-mil}
+ggplot(
+  filter(data, deaths_per_million_yesterday_smoothed < 3), 
+  aes(
+    x = days_since_first_death,
+    y = deaths_per_million_smoothed,
+    colour = deaths_per_million_yesterday_smoothed,
+    group = iso3c
+  )
+) + 
+  geom_line() + 
+  geom_dl(aes(label = iso3c), method = "last.points", cex = 0.8) +
+  labs(x = "days since first death", y = "deaths per million",
+       colour = "deaths per million yesterday") +
+  scale_colour_gradient(low = "blue", high = "red") + 
+  xlim(0, max(data$days_since_first_death) + 2) 
+```
+
+Belgium, Switzerland, The Netherlands and France are all in exponential growth and near or above 2 deaths per million. They look to be on their way to where Spain is now; Belgium's rate of increase is particularly alarming and 10 days after their first death, they have more deaths per capita than any other country did at that stage. Interestingly, Iran looks to be turning the corner and lowering its fatalities. We'll need another week of data to see if they can sustain this. 
+
+
+## Countries with less than 1 death per million yesterday
+
+```{r lt1-death-per-mil}
+ggplot(
+  filter(data, deaths_per_million_yesterday_smoothed < 1), 
+  aes(
+    x = days_since_first_death,
+    y = deaths_per_million_smoothed,
+    colour = deaths_per_million_yesterday_smoothed,
+    group = iso3c
+  )
+) + 
+  geom_line() + 
+  geom_dl(aes(label = iso3c), method = "last.points", cex = 0.8) +
+  labs(x = "days since first death", y = "deaths per million",
+       colour = "deaths per million yesterday") +
+  scale_colour_gradient(low = "blue", high = "red") + 
+  xlim(0, max(data$days_since_first_death) + 2) 
+```
+
+We see Portugal, Denmark and Great Britain rising sharply here. The British prime minister said today he thinks it will be 12 weeks before they see a drop in the number of cases. Social distancing is only coming into effect in Great Britain now and is being widely flouted. It looks like dire times lie ahead there. The Swedish curve looks like the British one with a few days' lag.
+
+
+## Countries with less than 0.2 deaths per million yesterday
+
+```{r lt0.2-death-per-mil}
+ggplot(
+  filter(data, deaths_per_million_yesterday_smoothed < 0.2), 
+  aes(
+    x = days_since_first_death,
+    y = deaths_per_million_smoothed,
+    colour = deaths_per_million_yesterday_smoothed,
+    group = iso3c
+  )
+) + 
+  geom_line() + 
+  geom_dl(aes(label = iso3c), method = "last.points", cex = 0.8) +
+  labs(x = "days since first death", y = "deaths per million",
+       colour = "deaths per million yesterday") +
+  scale_colour_gradient(low = "blue", high = "red") + 
+  xlim(0, max(data$days_since_first_death) + 2)
+```
+
+Japan have managed to keep their deaths low throughout, which is a credit to them, though people are still dying there, so they are by no means out of the woods. China is the only country to have really turned it around. Their deaths are now falling almost as fast as they were rising a few weeks ago. Provided their figures are accurate, they deserve enormous credit for their response (post cover-up) and lessons should be learned from what they did. South Korea has managed to keep its death numbers in a linear regime (growing at constant number of people dying every day). This is also a great achievement, given how nearly every other country is displaying exponential growth. Canada is worrying, similarly Greece and Algeria, who are only getting started. The USA is also in trouble. They are showing slower growth in cases than other places, probably because epicentres like Seattle and New York are being offset by a lot of people living rurally, who are low transmission risk. Make no mistake, the USA is heading for disaster according to this data. They have time to turn it around, but not that much of it.
+
+
+# Appendix
+
+```{r country-codes}
+knitr::kable(arrange(select(countries_iso3c, iso3c, country), iso3c))
+```
