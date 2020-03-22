@@ -21,7 +21,7 @@
 &lt;h1&gt;We should be using deaths per capita&lt;/h1&gt;
 &lt;p&gt;First of all, we should be using per capita statistics. For example 100,000 cases in China vs 100,000 cases in Ireland would be very different things, because of what they imply for concentration of cases. Per capita (assuming a billion people in China and 5 million in Ireland), this would mean 1% of people in Ireland have the disease, whereas 0.01% of people in China would; 1 in 100 vs 1 in 10,000. You get the idea, different things. Of course, just using per capita by country, you miss a lot of things too. Most of the cases being in Wuhan is not the same as a more even spread of cases throughout China. You can fix this by dividing by province or county (if you have that level of granularity in your data), but I won’t be doing that here.&lt;/p&gt;
 &lt;p&gt;Second, reported deaths from the virus are more reliable than confirmed cases. That’s because the more ill you are, the more likely you are to get a test. The number of people reported to have died of COVID-19 infection will be closer to the true number than the number of people reported to be infected will be to the true number of infected individuals.&lt;/p&gt;
-&lt;p&gt;For timelining the virus in a particular country, the FT article uses days since first confirmed case in that country. In that spirit, I’ll use days since first confirmed death.&lt;/p&gt;
+&lt;p&gt;For timelining the virus in a particular country, the &lt;em&gt;Financial Times&lt;/em&gt; article uses days since first confirmed case in that country. In that spirit, I’ll use days since first confirmed death.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;the-data&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;The data&lt;/h1&gt;
@@ -790,7 +790,7 @@ rbernoulli(5, 0.7)
 #&amp;gt; {
 #&amp;gt;     stats::runif(n) &amp;gt; (1 - p)
 #&amp;gt; }
-#&amp;gt; &amp;lt;bytecode: 0x7fec374eacb0&amp;gt;
+#&amp;gt; &amp;lt;bytecode: 0x7fdc2488f2b0&amp;gt;
 #&amp;gt; &amp;lt;environment: namespace:purrr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Ah, it seems Hadley just wrapped &lt;code&gt;runif()&lt;/code&gt;; hence, because &lt;code&gt;set.seed()&lt;/code&gt; works with &lt;code&gt;runif()&lt;/code&gt;, it works with his implementation of &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -863,8 +863,8 @@ rorybernoulli(6, 0.7)
 #&amp;gt; # A tibble: 2 x 6
 #&amp;gt;   expression                            min  median `itr/sec` mem_alloc `gc/sec`
 #&amp;gt;   &amp;lt;bch:expr&amp;gt;                        &amp;lt;bch:t&amp;gt; &amp;lt;bch:t&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;    &amp;lt;dbl&amp;gt;
-#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 28.16ms 28.64ms      33.8   11.45MB    10.4 
-#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.73ms  9.22ms     106.     3.82MB     8.99&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 28.28ms 28.67ms      33.7   11.45MB    10.4 
+#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.81ms  9.21ms     105.     3.82MB     8.97&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). It’s also three times as efficient with memory; the memory and time improvements probably have the same underlying reason. The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that they can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
 &lt;/div&gt;
 </description>

@@ -21,7 +21,7 @@ First of all, we should be using per capita statistics. For example 100,000 case
 
 Second, reported deaths from the virus are more reliable than confirmed cases. That's because the more ill you are, the more likely you are to get a test. The number of people reported to have died of COVID-19 infection will be closer to the true number than the number of people reported to be infected will be to the true number of infected individuals.
 
-For timelining the virus in a particular country, the FT article uses days since first confirmed case in that country. In that spirit, I'll use days since first confirmed death.
+For timelining the virus in a particular country, the _Financial Times_ article uses days since first confirmed case in that country. In that spirit, I'll use days since first confirmed death.
 
 
 # The data
@@ -112,9 +112,10 @@ ggplot(
   geom_line() + 
   geom_dl(aes(label = iso3c), method = "last.points", cex = 0.8) +
   labs(x = "days since first death", y = "deaths per million",
-       colour = "deaths per million yesterday") +
+       colour = "deaths/million\nyesterday") +
   scale_colour_gradient(low = "blue", high = "red") + 
-  xlim(0, max(data$days_since_first_death) + 2)
+  xlim(0, max(data$days_since_first_death) + 2) + 
+  theme(text = element_text(size = 20))
 ```
 
 We can see that Spain and Italy are in a really bad way and still showing exponential growth in the number of deaths. This does not bode well for them.
@@ -137,9 +138,10 @@ ggplot(
   geom_line() + 
   geom_dl(aes(label = iso3c), method = "last.points", cex = 0.8) +
   labs(x = "days since first death", y = "deaths per million",
-       colour = "deaths per million yesterday") +
+       colour = "deaths/million\nyesterday") +
   scale_colour_gradient(low = "blue", high = "red") + 
-  xlim(0, max(data$days_since_first_death) + 2) 
+  xlim(0, max(data$days_since_first_death) + 2) + 
+  theme(text = element_text(size = 20))
 ```
 
 Belgium, Switzerland, The Netherlands and France are all in exponential growth and near or above 2 deaths per million. They look to be on their way to where Spain is now; Belgium's rate of increase is particularly alarming and 10 days after their first death, they have more deaths per capita than any other country did at that stage. Interestingly, Iran looks to be turning the corner and lowering its fatalities. We'll need another week of data to see if they can sustain this. 
@@ -160,9 +162,10 @@ ggplot(
   geom_line() + 
   geom_dl(aes(label = iso3c), method = "last.points", cex = 0.8) +
   labs(x = "days since first death", y = "deaths per million",
-       colour = "deaths per million yesterday") +
+       colour = "deaths/million\nyesterday") +
   scale_colour_gradient(low = "blue", high = "red") + 
-  xlim(0, max(data$days_since_first_death) + 2) 
+  xlim(0, max(data$days_since_first_death) + 2) + 
+  theme(text = element_text(size = 20))
 ```
 
 We see Portugal, Denmark and Great Britain rising sharply here. The British prime minister said today he thinks it will be 12 weeks before they see a drop in the number of cases. Social distancing is only coming into effect in Great Britain now and is being widely flouted. It looks like dire times lie ahead there. The Swedish curve looks like the British one with a few days' lag.
@@ -183,9 +186,10 @@ ggplot(
   geom_line() + 
   geom_dl(aes(label = iso3c), method = "last.points", cex = 0.8) +
   labs(x = "days since first death", y = "deaths per million",
-       colour = "deaths per million yesterday") +
+       colour = "deaths/million\nyesterday") +
   scale_colour_gradient(low = "blue", high = "red") + 
-  xlim(0, max(data$days_since_first_death) + 2)
+  xlim(0, max(data$days_since_first_death) + 2) + 
+  theme(text = element_text(size = 20))
 ```
 
 Japan have managed to keep their deaths low throughout, which is a credit to them, though people are still dying there, so they are by no means out of the woods. China is the only country to have really turned it around. Their deaths are now falling almost as fast as they were rising a few weeks ago. Provided their figures are accurate, they deserve enormous credit for their response (post cover-up) and lessons should be learned from what they did. South Korea has managed to keep its death numbers in a linear regime (growing at constant number of people dying every day). This is also a great achievement, given how nearly every other country is displaying exponential growth. Canada is worrying, similarly Greece and Algeria, who are only getting started. The USA is also in trouble. They are showing slower growth in cases than other places, probably because epicentres like Seattle and New York are being offset by a lot of people living rurally, who are low transmission risk. Make no mistake, the USA is heading for disaster according to this data. They have time to turn it around, but not that much of it.
