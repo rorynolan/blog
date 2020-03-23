@@ -12,21 +12,21 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", echo = FALSE,
                       fig.height = 5, fig.width = 10)
 ```
 
-Right now the rate of testing for COVID-19 is increasing in many countries. As such, there are many articles and posts that correctly point out that using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. However, many articles---including [this one](https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441) in the _Financial Times_---still use the number of confirmed cases, for lack of something better. 
+The rate of testing for COVID-19 is increasing in many countries. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. Nevertheless, many articles---including [this one](https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441) in the _Financial Times_---still use the number of confirmed cases, for lack of something better. 
 
 
 # We should be using deaths per capita
 
-First of all, we should be using per capita statistics. For example 100,000 cases in China vs 100,000 cases in Ireland would be very different things, because of what they imply for concentration of cases. Per capita (assuming a billion people in China and 5 million in Ireland), this would mean 1% of people in Ireland have the disease, whereas 0.01% of people in China would; 1 in 100 vs 1 in 10,000. You get the idea, different things. Of course, just using per capita by country, you miss a lot of things too. Most of the cases being in Wuhan is not the same as a more even spread of cases throughout China. You can fix this by dividing by province or county (if you have that level of granularity in your data), but I won't be doing that here.
+First of all, we should be using per capita statistics. For example, 100,000 cases in China vs 100,000 cases in Ireland would be very different things, because of what they imply for concentration of cases. Per capita (assuming a billion people in China and 5 million in Ireland), this would mean 1% of people in Ireland have the disease compared to 0.01% of people in China: 1 in 100 vs 1 in 10,000. Of course, just using per capita by country, you miss a lot too. A particularly high concentration of cases in Wuhan is not the same as a more even spread of cases throughout China. You can fix this by dividing by province or county (if you have that level of granularity in your data), but I won't be doing that here.
 
-Second, reported deaths from the virus are more reliable than confirmed cases. That's because the more ill you are, the more likely you are to get a test. The number of people reported to have died of COVID-19 infection will be closer to the true number than the number of people reported to be infected will be to the true number of infected individuals.
+Second, reported deaths from the virus are more reliable than confirmed cases. That's because the more ill you are, the more likely you are to get a test. The number of people _reported_ to have died of COVID-19 infection will be closer to the true number of people who died of COVID-19 than the number of people _reported_ to be infected will be to the true number of infected individuals.
 
 For timelining the virus in a particular country, the _Financial Times_ article uses days since first confirmed case in that country. In that spirit, I'll use days since first confirmed death. This is imperfect because there's a lot of randomness associated with when exactly that first death occurs, so keep that in mind as you read on. 
 
 
 # The data
 
-Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE) has put together a great [COVID-19 data repository](https://github.com/CSSEGISandData/COVID-19).
+Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE) has put together a great [COVID-19 data repository](https://github.com/CSSEGISandData/COVID-19). Note that I've smoothed the data to make the plots more readable.
 
 ```{r prep-data}
 pacman::p_load(tidyverse, coronavirus, countrycode, wbstats, directlabels)
@@ -92,14 +92,13 @@ data <- coronavirus %>%
   arrange(total_deaths_per_capita, country, days_since_first_death)
 ```
 
-I'm about do dive in and show you this data now. Brace yourself, not many countries appear to be on a good trajectory. Social distancing is new (where it exists at all) and due to the long (approximately 2 week) latency period of the virus (_latency_ is roughly the period between a person encountering the virus and showing symptoms of infection), we probably won't see the benefit of social distancing in these statistics for at least another week. If by then there's still no improvement, that would be cause for huge concern. In China, they had more enforced social distancing, whereby households were forbidden to have any visitors at all, no exceptions. They also had a system of food delivery so that people didn't need to go to supermarkets. I was in a crowded supermarket yesterday in Oakland, California. I'd be surprised if there wasn't a single transmission in there that day. We're nowhere near China's level of lockdown in the western world, even though it feels that our lives are at standstill. Are we doing _enough_? We'll have a better idea in a few weeks.
+I'm about to dive in and show you this data now. Brace yourself: not many countries appear to be on a good trajectory. Social distancing is new (where it exists at all) and due to the long (approximately 2-week) latency period of the virus (_latency_ is roughly the period between a person encountering the virus and showing symptoms of infection), we probably won't see the benefit of social distancing in these statistics for at least another week. If by then there's still no improvement, that would be cause for huge concern. In China, there was stricter social distancing, whereby households were forbidden to have any visitors at all, no exceptions. China also had a system of food delivery so that people didn't need to go to supermarkets. I was in a crowded supermarket yesterday in Oakland, California. I'd be surprised if there wasn't a single transmission in there that day. We're nowhere near China's level of lockdown in the western world, even though it feels that our lives are at standstill. Are we doing _enough_? We'll have a better idea in a few weeks.
 
-Note that I've smoothed the data to make the plots more readable.
 
 
 ## All countries
 
-I'm going to limit the data to countries with over 8 million people that have reported at least 10 deaths. First up, I'll just plot all of the countries. I'll give a table of country codes at the end of this article. For me, the most confusing are DZA (Algeria) and CHE (Switzerland). Note that the data is not cumulative: each data point is deaths on that day. The lines are colored by how bad the situation is in that country is right now: how many deaths there were there yesterday.
+I'm going to limit the data to countries with over 8 million people that have reported at least 10 deaths. First up, I'll just plot all of the countries. I'll give a table of country codes at the end of this article. For me, the most confusing are DZA (Algeria) and CHE (Switzerland). Note that the data is not cumulative: each data point is deaths per million on that day. The lines are colored by how bad the situation is in that country right now: how many deaths there were there yesterday.
 
 ```{r all-countries}
 ggplot(
@@ -133,9 +132,9 @@ italy_that_day_deaths_per_mil_smoothed <- data %>%
   round()
 ```
 
-We can see that Spain and Italy are in a really bad way and still showing exponential growth in the number of deaths. This does not bode well for them. Spain looks to be in worse shape than Italy. `r spain_days_after` days after its first death, it's up to `r spain_yesterday_deaths_per_mil_smoothed` deaths per million that day, whereas Italy was on `r italy_that_day_deaths_per_mil_smoothed` deaths per million on its equivalent day. I am very, very worried about Spain. The Netherlands is somewhere between Spain and Italy right now, but it appears to have a flatter trajectory than both of those, so it looks like it won't be as bad as Italy. That's a low bar though, it could get pretty bad there too at this rate.
+We can see that Spain and Italy are in a really bad way and still showing exponential growth in the number of deaths. This does not bode well for them. Spain looks to be in worse shape than Italy. `r spain_days_after` days after its first death, it's up to `r spain_yesterday_deaths_per_mil_smoothed` deaths per million that day, whereas Italy was on `r italy_that_day_deaths_per_mil_smoothed` deaths per million on its equivalent day. I am very, very worried about Spain. The Netherlands is somewhere between Spain and Italy right now, but it appears to have a flatter trajectory than both of those, so it looks like it won't be as bad as Italy. That's a low bar though; it could get pretty bad there too at this rate.
 
-The other countries are a bit bunched so next I'll limit the plot to countries with less than 3 deaths per million yesterday.
+The other countries are a bit bunched, so next I'll limit the plot to countries with fewer than 3 deaths per million yesterday.
 
 
 ## Countries with less than 3 deaths per million yesterday
@@ -159,7 +158,7 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-Belgium, Switzerland, The Netherlands and France are all growing at alarming rates and are currently near or above 2 deaths per million. It would be surprising if they don't breach 10 deaths per million per day soon, which would be horrific. Belgium's rate of increase is particularly alarming and 10 days after their first death, they have more deaths per capita than any other country did at that stage. It's possible that Belgium could end up worse than Spain or Italy, but the overall rate (less than 3 deaths per million per day) might be low enough for them to turn things around before they become overwhelmed. Similarly, Portugal could be worse than Belgium. Interestingly, Iran looks to be turning the corner and lowering its fatalities. We'll need another week of data to see if they can sustain this. 
+Belgium, Switzerland, The Netherlands and France are all growing at alarming rates and are currently near or above 2 deaths per million. It would be surprising if they don't breach 10 deaths per million per day soon, which would be horrific. Belgium's rate of increase is particularly alarming: 10 days after their first death, they have more deaths per capita than any other country did at that stage. It's possible that Belgium could end up worse than Spain or Italy, but the overall rate (fewer than 3 deaths per million per day) might be low enough for them to turn things around before they become overwhelmed. Similarly, Portugal could be worse than Belgium. Interestingly, Iran looks to be turning the corner and lowering its fatalities. We'll need another week of data to see if they can sustain this. 
 
 
 ## Countries with less than 1 death per million yesterday
@@ -183,7 +182,7 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-We see Portugal and Great Britain rising sharply here. The British prime minister said today he thinks it will be 12 weeks before they see a drop in the number of cases. Social distancing is only coming into effect in Great Britain now and is being widely flouted. It looks like dire times lie ahead there. 
+We see Portugal and Great Britain rising sharply here. Today, the British Prime Minister said that he thinks it will be 12 weeks before they see a drop in the number of cases. Social distancing is only coming into effect in Great Britain now and is being widely flouted. It looks like dire times lie ahead there. 
 
 
 ## Countries with less than 0.2 deaths per million yesterday
@@ -207,7 +206,7 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-Japan have managed to keep their deaths low throughout, which is a credit to them, though people are still dying there, so they are by no means out of the woods. China is the only country to have really turned it around. Their deaths are now falling almost as fast as they were rising a few weeks ago. Provided their figures are accurate, they deserve enormous credit for their response (post cover-up) and lessons should be learned from what they did. South Korea has managed to keep its death numbers in a linear regime (growing at constant number of people dying every day). This is also a great achievement, given how nearly every other country is displaying exponential growth. Canada is worrying, similarly Greece and Algeria, who are only getting started. The USA is also in trouble. They are showing slower growth in cases than other places, probably because epicenters like Seattle and New York are being offset by a lot of people living rurally, who are low transmission risk. Make no mistake, the USA is heading for disaster according to this data. They have time to turn it around, but not that much of it.
+Japan have managed to keep their deaths low throughout, which is a credit to them, though people are still dying there, so they are by no means out of the woods. China is the only country to have really turned it around. Their deaths are now falling almost as fast as they were rising a few weeks ago. Provided their figures are accurate, they deserve enormous credit for their response (post cover-up) and lessons should be learned from what they did. South Korea has managed to keep its death numbers in a linear regime (growing at constant number of people dying every day). This is also a great achievement, given how nearly every other country is displaying exponential growth. Canada is worrying, as are Greece and Algeria, who are only at the beginning of their outbreaks. The USA is also in trouble. They are showing slower growth in cases than other places, probably because epicenters like Seattle and New York are being offset by a lot of people living rurally, who are low transmission risk. Make no mistake: the USA is heading for disaster according to this data. They have time to turn it around, but not much time.
 
 
 # Appendix

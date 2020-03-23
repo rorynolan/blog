@@ -86,7 +86,7 @@ rbernoulli(5, 0.7)
 #&amp;gt; {
 #&amp;gt;     stats::runif(n) &amp;gt; (1 - p)
 #&amp;gt; }
-#&amp;gt; &amp;lt;bytecode: 0x7ff2ac4448b0&amp;gt;
+#&amp;gt; &amp;lt;bytecode: 0x7fce9d0ce260&amp;gt;
 #&amp;gt; &amp;lt;environment: namespace:purrr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Ah, it seems Hadley just wrapped &lt;code&gt;runif()&lt;/code&gt;; hence, because &lt;code&gt;set.seed()&lt;/code&gt; works with &lt;code&gt;runif()&lt;/code&gt;, it works with his implementation of &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -159,8 +159,8 @@ rorybernoulli(6, 0.7)
 #&amp;gt; # A tibble: 2 x 6
 #&amp;gt;   expression                            min  median `itr/sec` mem_alloc `gc/sec`
 #&amp;gt;   &amp;lt;bch:expr&amp;gt;                        &amp;lt;bch:t&amp;gt; &amp;lt;bch:t&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;    &amp;lt;dbl&amp;gt;
-#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 28.19ms 29.27ms      33.1   11.45MB    10.2 
-#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.99ms  9.38ms     103.     3.82MB     8.95&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5)  25.6ms 27.09ms      35.9   11.45MB    10.3 
+#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.21ms  8.85ms     110.     3.82MB     9.00&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). It’s also three times as efficient with memory; the memory and time improvements probably have the same underlying reason. The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that they can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
 &lt;/div&gt;
 </description>
