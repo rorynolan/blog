@@ -12,7 +12,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", echo = FALSE,
                       fig.height = 5, fig.width = 10)
 ```
 
-The rate of testing for COVID-19 is increasing in many countries. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. Nevertheless, many articles---including [this one](https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441) in the _Financial Times_---still use the number of confirmed cases, for lack of something better. 
+The rate of testing for COVID-19 is increasing in many countries. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. Nevertheless, many articles---including [this one](https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441) in the _Financial Times_---still talk aout the number of confirmed cases. That article also focusses on number of deaths though, which is much better and leads us to what I think should be used.
 
 
 # We should be using deaths per capita
@@ -75,7 +75,7 @@ data <- coronavirus %>%
   filter(
     total_deaths_per_capita > 1 / 5e6, 
     total_deaths >= 10,
-    population > 8e6,
+    population > 10e6,
     between(days_since_first_death, 0, 40)
   ) %>% 
   inner_join(countries_iso3c, by = c("country" = "country")) %>% 
@@ -98,7 +98,7 @@ I'm about to dive in and show you this data now. Brace yourself: not many countr
 
 ## All countries
 
-I'm going to limit the data to countries with over 8 million people that have reported at least 10 deaths. First up, I'll just plot all of the countries. I'll give a table of country codes at the end of this article. For me, the most confusing are DZA (Algeria) and CHE (Switzerland). Note that the data is not cumulative: each data point is deaths per million on that day. The lines are colored by how bad the situation is in that country right now: how many deaths there were there yesterday.
+I'm going to limit the data to countries with over 10 million people that have reported at least 10 deaths. First up, I'll just plot all of the countries. I'll give a table of country codes at the end of this article. For me, the most confusing is DZA (Algeria). Note that the data is not cumulative: each data point is deaths per million on that day. The lines are colored by how bad the situation is in that country right now: how many deaths there were there yesterday.
 
 ```{r all-countries}
 ggplot(
@@ -111,7 +111,8 @@ ggplot(
   )
 ) + 
   geom_line() + 
-  geom_dl(aes(label = iso3c), method = "last.points", cex = 0.8) +
+  geom_dl(aes(label = iso3c), 
+          method = list("last.points", cex = 4/3)) +
   labs(x = "days since first death", y = "deaths per million",
        colour = "deaths/million\nyesterday") +
   scale_colour_gradient(low = "blue", high = "red") + 
@@ -150,7 +151,8 @@ ggplot(
   )
 ) + 
   geom_line() + 
-  geom_dl(aes(label = iso3c), method = "last.points", cex = 0.8) +
+  geom_dl(aes(label = iso3c), 
+          method = list("last.points", cex = 4/3)) +
   labs(x = "days since first death", y = "deaths per million",
        colour = "deaths/million\nyesterday") +
   scale_colour_gradient(low = "blue", high = "red") + 
@@ -158,7 +160,7 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-Belgium, Switzerland, The Netherlands and France are all growing at alarming rates and are currently near or above 2 deaths per million. It would be surprising if they don't breach 10 deaths per million per day soon, which would be horrific. Belgium's rate of increase is particularly alarming: 10 days after their first death, they have more deaths per capita than any other country did at that stage. It's possible that Belgium could end up worse than Spain or Italy, but the overall rate (fewer than 3 deaths per million per day) might be low enough for them to turn things around before they become overwhelmed. Similarly, Portugal could be worse than Belgium. Interestingly, Iran looks to be turning the corner and lowering its fatalities. We'll need another week of data to see if they can sustain this. 
+Belgium and The Netherlands are growing at alarming rates and are currently near or above 2 deaths per million. It would be surprising if they don't breach 10 deaths per million per day soon, which would be horrific. Belgium's rate of increase is particularly alarming: 10 days after their first death, they had more deaths per capita than any other country did at that stage. It's possible that Belgium could end up worse than Spain or Italy, but the overall rate (fewer than 3 deaths per million per day) might be low enough for them to turn things around before they become overwhelmed. Similarly, Portugal could be worse than Belgium. Interestingly, France and Iran look to be turning the corner and lowering their fatalities. We'll need another week of data to see if they can sustain this. 
 
 
 ## Countries with less than 1 death per million yesterday
@@ -174,7 +176,8 @@ ggplot(
   )
 ) + 
   geom_line() + 
-  geom_dl(aes(label = iso3c), method = "last.points", cex = 0.8) +
+  geom_dl(aes(label = iso3c), 
+          method = list("last.points", cex = 4/3)) +
   labs(x = "days since first death", y = "deaths per million",
        colour = "deaths/million\nyesterday") +
   scale_colour_gradient(low = "blue", high = "red") + 
@@ -182,7 +185,7 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-We see Portugal and Great Britain rising sharply here. Today, the British Prime Minister said that he thinks it will be 12 weeks before they see a drop in the number of cases. Social distancing is only coming into effect in Great Britain now and is being widely flouted. It looks like dire times lie ahead there. 
+We see Portugal, Turkey, Ecuador and Great Britain rising sharply here. Yesterday, the British Prime Minister said that he thinks it will be 12 weeks before they see a drop in the number of cases. Social distancing is only coming into effect in Great Britain now and is being widely flouted. It looks like dire times lie ahead there. 
 
 
 ## Countries with less than 0.2 deaths per million yesterday
@@ -198,7 +201,8 @@ ggplot(
   )
 ) + 
   geom_line() + 
-  geom_dl(aes(label = iso3c), method = "last.points", cex = 0.8) +
+  geom_dl(aes(label = iso3c), 
+          method = list("last.points", cex = 4/3)) +
   labs(x = "days since first death", y = "deaths per million",
        colour = "deaths/million\nyesterday") +
   scale_colour_gradient(low = "blue", high = "red") + 
@@ -206,7 +210,7 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-Japan have managed to keep their deaths low throughout, which is a credit to them, though people are still dying there, so they are by no means out of the woods. China is the only country to have really turned it around. Their deaths are now falling almost as fast as they were rising a few weeks ago. Provided their figures are accurate, they deserve enormous credit for their response (post cover-up) and lessons should be learned from what they did. South Korea has managed to keep its death numbers in a linear regime (growing at constant number of people dying every day). This is also a great achievement, given how nearly every other country is displaying exponential growth. Canada is worrying, as are Greece and Algeria, who are only at the beginning of their outbreaks. The USA is also in trouble. They are showing slower growth in cases than other places, probably because epicenters like Seattle and New York are being offset by a lot of people living rurally, who are low transmission risk. Make no mistake: the USA is heading for disaster according to this data. They have time to turn it around, but not much time.
+Japan have managed to keep their deaths low throughout, which is a credit to them, though people are still dying there, so they are by no means out of the woods. China is the only country to have really turned it around. Their deaths are now falling almost as fast as they were rising a few weeks ago. Provided their figures are accurate, they deserve enormous credit for their response (post cover-up) and lessons should be learned from what they did. South Korea has managed to keep its death numbers in a linear regime (growing at constant number of people dying every day). This is also a great achievement, given how nearly every other country is displaying exponential growth. Germany (DEU) looks promising, let's see if they can sustain their downward trajectory after their brief spike. Canada is worrying, as are Greece and Algeria, who are only at the beginning of their outbreaks. The USA is also in trouble. They are showing slower growth in cases than other places, probably because epicenters like Seattle and New York are being offset by a lot of people living rurally, who are low transmission risk. Make no mistake: the USA is heading for disaster according to this data. They have time to turn it around, but not much time. It's possible that The Philippines are handling the outbreak well, or that they are only at the start of their growth period.
 
 
 # Appendix
