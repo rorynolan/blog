@@ -19,7 +19,7 @@
       <description>&lt;p&gt;The rate of testing for COVID-19 is increasing in many countries. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. Nevertheless, many articles—including &lt;a href=&#34;https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441&#34;&gt;this one&lt;/a&gt; in the &lt;em&gt;Financial Times&lt;/em&gt;—still talk about the number of confirmed cases. That article also focuses on number of deaths though, which is much better and leads us to what I think should be used.&lt;/p&gt;
 &lt;div id=&#34;we-should-be-using-deaths-per-capita&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;We should be using deaths per capita&lt;/h1&gt;
-&lt;p&gt;First of all, we should be using per capita statistics. For example, 100,000 cases in China vs 100,000 cases in Ireland would be very different things, because of what they imply for concentration of cases. Per capita (assuming a billion people in China and 5 million in Ireland), this would mean 1% of people in Ireland have the disease compared to 0.01% of people in China: 1 in 100 vs 1 in 10,000. Of course, just using per capita by country, you miss a lot too. A particularly high concentration of cases in Wuhan is not the same as a more even spread of cases throughout China. You can fix this by dividing by province or county (if you have that level of granularity in your data), but I won’t be doing that here. I’m going to use per million people instead of per capita, because it’s a bit easier to think about.&lt;/p&gt;
+&lt;p&gt;First of all, we should be using per capita statistics. For example, 100,000 cases in China vs 100,000 cases in Ireland would be very different things, because of what they imply for concentration of cases. Per capita (assuming a billion people in China and 5 million in Ireland), this would mean 1% of people in Ireland have the disease compared to 0.01% of people in China: 1 in 100 vs 1 in 10,000. Of course, just using per capita by country, you miss a lot too. A particularly high concentration of cases in Wuhan is not the same as a more even spread of cases throughout China. You can fix this by dividing by province or county (if you have that level of granularity in your data); I do this by state for the US. I’m going to use per million people instead of per capita, because it’s a bit easier to think about.&lt;/p&gt;
 &lt;p&gt;Second, reported deaths from the virus are more reliable than confirmed cases. That’s because the more ill you are, the more likely you are to get a test. The number of people &lt;em&gt;reported&lt;/em&gt; to have died of COVID-19 infection will be closer to the true number of people who died of COVID-19 than the number of people &lt;em&gt;reported&lt;/em&gt; to be infected will be to the true number of infected individuals.&lt;/p&gt;
 &lt;p&gt;For timelining, I’ll use days since the tenth confirmed death from COVID-19 in a particular country, just like the &lt;em&gt;Financial Times&lt;/em&gt; article.&lt;/p&gt;
 &lt;/div&gt;
@@ -58,7 +58,7 @@
 &lt;ul&gt;
 &lt;li&gt;For &lt;strong&gt;Portugal&lt;/strong&gt;, &lt;strong&gt;Sweden&lt;/strong&gt; and &lt;strong&gt;Greece&lt;/strong&gt;, it’s too early to tell, though the upward trajectories are cause for great concern.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Germany&lt;/strong&gt; appears to be tackling the disease early and very well. They have more hospital beds per capita than any other country in the world, so kudos to them and I hope their success continues.&lt;/li&gt;
-&lt;li&gt;The &lt;strong&gt;USA&lt;/strong&gt; curve looks pretty ominous here. They have 3 main states (California, New York and Washington) driving most of their cases and deaths. It would be interesting to see a breakdown by state; I’ll try to work on that in the coming days.&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;USA&lt;/strong&gt; curve looks pretty ominous here. They have 3 main states (California, New York and Washington) driving most of their cases and deaths. See below for a breakdown of the US by states.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;China&lt;/strong&gt; is the only country which can definitively be said to have beaten their outbreak. They deserve enormous credit for their (post cover-up) response, and a lot can be learned from what they did. Of course, the number of cases there could rise again, but they know what to do if that happens.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;South Korea&lt;/strong&gt; has managed to keep its death numbers in a linear regime (growing at constant number of people dying every day) or perhaps slightly better. This is also a great achievement, given how nearly every other country is displaying exponential growth. Still, they need to improve further. More people died there yesterday than the day before; that needs to change.&lt;/li&gt;
 &lt;/ul&gt;
@@ -214,7 +214,7 @@ rbernoulli(5, 0.7)
 #&amp;gt; {
 #&amp;gt;     stats::runif(n) &amp;gt; (1 - p)
 #&amp;gt; }
-#&amp;gt; &amp;lt;bytecode: 0x7ff07b999158&amp;gt;
+#&amp;gt; &amp;lt;bytecode: 0x7ff161e38758&amp;gt;
 #&amp;gt; &amp;lt;environment: namespace:purrr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Ah, it seems Hadley just wrapped &lt;code&gt;runif()&lt;/code&gt;; hence, because &lt;code&gt;set.seed()&lt;/code&gt; works with &lt;code&gt;runif()&lt;/code&gt;, it works with his implementation of &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -287,8 +287,8 @@ rorybernoulli(6, 0.7)
 #&amp;gt; # A tibble: 2 x 6
 #&amp;gt;   expression                            min  median `itr/sec` mem_alloc `gc/sec`
 #&amp;gt;   &amp;lt;bch:expr&amp;gt;                        &amp;lt;bch:t&amp;gt; &amp;lt;bch:t&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;    &amp;lt;dbl&amp;gt;
-#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 25.51ms 27.47ms      35.4   11.45MB    10.1 
-#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.25ms  8.82ms     110.     3.82MB     8.99&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 26.72ms 27.11ms      35.5   11.45MB    10.1 
+#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.46ms  8.64ms     112.     3.82MB     8.97&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). It’s also three times as efficient with memory; the memory and time improvements probably have the same underlying reason. The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that they can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
 &lt;/div&gt;
 </description>
