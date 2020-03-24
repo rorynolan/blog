@@ -241,7 +241,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    6 min read
+    7 min read
   </span>
   
 
@@ -320,10 +320,16 @@
 <p>Second, reported deaths from the virus are more reliable than confirmed cases. That’s because the more ill you are, the more likely you are to get a test. The number of people <em>reported</em> to have died of COVID-19 infection will be closer to the true number of people who died of COVID-19 than the number of people <em>reported</em> to be infected will be to the true number of infected individuals.</p>
 <p>For timelining, I’ll use days since the tenth confirmed death from COVID-19 in a particular country, just like the <em>Financial Times</em> article.</p>
 </div>
-<div id="the-data" class="section level1">
-<h1>The data</h1>
+<div id="data-source-preparation-and-limitations" class="section level1">
+<h1>Data source, preparation and limitations</h1>
 <p>Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE) has put together a great <a href="https://github.com/CSSEGISandData/COVID-19">COVID-19 data repository</a>. Note that I’ve smoothed the data to make the plots more readable. This means that only sustained changes will appear on the plots (e.g. a one-day drop in deaths will be smoothed out). This is a good thing as it prevents us from reading too much into single data. Bear in mind that different countries have different measurement methods and capabilities, so they aren’t strictly comparable. However, provided that within a given country, the measurements are done in a consistent manner, one can still do reliable comparisons of the <em>shapes</em> of the countries’ curves.</p>
-<p>I’m about to dive in and show you this data now. Brace yourself: not many countries appear to be on a good trajectory. Social distancing is new (where it exists at all) and due to the long (approximately 2-week) latency period of the virus (<em>latency</em> is roughly the period between a person encountering the virus and showing symptoms of infection), we probably won’t see the benefit of social distancing in these statistics for at least another week. If by then there’s still no improvement, that would be cause for huge concern. In Taiwan, for example, the government is using people’s mobile phone location to ensure they stay at home. If you leave home without permission, the police come and find you within a half hour and make you return home. That is a much better lockdown than exists anywhere in the western world. I was in a crowded supermarket yesterday in Oakland, California. I’d be surprised if there wasn’t a single transmission in there that day. The local lake is more crowded than ever with people who are desperate to get outside. They <em>try</em> to keep their distance, but they’re not as distant as they would be if they’d stayed at home. Are we doing <em>enough</em>? We’ll have a better idea in a few weeks.</p>
+<div id="a-note-on-social-distancing" class="section level2">
+<h2>A note on social distancing</h2>
+<p>Social distancing is mostly new (where it exists at all) and due to the long (approximately 2-week) latency period of the virus (<em>latency</em> is roughly the period between a person encountering the virus and showing symptoms of infection), we probably won’t see the benefit of social distancing in these statistics for at least another week. If by then there’s still no improvement, that would be cause for huge concern. In Taiwan, for example, the government is using people’s mobile phone location to ensure they stay at home. If you leave home without permission, the police come and find you within a half hour and make you return home. That is a much better lockdown than exists anywhere in the western world. I was in a crowded supermarket yesterday in Oakland, California. I’d be surprised if there wasn’t a single transmission in there that day. The local lake is more crowded than ever with people who are desperate to get outside. They <em>try</em> to keep their distance, but they’re not as distant as they would be if they’d stayed at home. Are we doing <em>enough</em>? We’ll have a better idea in a few weeks.</p>
+</div>
+</div>
+<div id="world-data" class="section level1">
+<h1>World data</h1>
 <div id="all-countries" class="section level2">
 <h2>All countries</h2>
 <p>I’m going to limit the data to countries with over 10 million people that have reported at least 10 deaths and have at least 1 death per million people. First up, I’ll just plot all of these countries. I’ll give a table of country codes at the end. Note that the data is not cumulative: each data point is deaths per million on that day. The lines are colored by how bad the situation is in that country right now: how many deaths there were there yesterday.</p>
@@ -354,6 +360,20 @@
 <li><strong>South Korea</strong> has managed to keep its death numbers in a linear regime (growing at constant number of people dying every day) or perhaps slightly better. This is also a great achievement, given how nearly every other country is displaying exponential growth. Still, they need to improve further. More people died there yesterday than the day before; that needs to change.</li>
 </ul>
 </div>
+</div>
+<div id="us-data" class="section level1">
+<h1>US data</h1>
+<p>I’m going to use the same limitations for the US state data except that I’ll allow populations over 7.5 million, so that we can see Washington state.</p>
+<p><img src="/post/2020-03-21-covid19deaths_files/figure-html/us-plot-1.png" width="960" /></p>
+<ul>
+<li>For <strong>Ohio</strong>, <strong>Virginia</strong> and <strong>Michigan</strong>, it’s too early to say.</li>
+<li><strong>Washington</strong> state is at 13 deaths per million 12 days after its tenth death. At this point, Spain was at 4 deaths per million. This is absolutely dire. One bright light for Washington is that they have avoided exponential growth in the death rate, but the linear growth they have is still a massive problem.</li>
+<li><strong>New York</strong> is at 6 deaths per million 7 days after its tenth death. At this point, Spain was at 1 deaths per million. New York looks like it will get worse than Washington.</li>
+<li><strong>New York</strong> is at 3 deaths per million 6 days after its tenth death; better than New York but not good at all. At this point, Spain was at 1 deaths per million.</li>
+<li><strong>Georgia</strong> and <strong>Illinois</strong> are near where New York was at equivalent stages, but with flatter trajectories. But New York is a low bar. To be barely better than New York is to be headed for disaster.</li>
+<li>9 days after its tenth death, <strong>California</strong> is at approximately 6 deaths per million. This is similar to where Italy was at this stage, but California’s curve is flatter than Italy’s, so they are on course to avoid the explosion in cases that happened there.</li>
+<li><strong>Texas</strong> and <strong>Florida</strong> look very like California with a few days’ lag.</li>
+</ul>
 </div>
 <div id="appendix" class="section level1">
 <h1>Appendix</h1>

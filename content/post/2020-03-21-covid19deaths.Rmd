@@ -1,6 +1,11 @@
 ---
 slug: "covid19deaths"
 title: "Deaths from COVID-19 are more informative than confirmed cases"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
 author: "Rory Nolan"
 date: "`r lubridate::today()`"
 categories: ["COVID-19"]
@@ -24,7 +29,7 @@ Second, reported deaths from the virus are more reliable than confirmed cases. T
 For timelining, I'll use days since the tenth confirmed death from COVID-19 in a particular country, just like the _Financial Times_ article. 
 
 
-# The data
+# Data source, preparation and limitations
 
 Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE) has put together a great [COVID-19 data repository](https://github.com/CSSEGISandData/COVID-19). Note that I've smoothed the data to make the plots more readable. This means that only sustained changes will appear on the plots (e.g. a one-day drop in deaths will be smoothed out). This is a good thing as it prevents us from reading too much into single data. Bear in mind that different countries have different measurement methods and capabilities, so they aren't strictly comparable. However, provided that within a given country, the measurements are done in a consistent manner, one can still do reliable comparisons of the _shapes_ of the countries' curves.
 
@@ -62,6 +67,7 @@ data <- coronavirus %>%
   add_count(country, wt = deaths, name = "total_deaths") %>% 
   filter(total_deaths >= 10) %>% 
   inner_join(country_pops, by = c("country" = "country")) %>% 
+  arrange(country, date) %>% 
   group_by(country) %>% 
   mutate(
     cum_deaths = cumsum(deaths),
@@ -93,9 +99,12 @@ data <- coronavirus %>%
   arrange(total_deaths_per_million, country, days_since_tenth_death)
 ```
 
-I'm about to dive in and show you this data now. Brace yourself: not many countries appear to be on a good trajectory. Social distancing is new (where it exists at all) and due to the long (approximately 2-week) latency period of the virus (_latency_ is roughly the period between a person encountering the virus and showing symptoms of infection), we probably won't see the benefit of social distancing in these statistics for at least another week. If by then there's still no improvement, that would be cause for huge concern. In Taiwan, for example, the government is using people's mobile phone location to ensure they stay at home. If you leave home without permission, the police come and find you within a half hour and make you return home. That is a much better lockdown than exists anywhere in the western world. I was in a crowded supermarket yesterday in Oakland, California. I'd be surprised if there wasn't a single transmission in there that day. The local lake is more crowded than ever with people who are desperate to get outside. They _try_ to keep their distance, but they're not as distant as they would be if they'd stayed at home. Are we doing _enough_? We'll have a better idea in a few weeks.
+## A note on social distancing
+
+Social distancing is mostly new (where it exists at all) and due to the long (approximately 2-week) latency period of the virus (_latency_ is roughly the period between a person encountering the virus and showing symptoms of infection), we probably won't see the benefit of social distancing in these statistics for at least another week. If by then there's still no improvement, that would be cause for huge concern. In Taiwan, for example, the government is using people's mobile phone location to ensure they stay at home. If you leave home without permission, the police come and find you within a half hour and make you return home. That is a much better lockdown than exists anywhere in the western world. I was in a crowded supermarket yesterday in Oakland, California. I'd be surprised if there wasn't a single transmission in there that day. The local lake is more crowded than ever with people who are desperate to get outside. They _try_ to keep their distance, but they're not as distant as they would be if they'd stayed at home. Are we doing _enough_? We'll have a better idea in a few weeks.
 
 
+# World data
 
 ## All countries
 
@@ -195,6 +204,129 @@ ggplot(
 * **China** is the only country which can definitively be said to have beaten their outbreak. They deserve enormous credit for their (post cover-up) response, and a lot can be learned from what they did. Of course, the number of cases there could rise again, but they know what to do if that happens.
 * **South Korea** has managed to keep its death numbers in a linear regime (growing at constant number of people dying every day) or perhaps slightly better. This is also a great achievement, given how nearly every other country is displaying exponential growth. Still, they need to improve further. More people died there yesterday than the day before; that needs to change.
 
+
+# US data
+
+I'm going to use the same limitations for the US state data except that I'll allow populations over 7.5 million, so that we can see Washington state.
+
+```{r prep-US-data}
+pacman::p_load(covid19us, tidycensus, openintro)
+pop_thresh <- 7.5e6
+state_pops <- get_estimates(geography = "state", product = "population") %>% 
+  filter(variable == "POP", NAME != "Puerto Rico") %>% 
+  transmute(state = state2abbr(NAME), population = value)
+us_data <- get_states_daily() %>% 
+  select(date, state, death) %>% 
+  rename(deaths = death) %>% 
+  mutate(deaths = replace_na(deaths, 0L)) %>% 
+  inner_join(state_pops, by = c("state" = "state")) %>% 
+  add_count(state, wt = deaths, name = "total_deaths") %>% 
+  filter(total_deaths >= 10) %>% 
+  arrange(state, date) %>% 
+  group_by(state) %>% 
+  mutate(
+    cum_deaths = cumsum(deaths),
+    tenth_death_date = date[cum_deaths >= 10][[1]],
+    days_since_tenth_death = as.integer(date - tenth_death_date),
+    deaths_smoothed = suppressMessages(
+      smooth.spline(deaths, cv = TRUE)
+    )$y,
+    deaths_per_million_smoothed = deaths_smoothed / population * 1e6,
+    total_deaths_per_million = total_deaths / population * 1e6,
+    deaths_per_million_smoothed_yesterday = 
+      deaths_per_million_smoothed[
+        days_since_tenth_death = which.max(days_since_tenth_death)
+      ]
+  ) %>% 
+  filter(
+    total_deaths_per_million > total_deaths_per_million_thresh, 
+    total_deaths >= total_deaths_thresh,
+    population > pop_thresh,
+    days_since_tenth_death >= 0
+  ) %>% 
+  select(
+    state, 
+    days_since_tenth_death, 
+    deaths_per_million_smoothed,
+    total_deaths_per_million,
+    deaths_per_million_smoothed_yesterday,
+    total_deaths
+  ) %>% 
+  arrange(total_deaths_per_million, state, days_since_tenth_death)
+```
+
+```{r us-plot}
+ggplot(
+  us_data, 
+  aes(
+    x = days_since_tenth_death,
+    y = deaths_per_million_smoothed,
+    colour = deaths_per_million_smoothed_yesterday,
+    group = state
+  )
+) + 
+  geom_line() + 
+  geom_dl(aes(label = state), 
+          method = list("last.points", cex = 4/3)) +
+  labs(x = "days since tenth death", y = "deaths per million",
+       colour = "deaths/million\nyesterday") +
+  scale_colour_gradient(low = "blue", high = "red") + 
+  xlim(0, max(us_data$days_since_tenth_death) + 2) + 
+  theme(text = element_text(size = 20))
+```
+
+```{r us-state-specifics}
+wa_days_since_tenth_death <- us_data %>% 
+  filter(state == "WA") %>% 
+  pull(days_since_tenth_death) %>% 
+  max()
+wa_current_deaths_per_million <- us_data %>% 
+  filter(state == "WA", days_since_tenth_death == wa_days_since_tenth_death) %>% 
+  pull(deaths_per_million_smoothed)
+spain_wa_equivalent_deaths_per_million <- data %>% 
+  filter(iso3c == "ESP", days_since_tenth_death == wa_days_since_tenth_death) %>% 
+  pull(deaths_per_million_smoothed)
+
+ny_days_since_tenth_death <- us_data %>% 
+  filter(state == "NY") %>% 
+  pull(days_since_tenth_death) %>% 
+  max()
+ny_current_deaths_per_million <- us_data %>% 
+  filter(state == "NY", days_since_tenth_death == ny_days_since_tenth_death) %>% 
+  pull(deaths_per_million_smoothed)
+spain_ny_equivalent_deaths_per_million <- data %>% 
+  filter(iso3c == "ESP", days_since_tenth_death == ny_days_since_tenth_death) %>% 
+  pull(deaths_per_million_smoothed)
+
+nj_days_since_tenth_death <- us_data %>% 
+  filter(state == "NJ") %>% 
+  pull(days_since_tenth_death) %>% 
+  max()
+nj_current_deaths_per_million <- us_data %>% 
+  filter(state == "NJ", days_since_tenth_death == nj_days_since_tenth_death) %>% 
+  pull(deaths_per_million_smoothed)
+spain_nj_equivalent_deaths_per_million <- data %>% 
+  filter(iso3c == "ESP", days_since_tenth_death == nj_days_since_tenth_death) %>% 
+  pull(deaths_per_million_smoothed)
+
+ca_days_since_tenth_death <- us_data %>% 
+  filter(state == "CA") %>% 
+  pull(days_since_tenth_death) %>% 
+  max()
+ca_current_deaths_per_million <- us_data %>% 
+  filter(state == "CA", days_since_tenth_death == ca_days_since_tenth_death) %>% 
+  pull(deaths_per_million_smoothed)
+
+```
+
+
+* For **Ohio**, **Virginia** and **Michigan**, it's too early to say.
+* **Washington** state is at `r round(wa_current_deaths_per_million)` deaths per million `r wa_days_since_tenth_death` days after its tenth death. At this point, Spain was at `r round(spain_wa_equivalent_deaths_per_million)` deaths per million. This is absolutely dire. One bright light for Washington is that they have avoided exponential growth in the death rate, but the linear growth they have is still a massive problem.
+* **New York** is at `r round(ny_current_deaths_per_million)` deaths per million `r ny_days_since_tenth_death` days after its tenth death. At this point, Spain was at `r round(spain_ny_equivalent_deaths_per_million)` deaths per million. New York looks like it will get worse than Washington.
+* **New York** is at `r round(nj_current_deaths_per_million)` deaths per million `r nj_days_since_tenth_death` days after its tenth death; better than New York but not good at all. At this point, Spain was at `r round(spain_nj_equivalent_deaths_per_million)` deaths per million. 
+* **Georgia** and **Illinois** are near where New York was at equivalent stages, but with flatter trajectories. But New York is a low bar. To be barely better than New York is to be headed for disaster.
+* `r round(ca_days_since_tenth_death)` days after its tenth death, **California** is at approximately `r round(ny_current_deaths_per_million)` `r if_else(round(ny_current_deaths_per_million) == 1, "death", "deaths")` per million. This is similar to where Italy was at this stage, but California's curve is flatter than Italy's, so they are on course to avoid the explosion in cases that happened there.
+* **Texas** and **Florida** look very like California with a few days' lag.
 
 # Appendix
 
