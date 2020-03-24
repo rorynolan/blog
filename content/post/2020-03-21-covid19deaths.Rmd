@@ -199,5 +199,14 @@ ggplot(
 # Appendix
 
 ```{r country-codes}
-knitr::kable(arrange(select(countries_iso3c, iso3c, country), iso3c))
+data %>% 
+  distinct(iso3c, country) %>%
+  arrange(iso3c) %>% {
+    if (FSA::is.odd(nrow(.))) . <- rbind(., list("", ""))
+    first_half <- seq_len(nrow(.) / 2)
+    last_half <- setdiff(seq_len(nrow(.)), first_half)
+    cbind(.[first_half, ], .[last_half, ])
+  } %>% 
+  set_names(names(.)[c(1, 2, 1, 2)]) %>% 
+  knitr::kable()
 ```
