@@ -12,10 +12,10 @@
     
     <item>
       <title>Deaths per capita from COVID-19 are more informative than confirmed cases</title>
-      <link>http://rorynolan.rbind.io/2020/03/24/covid19deathspercapita/</link>
-      <pubDate>Tue, 24 Mar 2020 00:00:00 +0000</pubDate>
+      <link>http://rorynolan.rbind.io/2020/03/25/covid19deathspercapita/</link>
+      <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/2020/03/24/covid19deathspercapita/</guid>
+      <guid>http://rorynolan.rbind.io/2020/03/25/covid19deathspercapita/</guid>
       <description>&lt;p&gt;The rate of testing for COVID-19 is increasing in many countries. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. Nevertheless, many articles—including &lt;a href=&#34;https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441&#34;&gt;this one&lt;/a&gt; in the &lt;em&gt;Financial Times&lt;/em&gt;—still talk about the number of confirmed cases. That article also focuses on number of deaths though, which is much better and leads us to what I think should be used.&lt;/p&gt;
 &lt;div id=&#34;we-should-be-using-deaths-per-capita&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;We should be using deaths per capita&lt;/h1&gt;
@@ -38,7 +38,7 @@
 &lt;p&gt;I’m going to limit the data to countries with over 10 million people that have reported at least 10 deaths and have at least 1 death per million people. First up, I’ll just plot all of these countries. I’ll give a table of country codes at the end. Note that the data is not cumulative: each data point is deaths per million on that day. The lines are colored by how bad the situation is in that country right now: how many deaths there were there yesterday.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-03-21-covid19deaths_files/figure-html/all-countries-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;We can see that &lt;strong&gt;Spain&lt;/strong&gt; and &lt;strong&gt;Italy&lt;/strong&gt; are in a really bad way and still showing exponential growth in the number of deaths. This does not bode well for them. Spain looks to be in worse shape than Italy. 15 days after its tenth death, it’s up to 8 deaths per million that day, whereas Italy was on 3 deaths per million on its equivalent day. I am very, very worried about Spain.&lt;/li&gt;
+&lt;li&gt;We can see that &lt;strong&gt;Spain&lt;/strong&gt; and &lt;strong&gt;Italy&lt;/strong&gt; are in a really bad way and still showing exponential growth in the number of deaths. This does not bode well for them. Spain looks to be in worse shape than Italy. 17 days after its tenth death, it’s up to 11 deaths per million that day, whereas Italy was on 4 deaths per million on its equivalent day. I am very, very worried about Spain.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;The Netherlands&lt;/strong&gt; curve suggests it won’t be as bad as Spain but might be as bad as Italy, though they have time to flatten it before their health system becomes overwhelmed.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The other countries are a bit bunched, so next I’ll limit the plot to countries with fewer than 3 deaths per million yesterday.&lt;/p&gt;
@@ -70,7 +70,7 @@
 &lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-03-21-covid19deaths_files/figure-html/us-plot-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;For &lt;strong&gt;Ohio&lt;/strong&gt;, &lt;strong&gt;Virginia&lt;/strong&gt; and &lt;strong&gt;Michigan&lt;/strong&gt;, it’s too early to say.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Washington&lt;/strong&gt; state is at 14 deaths per million 13 days after its tenth death. At this point, Spain was at 5 deaths per million. This is absolutely dire. One bright light for Washington is that they have avoided exponential growth in the death rate, but the linear growth they have is still a massive problem.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Washington&lt;/strong&gt; state is at 14 deaths per million 13 days after its tenth death. At this point, Spain was at 6 deaths per million. This is absolutely dire. One bright light for Washington is that they have avoided exponential growth in the death rate, but the linear growth they have is still a massive problem.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;New York&lt;/strong&gt; is at 10 deaths per million 8 days after its tenth death. At this point, Spain was at 2 deaths per million. New York looks like it will get worse than Washington.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;New York&lt;/strong&gt; is at 5 deaths per million 7 days after its tenth death; better than New York but not good at all. At this point, Spain was at 1 deaths per million.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Georgia&lt;/strong&gt; and &lt;strong&gt;Illinois&lt;/strong&gt; are near where New York was at equivalent stages, but with flatter trajectories. But New York is a low bar. To be barely better than New York is to be headed for disaster.&lt;/li&gt;
@@ -93,44 +93,44 @@
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;BEL&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Belgium&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;IRN&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Iran&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;GRC&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Greece&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;CHN&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;China&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;ITA&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Italy&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;IRN&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Iran&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;DEU&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Germany&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ITA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Italy&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;ECU&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Ecuador&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;KOR&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Korea, South&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
+&lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;ESP&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Spain&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;NLD&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Netherlands&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
+&lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;FRA&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;France&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;PRT&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Portugal&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
+&lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;GBR&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;United Kingdom&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;SWE&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Sweden&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;GRC&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Greece&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;USA&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;US&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -214,7 +214,7 @@ rbernoulli(5, 0.7)
 #&amp;gt; {
 #&amp;gt;     stats::runif(n) &amp;gt; (1 - p)
 #&amp;gt; }
-#&amp;gt; &amp;lt;bytecode: 0x7fde91dc7660&amp;gt;
+#&amp;gt; &amp;lt;bytecode: 0x7ffa488c8a90&amp;gt;
 #&amp;gt; &amp;lt;environment: namespace:purrr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Ah, it seems Hadley just wrapped &lt;code&gt;runif()&lt;/code&gt;; hence, because &lt;code&gt;set.seed()&lt;/code&gt; works with &lt;code&gt;runif()&lt;/code&gt;, it works with his implementation of &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -287,8 +287,8 @@ rorybernoulli(6, 0.7)
 #&amp;gt; # A tibble: 2 x 6
 #&amp;gt;   expression                            min  median `itr/sec` mem_alloc `gc/sec`
 #&amp;gt;   &amp;lt;bch:expr&amp;gt;                        &amp;lt;bch:t&amp;gt; &amp;lt;bch:t&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;    &amp;lt;dbl&amp;gt;
-#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 26.96ms 29.38ms      33.2   11.45MB    10.2 
-#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.78ms  9.39ms     105.     3.82MB     8.92&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 27.02ms 27.92ms      34.5   11.45MB    10.6 
+#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.41ms  8.86ms     110.     3.82MB     9.00&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). It’s also three times as efficient with memory; the memory and time improvements probably have the same underlying reason. The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that they can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
 &lt;/div&gt;
 </description>

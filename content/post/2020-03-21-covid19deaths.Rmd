@@ -43,7 +43,7 @@ pop_thresh <- 10e6
 countries_iso3c <- tibble(
   country = sort(unique(coronavirus$Country.Region))
 ) %>% 
-  filter(!is.element(country, c("Kosovo", "Cruise Ship"))) %>%  # not recognised by countrycodes package
+  filter(!str_detect(country, "(Kosovo|Cruise Ship|Diamond Princess)")) %>%  # not recognised by countrycodes package
   mutate(iso3c = countrycode(country, "country.name", "iso3c")) %>% 
   filter(!is.element(iso3c, c("VAT", "MTQ")))  # not included in world bank data
 
@@ -333,11 +333,17 @@ ca_current_deaths_per_million <- us_data %>%
 ```{r country-codes}
 data %>% 
   distinct(iso3c, country) %>%
+  filter(!str_starts(country, coll("US"))) %>% 
   arrange(iso3c) %>% {
-    if (FSA::is.odd(nrow(.))) . <- rbind(., list("", ""))
+    if (FSA::is.odd(nrow(.))) {
+      . <- bind_rows(
+        ., 
+        tibble(iso3c = "", country = "")
+      )
+    }
     first_half <- seq_len(nrow(.) / 2)
     last_half <- setdiff(seq_len(nrow(.)), first_half)
-    cbind(.[first_half, ], .[last_half, ])
+    bind_cols(.[first_half, ], .[last_half, ])
   } %>% 
   set_names(names(.)[c(1, 2, 1, 2)]) %>% 
   knitr::kable()
