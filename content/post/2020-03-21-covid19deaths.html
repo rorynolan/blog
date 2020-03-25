@@ -20,6 +20,10 @@ tags: ["COVID-19", "coronavirus"]
 <p>First of all, we should be using per capita statistics. For example, 100,000 cases in China vs 100,000 cases in Ireland would be very different things, because of what they imply for concentration of cases. Per capita (assuming a billion people in China and 5 million in Ireland), this would mean 1% of people in Ireland have the disease compared to 0.01% of people in China: 1 in 100 vs 1 in 10,000. Of course, just using per capita by country, you miss a lot too. A particularly high concentration of cases in Wuhan is not the same as a more even spread of cases throughout China. You can fix this by dividing by province or county (if you have that level of granularity in your data); I do this by state for the US. I’m going to use per million people instead of per capita, because it’s a bit easier to think about.</p>
 <p>Second, reported deaths from the virus are more reliable than confirmed cases. That’s because the more ill you are, the more likely you are to get a test. The number of people <em>reported</em> to have died of COVID-19 infection will be closer to the true number of people who died of COVID-19 than the number of people <em>reported</em> to be infected will be to the true number of infected individuals.</p>
 <p>For timelining, I’ll use days since the tenth confirmed death from COVID-19 in a particular country, just like the <em>Financial Times</em> article.</p>
+<div id="deaths-per-capita-will-lag-other-measures" class="section level2">
+<h2>Deaths per capita will lag other measures</h2>
+<p>I don’t mean to say that deaths per capita is the only useful thing. It actually lags other measures (in particular the number of infected individuals) by a few days because the disease does not kill quickly. In particular, if a countries rate of testing is steady or increasing but the absolute number of people testing positive per day is decreasing, that’s a great sign and a sign that you’ll see sooner than a drop in deaths.</p>
+</div>
 </div>
 <div id="data-source-preparation-and-limitations" class="section level1">
 <h1>Data source, preparation and limitations</h1>
@@ -39,23 +43,24 @@ tags: ["COVID-19", "coronavirus"]
 <li>We can see that <strong>Spain</strong> and <strong>Italy</strong> are in a really bad way and still showing exponential growth in the number of deaths. This does not bode well for them. Spain looks to be in worse shape than Italy. 17 days after its tenth death, it’s up to 11 deaths per million that day, whereas Italy was on 4 deaths per million on its equivalent day. I am very, very worried about Spain.</li>
 <li><strong>The Netherlands</strong> curve suggests it won’t be as bad as Spain but might be as bad as Italy, though they have time to flatten it before their health system becomes overwhelmed.</li>
 </ul>
-<p>The other countries are a bit bunched, so next I’ll limit the plot to countries with fewer than 3 deaths per million yesterday.</p>
+<p>The other countries are a bit bunched, so next I’ll limit the plot to countries with fewer than 5 deaths per million yesterday.</p>
 </div>
-<div id="countries-with-fewer-than-3-deaths-per-million-yesterday" class="section level2">
-<h2>Countries with fewer than 3 deaths per million yesterday</h2>
-<p><img src="/post/2020-03-21-covid19deaths_files/figure-html/lt3-deaths-per-mil-1.png" width="960" /></p>
+<div id="countries-with-fewer-than-5-deaths-per-million-yesterday" class="section level2">
+<h2>Countries with fewer than 5 deaths per million yesterday</h2>
+<p><img src="/post/2020-03-21-covid19deaths_files/figure-html/lt5-deaths-per-mil-1.png" width="960" /></p>
 <ul>
-<li><strong>Belgium</strong> and <strong>The Netherlands</strong> are growing at alarming rates and are currently near or above 2 deaths per million per day. They would be doing well not to breach 10 deaths per million per day soon.</li>
-<li>Interestingly, <strong>France</strong> and <strong>Iran</strong> look to be turning the corner and lowering their fatalities. We’ll need another week of data to see if they can sustain this.</li>
+<li><strong>Belgium</strong> and <strong>The Netherlands</strong> are growing at alarming rates and are currently heading for 3 deaths per million per day. They would be doing well not to breach 10 deaths per million per day soon.</li>
+<li><strong>France</strong>’s data is weirdly oscillating but they are currently showing a stark increase in deaths per million per day.</li>
+<li>Interestingly, <strong>Iran</strong> look to be turning the corner and lowering their fatalities. We’ll need another week of data to see if they can sustain this.</li>
 <li><strong>Great Britain</strong> looks to be faring better than Belgium and The Netherlands, but could yet end up worse than Iran.</li>
 </ul>
 </div>
-<div id="countries-with-less-than-0.5-deaths-per-million-yesterday" class="section level2">
-<h2>Countries with less than 0.5 deaths per million yesterday</h2>
+<div id="countries-with-less-than-1-death-per-million-yesterday" class="section level2">
+<h2>Countries with less than 1 death per million yesterday</h2>
 <p><img src="/post/2020-03-21-covid19deaths_files/figure-html/lt1-death-per-mil-1.png" width="960" /></p>
 <ul>
-<li>For <strong>Portugal</strong>, <strong>Sweden</strong> and <strong>Greece</strong>, it’s too early to tell, though the upward trajectories are cause for great concern.</li>
-<li><strong>Germany</strong> appears to be tackling the disease early and very well. They have more hospital beds per capita than any other country in the world, so kudos to them and I hope their success continues.</li>
+<li>For <strong>Ecuador</strong>, <strong>Portugal</strong>, <strong>Sweden</strong> and <strong>Greece</strong>, it’s too early to tell, though the upward trajectories are cause for great concern.</li>
+<li><strong>Germany</strong> appeared to be tackling the disease well earlier in the week, but their deaths are increasing again now.</li>
 <li>The <strong>USA</strong> curve looks pretty ominous here. They have 3 main states (California, New York and Washington) driving most of their cases and deaths. See below for a breakdown of the US by states.</li>
 <li><strong>China</strong> is the only country which can definitively be said to have beaten their outbreak. They deserve enormous credit for their (post cover-up) response, and a lot can be learned from what they did. Of course, the number of cases there could rise again, but they know what to do if that happens.</li>
 <li><strong>South Korea</strong> has managed to keep its death numbers in a linear regime (growing at constant number of people dying every day) or perhaps slightly better. This is also a great achievement, given how nearly every other country is displaying exponential growth. Still, they need to improve further. More people died there yesterday than the day before; that needs to change.</li>
@@ -67,10 +72,10 @@ tags: ["COVID-19", "coronavirus"]
 <p>I’m going to use the same limitations for the US state data except that I’ll allow populations over 7.5 million, so that we can see Washington state.</p>
 <p><img src="/post/2020-03-21-covid19deaths_files/figure-html/us-plot-1.png" width="960" /></p>
 <ul>
-<li>For <strong>Ohio</strong>, <strong>Virginia</strong> and <strong>Michigan</strong>, it’s too early to say.</li>
+<li>For <strong>Ohio</strong>, <strong>Virginia</strong>, <strong>Pennsylvania</strong> and <strong>Michigan</strong>, it’s too early to say.</li>
 <li><strong>Washington</strong> state is at 14 deaths per million 13 days after its tenth death. At this point, Spain was at 6 deaths per million. This is absolutely dire. One bright light for Washington is that they have avoided exponential growth in the death rate, but the linear growth they have is still a massive problem.</li>
-<li><strong>New York</strong> is at 10 deaths per million 8 days after its tenth death. At this point, Spain was at 2 deaths per million. New York looks like it will get worse than Washington.</li>
-<li><strong>New York</strong> is at 5 deaths per million 7 days after its tenth death; better than New York but not good at all. At this point, Spain was at 1 deaths per million.</li>
+<li><strong>New York</strong> is at 10 deaths per million 8 days after its tenth death. At this point, Spain was at 2 deaths per million. New York looks like it will get much worse than Washington.</li>
+<li><strong>New Jersey</strong> is at 5 deaths per million 7 days after its tenth death; better than New York but not good at all. At this point, Spain was at 1 deaths per million.</li>
 <li><strong>Georgia</strong> and <strong>Illinois</strong> are near where New York was at equivalent stages, but with flatter trajectories. But New York is a low bar. To be barely better than New York is to be headed for disaster.</li>
 <li>10 days after its tenth death, <strong>California</strong> is at approximately 10 deaths per million. This is similar to where Italy was at this stage, but California’s curve is flatter than Italy’s, so they are on course to avoid the explosion in cases that happened there.</li>
 <li><strong>Texas</strong> and <strong>Florida</strong> look very like California with a few days’ lag.</li>

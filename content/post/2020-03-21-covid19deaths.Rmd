@@ -29,6 +29,11 @@ Second, reported deaths from the virus are more reliable than confirmed cases. T
 For timelining, I'll use days since the tenth confirmed death from COVID-19 in a particular country, just like the _Financial Times_ article. 
 
 
+## Deaths per capita will lag other measures
+
+I don't mean to say that deaths per capita is the only useful thing. It actually lags other measures (in particular the number of infected individuals) by a few days because the disease does not kill quickly. In particular, if a countries rate of testing is steady or increasing but the absolute number of people testing positive per day is decreasing, that's a great sign and a sign that you'll see sooner than a drop in deaths.
+
+
 # Data source, preparation and limitations
 
 Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE) has put together a great [COVID-19 data repository](https://github.com/CSSEGISandData/COVID-19). Note that I've smoothed the data to make the plots more readable. This means that only sustained changes will appear on the plots (e.g. a one-day drop in deaths will be smoothed out). This is a good thing as it prevents us from reading too much into single data. Bear in mind that different countries have different measurement methods and capabilities, so they aren't strictly comparable. However, provided that within a given country, the measurements are done in a consistent manner, one can still do reliable comparisons of the _shapes_ of the countries' curves.
@@ -146,14 +151,14 @@ italy_that_day_deaths_per_mil_smoothed <- data %>%
 * We can see that **Spain** and **Italy** are in a really bad way and still showing exponential growth in the number of deaths. This does not bode well for them. Spain looks to be in worse shape than Italy. `r spain_days_after` days after its tenth death, it's up to `r spain_yesterday_deaths_per_mil_smoothed` deaths per million that day, whereas Italy was on `r italy_that_day_deaths_per_mil_smoothed` deaths per million on its equivalent day. I am very, very worried about Spain. 
 * **The Netherlands** curve suggests it won't be as bad as Spain but might be as bad as Italy, though they have time to flatten it before their health system becomes overwhelmed.
 
-The other countries are a bit bunched, so next I'll limit the plot to countries with fewer than 3 deaths per million yesterday.
+The other countries are a bit bunched, so next I'll limit the plot to countries with fewer than 5 deaths per million yesterday.
 
 
-## Countries with fewer than 3 deaths per million yesterday
+## Countries with fewer than 5 deaths per million yesterday
 
-```{r lt3-deaths-per-mil}
+```{r lt5-deaths-per-mil}
 ggplot(
-  filter(data, deaths_per_million_smoothed_yesterday < 3), 
+  filter(data, deaths_per_million_smoothed_yesterday < 5), 
   aes(
     x = days_since_tenth_death,
     y = deaths_per_million_smoothed,
@@ -171,16 +176,17 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-* **Belgium** and **The Netherlands** are growing at alarming rates and are currently near or above 2 deaths per million per day. They would be doing well not to breach 10 deaths per million per day soon. 
-* Interestingly, **France** and **Iran** look to be turning the corner and lowering their fatalities. We'll need another week of data to see if they can sustain this. 
+* **Belgium** and **The Netherlands** are growing at alarming rates and are currently heading for 3 deaths per million per day. They would be doing well not to breach 10 deaths per million per day soon. 
+* **France**'s data is weirdly oscillating but they are currently showing a stark increase in deaths per million per day.
+* Interestingly, **Iran** look to be turning the corner and lowering their fatalities. We'll need another week of data to see if they can sustain this. 
 * **Great Britain** looks to be faring better than Belgium and The Netherlands, but could yet end up worse than Iran.
 
 
-## Countries with less than 0.5 deaths per million yesterday
+## Countries with less than 1 death per million yesterday
 
 ```{r lt1-death-per-mil}
 ggplot(
-  filter(data, deaths_per_million_smoothed_yesterday < 0.5), 
+  filter(data, deaths_per_million_smoothed_yesterday < 1), 
   aes(
     x = days_since_tenth_death,
     y = deaths_per_million_smoothed,
@@ -198,8 +204,8 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-* For **Portugal**, **Sweden** and **Greece**, it's too early to tell, though the upward trajectories are cause for great concern. 
-* **Germany** appears to be tackling the disease early and very well. They have more hospital beds per capita than any other country in the world, so kudos to them and I hope their success continues.
+* For **Ecuador**, **Portugal**, **Sweden** and **Greece**, it's too early to tell, though the upward trajectories are cause for great concern. 
+* **Germany** appeared to be tackling the disease well earlier in the week, but their deaths are increasing again now.
 * The **USA** curve looks pretty ominous here. They have 3 main states (California, New York and Washington) driving most of their cases and deaths. See below for a breakdown of the US by states.
 * **China** is the only country which can definitively be said to have beaten their outbreak. They deserve enormous credit for their (post cover-up) response, and a lot can be learned from what they did. Of course, the number of cases there could rise again, but they know what to do if that happens.
 * **South Korea** has managed to keep its death numbers in a linear regime (growing at constant number of people dying every day) or perhaps slightly better. This is also a great achievement, given how nearly every other country is displaying exponential growth. Still, they need to improve further. More people died there yesterday than the day before; that needs to change.
@@ -320,10 +326,10 @@ ca_current_deaths_per_million <- us_data %>%
 ```
 
 
-* For **Ohio**, **Virginia** and **Michigan**, it's too early to say.
+* For **Ohio**, **Virginia**, **Pennsylvania** and **Michigan**, it's too early to say.
 * **Washington** state is at `r round(wa_current_deaths_per_million)` deaths per million `r wa_days_since_tenth_death` days after its tenth death. At this point, Spain was at `r round(spain_wa_equivalent_deaths_per_million)` deaths per million. This is absolutely dire. One bright light for Washington is that they have avoided exponential growth in the death rate, but the linear growth they have is still a massive problem.
-* **New York** is at `r round(ny_current_deaths_per_million)` deaths per million `r ny_days_since_tenth_death` days after its tenth death. At this point, Spain was at `r round(spain_ny_equivalent_deaths_per_million)` deaths per million. New York looks like it will get worse than Washington.
-* **New York** is at `r round(nj_current_deaths_per_million)` deaths per million `r nj_days_since_tenth_death` days after its tenth death; better than New York but not good at all. At this point, Spain was at `r round(spain_nj_equivalent_deaths_per_million)` deaths per million. 
+* **New York** is at `r round(ny_current_deaths_per_million)` deaths per million `r ny_days_since_tenth_death` days after its tenth death. At this point, Spain was at `r round(spain_ny_equivalent_deaths_per_million)` deaths per million. New York looks like it will get much worse than Washington.
+* **New Jersey** is at `r round(nj_current_deaths_per_million)` deaths per million `r nj_days_since_tenth_death` days after its tenth death; better than New York but not good at all. At this point, Spain was at `r round(spain_nj_equivalent_deaths_per_million)` deaths per million. 
 * **Georgia** and **Illinois** are near where New York was at equivalent stages, but with flatter trajectories. But New York is a low bar. To be barely better than New York is to be headed for disaster.
 * `r round(ca_days_since_tenth_death)` days after its tenth death, **California** is at approximately `r round(ny_current_deaths_per_million)` `r if_else(round(ny_current_deaths_per_million) == 1, "death", "deaths")` per million. This is similar to where Italy was at this stage, but California's curve is flatter than Italy's, so they are on course to avoid the explosion in cases that happened there.
 * **Texas** and **Florida** look very like California with a few days' lag.
