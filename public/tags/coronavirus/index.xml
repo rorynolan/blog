@@ -7,15 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Wed, 25 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Mar 2020 00:00:00 +0000</lastBuildDate>
     <atom:link href="/tags/coronavirus/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Deaths per capita from COVID-19 are more informative than confirmed cases</title>
-      <link>http://rorynolan.rbind.io/2020/03/25/covid19deathspercapita/</link>
-      <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
+      <link>http://rorynolan.rbind.io/2020/03/26/covid19deathspercapita/</link>
+      <pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/2020/03/25/covid19deathspercapita/</guid>
+      <guid>http://rorynolan.rbind.io/2020/03/26/covid19deathspercapita/</guid>
       <description>&lt;p&gt;The rate of testing for COVID-19 is increasing in many countries. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. Nevertheless, many articles—including &lt;a href=&#34;https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441&#34;&gt;this one&lt;/a&gt; in the &lt;em&gt;Financial Times&lt;/em&gt;—still talk about the number of confirmed cases. That article also focuses on number of deaths though, which is much better and leads us to what I think should be used.&lt;/p&gt;
 &lt;div id=&#34;we-should-be-using-deaths-per-capita&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;We should be using deaths per capita&lt;/h1&gt;
@@ -75,11 +75,11 @@
 &lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-03-21-covid19deaths_files/figure-html/us-plot-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;For &lt;strong&gt;Ohio&lt;/strong&gt;, &lt;strong&gt;Virginia&lt;/strong&gt;, &lt;strong&gt;Pennsylvania&lt;/strong&gt; and &lt;strong&gt;Michigan&lt;/strong&gt;, it’s too early to say.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Washington&lt;/strong&gt; state is at 14 deaths per million 13 days after its tenth death. At this point, Spain was at 6 deaths per million. This is absolutely dire. One bright light for Washington is that they have avoided exponential growth in the death rate, but the linear growth they have is still a massive problem.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;New York&lt;/strong&gt; is at 10 deaths per million 8 days after its tenth death. At this point, Spain was at 2 deaths per million. New York looks like it will get much worse than Washington.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;New Jersey&lt;/strong&gt; is at 5 deaths per million 7 days after its tenth death; better than New York but not good at all. At this point, Spain was at 1 deaths per million.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Washington&lt;/strong&gt; state is at 16 deaths per million 14 days after its tenth death. At this point, Spain was at 7 deaths per million. This is absolutely dire. One bright light for Washington is that they have avoided exponential growth in the death rate, but the linear growth they have is still a massive problem.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;New York&lt;/strong&gt; is at 14 deaths per million 9 days after its tenth death. At this point, Spain was at 2 deaths per million. New York looks like it will get much worse than Washington.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;New Jersey&lt;/strong&gt; is at 7 deaths per million 8 days after its tenth death; better than New York but not good at all. At this point, Spain was at 2 deaths per million.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Georgia&lt;/strong&gt; and &lt;strong&gt;Illinois&lt;/strong&gt; are near where New York was at equivalent stages, but with flatter trajectories. But New York is a low bar. To be barely better than New York is to be headed for disaster.&lt;/li&gt;
-&lt;li&gt;10 days after its tenth death, &lt;strong&gt;California&lt;/strong&gt; is at approximately 10 deaths per million. This is similar to where Italy was at this stage, but California’s curve is flatter than Italy’s, so they are on course to avoid the explosion in cases that happened there.&lt;/li&gt;
+&lt;li&gt;11 days after its tenth death, &lt;strong&gt;California&lt;/strong&gt; is at approximately 14 deaths per million. This is similar to where Italy was at this stage, but California’s curve is flatter than Italy’s, so they are on course to avoid the explosion in cases that happened there.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Texas&lt;/strong&gt; and &lt;strong&gt;Florida&lt;/strong&gt; look very like California with a few days’ lag.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
