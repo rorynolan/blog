@@ -141,7 +141,7 @@ italy_that_day_deaths_per_mil_smoothed <- data %>%
   round()
 ```
 
-* We can see that **Spain** has (predictabbly) gotten worse than **Italy**. Italy has managed to contain enough to make their curve linear; Spain still looks to be in exponential growth and has surpassed Italy in deaths per million per day. `r spain_days_after` days after its tenth death, it's up to `r spain_yesterday_deaths_per_mil_smoothed` deaths per million that day, whereas Italy was on `r italy_that_day_deaths_per_mil_smoothed` deaths per million on its equivalent day. 
+* We can see that **Spain** has (predictably) gotten worse than **Italy**. Italy has managed to contain enough to make their curve linear; Spain still looks to be in exponential growth and has surpassed Italy in deaths per million per day. `r spain_days_after` days after its tenth death, it's up to `r spain_yesterday_deaths_per_mil_smoothed` deaths per million that day, whereas Italy was on `r italy_that_day_deaths_per_mil_smoothed` deaths per million on its equivalent day. 
 
 The other countries are a bit bunched, so next I'll limit the plot to countries with fewer than 5 deaths per million yesterday.
 
