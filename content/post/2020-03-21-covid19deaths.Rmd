@@ -331,7 +331,7 @@ ca_current_deaths_per_million <- us_data %>%
 * **New York** is at `r round(ny_current_deaths_per_million)` deaths per million `r ny_days_since_tenth_death` days after its tenth death. At this point, Spain was at `r round(spain_ny_equivalent_deaths_per_million)` deaths per million. New York looks like it will get much worse than Washington.
 * **New Jersey** is at `r round(nj_current_deaths_per_million)` deaths per million `r nj_days_since_tenth_death` days after its tenth death; better than New York but not good at all. At this point, Spain was at `r round(spain_nj_equivalent_deaths_per_million)` deaths per million. 
 * **Georgia** and **Illinois** are near where New York was at equivalent stages, but with flatter trajectories. But New York is a low bar. To be barely better than New York is to be headed for disaster.
-* `r round(ca_days_since_tenth_death)` days after its tenth death, **California** is at approximately `r round(ny_current_deaths_per_million)` `r if_else(round(ny_current_deaths_per_million) == 1, "death", "deaths")` per million. This is similar to where Italy was at this stage, but California's curve is flatter than Italy's, so they are on course to avoid the explosion in cases that happened there.
+* `r round(ca_days_since_tenth_death)` days after its tenth death, **California** is at approximately `r round(ca_current_deaths_per_million)` `r if_else(round(ca_current_deaths_per_million) == 1, "death", "deaths")` per million. This is similar to where Italy was at this stage, but California's curve is flatter than Italy's, so they are on course to avoid the explosion in cases that happened there.
 * **Texas** and **Florida** look very like California with a few days' lag.
 
 # Appendix

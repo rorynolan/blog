@@ -26,7 +26,7 @@ rbernoulli(5, 0.7)
 #&gt; {
 #&gt;     stats::runif(n) &gt; (1 - p)
 #&gt; }
-#&gt; &lt;bytecode: 0x7fc59a3be690&gt;
+#&gt; &lt;bytecode: 0x7fcb58554c00&gt;
 #&gt; &lt;environment: namespace:purrr&gt;</code></pre>
 <p>Ah, it seems Hadley just wrapped <code>runif()</code>; hence, because <code>set.seed()</code> works with <code>runif()</code>, it works with his implementation of <code>purrr::rbernoulli()</code>.</p>
 </div>
@@ -99,7 +99,7 @@ rorybernoulli(6, 0.7)
 #&gt; # A tibble: 2 x 6
 #&gt;   expression                            min  median `itr/sec` mem_alloc `gc/sec`
 #&gt;   &lt;bch:expr&gt;                        &lt;bch:t&gt; &lt;bch:t&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 28.88ms 29.39ms      32.7   11.45MB    10.9 
-#&gt; 2 rorybernoulli(1e+06, p = 0.5)      8.87ms  9.19ms     105.     3.82MB     9.15</code></pre>
+#&gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 28.07ms 28.55ms      33.8   11.45MB    10.4 
+#&gt; 2 rorybernoulli(1e+06, p = 0.5)      8.77ms  9.27ms     105.     3.82MB     8.90</code></pre>
 <p>Wow, <code>rorybernoulli()</code> is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as <code>purrr::rbernoulli()</code> does). It’s also three times as efficient with memory; the memory and time improvements probably have the same underlying reason. The point of me writing this post was to share this <code>get_seed()</code> thing with people so that they can use <code>set.seed()</code> with <code>Rcpp</code> and the like; <code>purrr::rbernoulli()</code> was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to <code>purrr</code>!</p>
 </div>
