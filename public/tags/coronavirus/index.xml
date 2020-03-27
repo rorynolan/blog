@@ -7,15 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Thu, 26 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 27 Mar 2020 00:00:00 +0000</lastBuildDate>
     <atom:link href="/tags/coronavirus/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Deaths per capita from COVID-19 are more informative than confirmed cases</title>
-      <link>http://rorynolan.rbind.io/2020/03/26/covid19deathspercapita/</link>
-      <pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
+      <link>http://rorynolan.rbind.io/2020/03/27/covid19deathspercapita/</link>
+      <pubDate>Fri, 27 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/2020/03/26/covid19deathspercapita/</guid>
+      <guid>http://rorynolan.rbind.io/2020/03/27/covid19deathspercapita/</guid>
       <description>&lt;p&gt;The rate of testing for COVID-19 is increasing in many countries. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. Nevertheless, many articles—including &lt;a href=&#34;https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441&#34;&gt;this one&lt;/a&gt; in the &lt;em&gt;Financial Times&lt;/em&gt;—still talk about the number of confirmed cases. That article also focuses on number of deaths though, which is much better and leads us to what I think should be used.&lt;/p&gt;
 &lt;div id=&#34;we-should-be-using-deaths-per-capita&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;We should be using deaths per capita&lt;/h1&gt;
@@ -42,7 +42,8 @@
 &lt;p&gt;I’m going to limit the data to countries that have reported at least 100 deaths. First up, I’ll just plot all of these countries. I’ll give a table of country codes at the end. Note that the data is not cumulative: each data point is deaths per million on that day. The lines are colored by how bad the situation is in that country right now: how many deaths there were there yesterday.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-03-21-covid19deaths_files/figure-html/all-countries-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;We can see that &lt;strong&gt;Spain&lt;/strong&gt; has (predictably) gotten worse than &lt;strong&gt;Italy&lt;/strong&gt;. Italy has managed to contain enough to make their curve linear; Spain still looks to be in exponential growth and has surpassed Italy in deaths per million per day. 18 days after its tenth death, it’s up to 16 deaths per million that day, whereas Italy was on 5 deaths per million on its equivalent day.&lt;/li&gt;
+&lt;li&gt;We can see that &lt;strong&gt;Spain&lt;/strong&gt; has (predictably) gotten worse than &lt;strong&gt;Italy&lt;/strong&gt;. Italy has managed to contain enough to make their curve linear; Spain still looks to be in exponential growth and has surpassed Italy in deaths per million per day. 19 days after its tenth death, it’s up to 16 deaths per million that day, whereas Italy was on 5 deaths per million on its equivalent day.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The Netherlands&lt;/strong&gt; and &lt;strong&gt;France&lt;/strong&gt;’s curves are looking a lot like Italy’s. They’re running out of time to avoid ending up like Italy.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The other countries are a bit bunched, so next I’ll limit the plot to countries with fewer than 5 deaths per million yesterday.&lt;/p&gt;
 &lt;/div&gt;
@@ -50,20 +51,19 @@
 &lt;h2&gt;Countries with fewer than 5 deaths per million yesterday&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-03-21-covid19deaths_files/figure-html/lt5-deaths-per-mil-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Belgium&lt;/strong&gt; and &lt;strong&gt;The Netherlands&lt;/strong&gt; are growing at alarming rates and are currently heading for 3 deaths per million per day. They would be doing well not to breach 10 deaths per million per day soon. Belgium’s reporting appears to be erratic.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;France&lt;/strong&gt;’s data reporting is also quirky but from what we can tell they are currently showing a stark increase in deaths per million per day.&lt;/li&gt;
-&lt;li&gt;Interestingly, &lt;strong&gt;Iran&lt;/strong&gt; look to be turning the corner and lowering their fatalities. We’ll need another week of data to see if they can sustain this. [Note that Iran’s data is some of the least trustworthy.]&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Great Britain&lt;/strong&gt; looks to be faring better than Belgium and The Netherlands, but could yet end up worse than Iran.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Switzerland&lt;/strong&gt; looks worse than Great Britain but not as bad as The Netherlands.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Belgium&lt;/strong&gt;’s reporting appears to be erratic, but from what I can tell, they look to be in a similar situation to the Netherlands but a bit worse.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Iran&lt;/strong&gt; looked to be turning the corner and lowering their fatalities but now they’ve ticked back up again. [Note that Iran’s data is some of the least trustworthy.]&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Great Britain&lt;/strong&gt; looks to be faring better than Belgium and The Netherlands, but is showing exponential growth.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Switzerland&lt;/strong&gt; is between The Netherlands and France.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;countries-with-less-than-1-death-per-million-yesterday&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Countries with less than 1 death per million yesterday&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-03-21-covid19deaths_files/figure-html/lt1-death-per-mil-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Germany&lt;/strong&gt; appeared to be tackling the disease well earlier in the week, but their deaths are increasing again now.&lt;/li&gt;
 &lt;li&gt;The &lt;strong&gt;USA&lt;/strong&gt; curve looks pretty ominous here. They have 3 main states (California, New York and Washington) driving most of their cases and deaths. See below for a breakdown of the US by states.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;China&lt;/strong&gt; is the only country which can definitively be said to have beaten their outbreak. They deserve enormous credit for their (post cover-up) response, and a lot can be learned from what they did. Of course, the number of cases there could rise again, but they know what to do if that happens.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Germany&lt;/strong&gt;’s growth matches that of the USA.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;China&lt;/strong&gt; is the only country which looks to have beaten their outbreak. They deserve enormous credit for their (post cover-up) response, and a lot can be learned from what they did. Of course, the number of cases there could rise again, but they know what to do if that happens. [China’s data is somewhat untrustworthy though: one day this week they reported 0 new cases and I don’t buy that.]&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;South Korea&lt;/strong&gt; has managed to keep its death numbers in a linear regime (growing at constant number of people dying every day) or perhaps slightly better. This is also a great achievement, given how nearly every other country is displaying exponential growth. Still, they need to improve further. More people died there yesterday than the day before; that needs to change.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -79,7 +79,7 @@
 &lt;li&gt;&lt;strong&gt;Michigan&lt;/strong&gt; is somewhere between New York and Louisiana.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;New Jersey&lt;/strong&gt; is at 9 deaths per million 9 days after its tenth death; better than New York but not good at all. At this point, Spain was at 2 deaths per million. New Jersey looks like it will be better than New York but worse than Washington.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Georgia&lt;/strong&gt; s at 9 deaths per million 9 days after its tenth death; better than New York but not good at all. At this point, Spain was at 2 deaths per million.&lt;/li&gt;
-&lt;li&gt;12 days after its tenth death, &lt;strong&gt;California&lt;/strong&gt; is at approximately 2 deaths per million. This is similar to where Italy was at this stage, but California’s curve is flatter than Italy’s, so they are on course to avoid the explosion in cases that happened there.&lt;/li&gt;
+&lt;li&gt;12 days after its tenth death, &lt;strong&gt;California&lt;/strong&gt; is at approximately 2 deaths per million. This is similar to where Italy was at this stage, but California’s curve is flatter than Italy’s, so they may avoid the explosion in cases that happened there.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Florida&lt;/strong&gt; looks very like California with a few days’ lag. Florida could get very bad with the density of old people there.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
