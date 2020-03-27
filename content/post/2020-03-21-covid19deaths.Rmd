@@ -364,7 +364,7 @@ spain_ga_equivalent_deaths_per_million <- data %>%
 * **Illinois** looks to be somewhere between Georgia and Spain.
 * `r round(ca_days_since_tenth_death)` days after its tenth death, **California** is at approximately `r round(ca_current_deaths_per_million)` `r if_else(round(ca_current_deaths_per_million) == 1, "death", "deaths")` per million. This is similar to where Italy was at this stage, but California's curve is flatter than Italy's, so they may avoid the explosion in cases that happened there.
 * **Florida** looks very like California with a few days' lag. Florida could get very bad with the density of old people there.
-** For **Connecticut** and **Massachusetts** it's too early to say, but they look to be going the way of Michigan.
+* For **Connecticut** and **Massachusetts** it's too early to say, but they look to be going the way of Michigan.
 
 # Appendix
 
