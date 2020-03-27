@@ -84,6 +84,7 @@ data <- coronavirus %>%
         days_since_tenth_death = which.max(days_since_tenth_death)
       ]
   ) %>% 
+  ungroup() %>% 
   filter(total_deaths >= total_deaths_thresh, days_since_tenth_death >= 0) %>% 
   inner_join(countries_iso3c, by = c("country" = "country")) %>% 
   select(
@@ -211,7 +212,7 @@ ggplot(
 
 # US data
 
-I'm going to use the same limitations for the US state data: states with at least 100 deaths.
+I'm going to use the same limitations for the US state data: states with at least 100 deaths. For reference, I'm also going to include Spain and Italy.
 
 ```{r prep-US-data}
 pacman::p_load(covid19us, tidycensus, openintro)
@@ -242,6 +243,7 @@ us_data <- get_states_daily() %>%
         days_since_tenth_death = which.max(days_since_tenth_death)
       ]
   ) %>% 
+  ungroup() %>% 
   filter(total_deaths >= total_deaths_thresh, days_since_tenth_death >= 0) %>% 
   select(
     state, 
@@ -261,8 +263,15 @@ us_data <- get_states_daily() %>%
 ```
 
 ```{r us-plot}
+us_plot_data <- bind_rows(
+  us_data,
+  data %>%
+    select(-country) %>% 
+    filter(iso3c %in% c("ESP", "ITA")) %>% 
+    rename(state = iso3c)
+)
 ggplot(
-  us_data, 
+  us_plot_data, 
   aes(
     x = days_since_tenth_death,
     y = deaths_per_million_smoothed,
@@ -276,7 +285,7 @@ ggplot(
   labs(x = "days since tenth death", y = "deaths per million",
        colour = "deaths\nper\nmillion\nyesterday") +
   scale_colour_gradient(low = "blue", high = "red") + 
-  xlim(0, max(us_data$days_since_tenth_death) + 2) + 
+  xlim(0, max(us_plot_data$days_since_tenth_death) + 2) + 
   theme(text = element_text(size = 20))
 ```
 
@@ -352,8 +361,10 @@ spain_ga_equivalent_deaths_per_million <- data %>%
 * **Michigan** is somewhere between New York and Louisiana.
 * **New Jersey** is at `r round(nj_current_deaths_per_million)` deaths per million `r nj_days_since_tenth_death` days after its tenth death; better than New York but not good at all. At this point, Spain was at `r round(spain_nj_equivalent_deaths_per_million)` deaths per million. New Jersey looks like it will be better than New York but worse than Washington.
 * **Georgia** s at `r round(nj_current_deaths_per_million)` deaths per million `r nj_days_since_tenth_death` days after its tenth death; better than New York but not good at all. At this point, Spain was at `r round(spain_nj_equivalent_deaths_per_million)` deaths per million.
+* **Illinois** looks to be somewhere between Georgia and Spain.
 * `r round(ca_days_since_tenth_death)` days after its tenth death, **California** is at approximately `r round(ca_current_deaths_per_million)` `r if_else(round(ca_current_deaths_per_million) == 1, "death", "deaths")` per million. This is similar to where Italy was at this stage, but California's curve is flatter than Italy's, so they may avoid the explosion in cases that happened there.
 * **Florida** looks very like California with a few days' lag. Florida could get very bad with the density of old people there.
+** For **Connecticut** and **Massachusetts** it's too early to say, but they look to be going the way of Michigan.
 
 # Appendix
 

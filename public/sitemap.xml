@@ -163,7 +163,7 @@
     
     <url>
     
-      <loc>http://rorynolan.rbind.io/tags/covid-19/</loc>
+      <loc>http://rorynolan.rbind.io/categories/covid-19/</loc>
       <lastmod>2020-03-27T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -173,7 +173,7 @@
     
     <url>
     
-      <loc>http://rorynolan.rbind.io/categories/covid-19/</loc>
+      <loc>http://rorynolan.rbind.io/tags/covid-19/</loc>
       <lastmod>2020-03-27T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -213,7 +213,7 @@
     
     <url>
     
-      <loc>http://rorynolan.rbind.io/tags/r/</loc>
+      <loc>http://rorynolan.rbind.io/categories/r/</loc>
       <lastmod>2019-06-30T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -223,7 +223,7 @@
     
     <url>
     
-      <loc>http://rorynolan.rbind.io/categories/r/</loc>
+      <loc>http://rorynolan.rbind.io/tags/r/</loc>
       <lastmod>2019-06-30T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
