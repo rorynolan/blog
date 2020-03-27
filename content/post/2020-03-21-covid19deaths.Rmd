@@ -128,7 +128,7 @@ ggplot(
   geom_dl(aes(label = iso3c), 
           method = list("last.points", cex = 4/3)) +
   labs(x = "days since tenth death", y = "deaths per million",
-       colour = "deaths/million\nyesterday") +
+       colour = "deaths\nper\nmillion\nyesterday") +
   scale_colour_gradient(low = "blue", high = "red") + 
   xlim(0, max(data$days_since_tenth_death) + 2) + 
   theme(text = element_text(size = 20))
@@ -169,7 +169,7 @@ ggplot(
   geom_dl(aes(label = iso3c), 
           method = list("last.points", cex = 4/3)) +
   labs(x = "days since tenth death", y = "deaths per million",
-       colour = "deaths/million\nyesterday") +
+       colour = "deaths\nper\nmillion\nyesterday") +
   scale_colour_gradient(low = "blue", high = "red") + 
   xlim(0, max(data$days_since_tenth_death) + 2) + 
   theme(text = element_text(size = 20))
@@ -197,7 +197,7 @@ ggplot(
   geom_dl(aes(label = iso3c), 
           method = list("last.points", cex = 4/3)) +
   labs(x = "days since tenth death", y = "deaths per million",
-       colour = "deaths/million\nyesterday") +
+       colour = "deaths\nper\nmillion\nyesterday") +
   scale_colour_gradient(low = "blue", high = "red") + 
   xlim(0, max(data$days_since_tenth_death) + 2) + 
   theme(text = element_text(size = 20))
@@ -274,7 +274,7 @@ ggplot(
   geom_dl(aes(label = state), 
           method = list("last.points", cex = 4/3)) +
   labs(x = "days since tenth death", y = "deaths per million",
-       colour = "deaths/million\nyesterday") +
+       colour = "deaths\nper\nmillion\nyesterday") +
   scale_colour_gradient(low = "blue", high = "red") + 
   xlim(0, max(us_data$days_since_tenth_death) + 2) + 
   theme(text = element_text(size = 20))
