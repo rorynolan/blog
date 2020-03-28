@@ -60,7 +60,7 @@ enableGitInfo = false
   # Organizations/Affiliations.
   #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
   organizations = [
-                   {name = "Facebook", url = "https://about.fb.com/"},
+                   {name = "Mirvie", url = "https://mirvie.com/"},
                    #{name = "Crystal Equation", url = "https://www.crystalequation.com/"},
                    #{name = "Oxford University", url = "http://www.ox.ac.uk/"}
                   ]

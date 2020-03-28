@@ -38,4 +38,4 @@ weight = 5
 
 # Biography
 
-Rory Nolan is a Data Scientist in the Small Business Group at Facebook. He lives in Oakland, California. He has a PhD in statistical image analysis and has worked at Paddy Power as a Data Scientist in A/B testing. He develops software in the R language for image analysis, TIFF file I/O and file and string manipulation. 
+Rory Nolan is a Data Scientist at Mirvie. He lives in Oakland, California. He has a PhD in statistical image analysis and has worked at Paddy Power as a Data Scientist in A/B testing. He develops software in the R language for image analysis, TIFF file I/O and file and string manipulation. 
