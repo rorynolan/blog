@@ -14,7 +14,7 @@ tags: ["COVID-19", "coronavirus"]
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", echo = FALSE,
-                      fig.height = 5, fig.width = 10)
+                      fig.height = 5, fig.width = 10, message = FALSE)
 ```
 
 The rate of testing for COVID-19 is increasing in many countries. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. Nevertheless, many articles---including [this one](https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441) in the _Financial Times_---still talk about the number of confirmed cases. That article also focuses on number of deaths though, which is much better and leads us to what I think should be used.
@@ -39,12 +39,19 @@ I don't mean to say that deaths per capita is the only useful thing. It actually
 Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE) has put together a great [COVID-19 data repository](https://github.com/CSSEGISandData/COVID-19). Note that I've smoothed the data to make the plots more readable. This means that only sustained changes will appear on the plots (e.g. a one-day drop in deaths will be smoothed out). This is a good thing as it prevents us from reading too much into single data. Bear in mind that different countries have different measurement methods and capabilities, so they aren't strictly comparable. However, provided that within a given country, the measurements are done in a consistent manner, one can still do reliable comparisons of the _shapes_ of the countries' curves.
 
 ```{r prep-data}
-pacman::p_load(tidyverse, coronavirus, countrycode, wbstats, directlabels)
+pacman::p_load(tidyverse, countrycode, wbstats, directlabels)
 
 total_deaths_thresh <- 100
 
+data_url <- str_c(
+  "https://raw.githubusercontent.com/", 
+  "RamiKrispin/coronavirus-csv/master/coronavirus_dataset.csv"
+)
+stopifnot(RCurl::url.exists(data_url))
+raw_data <- read_csv(data_url, guess_max = 1e6)
+
 countries_iso3c <- tibble(
-  country = sort(unique(coronavirus$Country.Region))
+  country = sort(unique(raw_data$Country.Region))
 ) %>% 
   filter(!str_detect(country, "(Kosovo|Cruise Ship|Diamond Princess)")) %>%  # not recognised by countrycodes package
   mutate(iso3c = countrycode(country, "country.name", "iso3c")) %>% 
@@ -60,7 +67,9 @@ country_pops <- wb(
   select(country, value) %>% 
   rename(population = value)
 
-data <- coronavirus %>% 
+
+
+data <- raw_data %>% 
   janitor::clean_names() %>% 
   dplyr::filter(type == "death") %>% 
   rename(country = country_region, deaths = cases) %>% 
@@ -148,17 +157,24 @@ italy_that_day_deaths_per_mil_smoothed <- data %>%
   round()
 ```
 
-* We can see that **Spain** has (predictably) gotten worse than **Italy**. Italy has managed to contain enough to make their curve linear; Spain still looks to be in exponential growth and has surpassed Italy in deaths per million per day. `r spain_days_after` days after its tenth death, it's up to `r spain_yesterday_deaths_per_mil_smoothed` deaths per million that day, whereas Italy was on `r italy_that_day_deaths_per_mil_smoothed` deaths per million on its equivalent day. 
-* **The Netherlands** and **France**'s curves are looking a lot like Italy's. They're running out of time to avoid ending up like Italy.
+* We can see that **Spain** has (predictably) gotten worse than **Italy**. Italy has managed to contain enough to make their curve linear; Spain still looks to be in exponential growth and has surpassed Italy in deaths per million per day. `r spain_days_after` days after its tenth death, it's up to `r spain_yesterday_deaths_per_mil_smoothed` deaths per million that day, whereas Italy was on `r italy_that_day_deaths_per_mil_smoothed` deaths per million on its equivalent day. Linear growth is still catastrophic for Italy. Their deaths per day are huge and growing.
+* **The Netherlands** and **Belgium** appear to be in serious danger of ending up worse than Italy.
 
-The other countries are a bit bunched, so next I'll limit the plot to countries with fewer than 5 deaths per million yesterday.
+```{r subset-1}
+subset1_deaths_per_million_thresh <- 10
+```
+
+The other countries are a bit bunched, so next I'll limit the plot to countries with less than `r subset1_deaths_per_million_thresh` deaths per million yesterday.
 
 
-## Countries with fewer than 5 deaths per million yesterday
+## Countries with less than `r subset1_deaths_per_million_thresh` deaths per million yesterday
 
 ```{r lt5-deaths-per-mil}
 ggplot(
-  filter(data, deaths_per_million_smoothed_yesterday < 5), 
+  filter(
+    data, 
+    deaths_per_million_smoothed_yesterday < subset1_deaths_per_million_thresh
+  ), 
   aes(
     x = days_since_tenth_death,
     y = deaths_per_million_smoothed,
@@ -176,17 +192,24 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-* **Belgium**'s reporting appears to be erratic, but from what I can tell, they look to be in a similar situation to the Netherlands but a bit worse.
+* **Sweden** are fast going the way of the Netherlands. Both tried _herd immunity_ and it appears to be failing them. 
 * **Iran** looked to be turning the corner and lowering their fatalities but now they've ticked back up again. [Note that Iran's data is some of the least trustworthy.]
-* **Great Britain** looks to be faring better than Belgium and The Netherlands, but is showing exponential growth.
+* **Great Britain** is getting really bad right now. look how steep their curve is.
 * **Switzerland** is between The Netherlands and France.
 
+```{r subset-2}
+subset2_deaths_per_million_thresh <- 2
+```
 
-## Countries with less than 1 death per million yesterday
+
+## Countries with less than `r subset2_deaths_per_million_thresh` death per million yesterday
 
 ```{r lt1-death-per-mil}
 ggplot(
-  filter(data, deaths_per_million_smoothed_yesterday < 1), 
+  filter(
+    data, 
+    deaths_per_million_smoothed_yesterday < subset2_deaths_per_million_thresh
+  ), 
   aes(
     x = days_since_tenth_death,
     y = deaths_per_million_smoothed,
@@ -204,8 +227,8 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-* The **USA** curve looks pretty ominous here. They have 3 main states (California, New York and Washington) driving most of their cases and deaths. See below for a breakdown of the US by states.
-* **Germany**'s growth matches that of the USA.
+* The **USA** curve looks ominously steep here. They have 3 main states (California, New York and Washington) driving most of their cases and deaths. See below for a breakdown of the US by states.
+* **Germany**'s growth looks like the numbers that Iran were reporting a month ago.
 * **China** is the only country which looks to have beaten their outbreak. They deserve enormous credit for their (post cover-up) response, and a lot can be learned from what they did. Of course, the number of cases there could rise again, but they know what to do if that happens. [China's data is somewhat untrustworthy though: one day this week they reported 0 new cases and I don't buy that.]
 * **South Korea** has managed to keep its death numbers in a linear regime (growing at constant number of people dying every day) or perhaps slightly better. This is also a great achievement, given how nearly every other country is displaying exponential growth. Still, they need to improve further. More people died there yesterday than the day before; that needs to change.
 
@@ -356,13 +379,13 @@ spain_ga_equivalent_deaths_per_million <- data %>%
 
 
 * **Washington** state is at `r round(wa_current_deaths_per_million)` deaths per million `r wa_days_since_tenth_death` days after its tenth death. At this point, Spain was at `r round(spain_wa_equivalent_deaths_per_million)` deaths per million. This is absolutely dire. One bright light for Washington is that they have avoided exponential growth in the death rate, but the linear growth they have is still a massive problem.
-* **New York** is at `r round(ny_current_deaths_per_million)` deaths per million `r ny_days_since_tenth_death` days after its tenth death. At this point, Spain was at `r round(spain_ny_equivalent_deaths_per_million)` deaths per million. New York is already worse than Washington.
+* **New York** is at `r round(ny_current_deaths_per_million)` deaths per million `r ny_days_since_tenth_death` days after its tenth death. At this point, Spain was at `r round(spain_ny_equivalent_deaths_per_million)` deaths per million. 
 * **Louisiana** is looking worse than New York. It's at `r round(la_current_deaths_per_million)` deaths per million `r la_days_since_tenth_death` days after its tenth death. At this point, New York was at `r round(ny_la_equivalent_deaths_per_million)` deaths per million.
 * **Michigan** is somewhere between New York and Louisiana.
-* **New Jersey** is at `r round(nj_current_deaths_per_million)` deaths per million `r nj_days_since_tenth_death` days after its tenth death; better than New York but not good at all. At this point, Spain was at `r round(spain_nj_equivalent_deaths_per_million)` deaths per million. New Jersey looks like it will be better than New York but worse than Washington.
+* **New Jersey** looks certain to be worse than Washington. It's at `r round(nj_current_deaths_per_million)` deaths per million `r nj_days_since_tenth_death` days after its tenth death; better than New York but not good at all. At this point, Spain was at `r round(spain_nj_equivalent_deaths_per_million)` deaths per million.
 * **Georgia** s at `r round(nj_current_deaths_per_million)` deaths per million `r nj_days_since_tenth_death` days after its tenth death; better than New York but not good at all. At this point, Spain was at `r round(spain_nj_equivalent_deaths_per_million)` deaths per million.
 * **Illinois** looks to be somewhere between Georgia and Spain.
-* `r round(ca_days_since_tenth_death)` days after its tenth death, **California** is at approximately `r round(ca_current_deaths_per_million)` `r if_else(round(ca_current_deaths_per_million) == 1, "death", "deaths")` per million. This is similar to where Italy was at this stage, but California's curve is flatter than Italy's, so they may avoid the explosion in cases that happened there.
+* `r round(ca_days_since_tenth_death)` days after its tenth death, **California** is at approximately `r round(ca_current_deaths_per_million)` `r if_else(round(ca_current_deaths_per_million) == 1, "death", "deaths")` per million. This is similar to where Italy was at this stage. California and Italy have interesting parallels. They have similar situations and they have single main epicenters of their outbreaks (Los Angeles and Lombardy).
 * **Florida** looks very like California with a few days' lag. Florida could get very bad with the density of old people there.
 * For **Connecticut** and **Massachusetts** it's too early to say, but they look to be going the way of Michigan.
 
