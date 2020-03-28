@@ -386,7 +386,7 @@ spain_ga_equivalent_deaths_per_million <- data %>%
 * **Georgia** s at `r round(nj_current_deaths_per_million)` deaths per million `r nj_days_since_tenth_death` days after its tenth death; better than New York but not good at all. At this point, Spain was at `r round(spain_nj_equivalent_deaths_per_million)` deaths per million.
 * **Illinois** looks to be somewhere between Georgia and Spain.
 * `r round(ca_days_since_tenth_death)` days after its tenth death, **California** is at approximately `r round(ca_current_deaths_per_million)` `r if_else(round(ca_current_deaths_per_million) == 1, "death", "deaths")` per million. This is similar to where Italy was at this stage. California and Italy have interesting parallels. They have similar situations and they have single main epicenters of their outbreaks (Los Angeles and Lombardy).
-* **Florida** looks very like California with a few days' lag. Florida could get very bad with the density of old people there.
+* **Texas** and **Florida** looks very like California with a few days' lag. Florida could get very bad with the density of old people there.
 * For **Connecticut** and **Massachusetts** it's too early to say, but they look to be going the way of Michigan.
 
 # Appendix
