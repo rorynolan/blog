@@ -241,7 +241,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    8 min read
+    5 min read
   </span>
   
 
@@ -338,50 +338,20 @@
 <h2>All countries</h2>
 <p>I’m going to limit the data to countries that have reported at least 100 deaths. First up, I’ll just plot all of these countries. I’ll give a table of country codes at the end. Note that the data is not cumulative: each data point is deaths per million on that day. The lines are colored by how bad the situation is in that country right now: how many deaths there were there yesterday.</p>
 <p><img src="/post/2020-03-21-covid19deaths_files/figure-html/all-countries-1.png" width="960" /></p>
-<ul>
-<li>We can see that <strong>Spain</strong> has (predictably) gotten worse than <strong>Italy</strong>. Italy has managed to contain enough to make their curve linear; Spain still looks to be in exponential growth and has surpassed Italy in deaths per million per day. 20 days after its tenth death, it’s up to 17 deaths per million that day, whereas Italy was on 6 deaths per million on its equivalent day. Linear growth is still catastrophic for Italy. Their deaths per day are huge and growing.</li>
-<li><strong>The Netherlands</strong> and <strong>Belgium</strong> appear to be in serious danger of ending up worse than Italy.</li>
-</ul>
-<p>The other countries are a bit bunched, so next I’ll limit the plot to countries with less than 10 deaths per million yesterday.</p>
 </div>
 <div id="countries-with-less-than-10-deaths-per-million-yesterday" class="section level2">
 <h2>Countries with less than 10 deaths per million yesterday</h2>
-<p><img src="/post/2020-03-21-covid19deaths_files/figure-html/lt5-deaths-per-mil-1.png" width="960" /></p>
-<ul>
-<li><strong>Sweden</strong> are fast going the way of the Netherlands. Both tried <em>herd immunity</em> and it appears to be failing them.</li>
-<li><strong>Iran</strong> looked to be turning the corner and lowering their fatalities but now they’ve ticked back up again. [Note that Iran’s data is some of the least trustworthy.]</li>
-<li><strong>Great Britain</strong> is getting really bad right now. look how steep their curve is.</li>
-<li><strong>Switzerland</strong> is between The Netherlands and France.</li>
-</ul>
+<p><img src="/post/2020-03-21-covid19deaths_files/figure-html/lt10-deaths-per-mil-1.png" width="960" /></p>
 </div>
 <div id="countries-with-less-than-2-death-per-million-yesterday" class="section level2">
 <h2>Countries with less than 2 death per million yesterday</h2>
 <p><img src="/post/2020-03-21-covid19deaths_files/figure-html/lt1-death-per-mil-1.png" width="960" /></p>
-<ul>
-<li>The <strong>USA</strong> curve looks ominously steep here. They have 3 main states (California, New York and Washington) driving most of their cases and deaths. See below for a breakdown of the US by states.</li>
-<li><strong>Germany</strong>’s growth looks like the numbers that Iran were reporting a month ago.</li>
-<li><strong>China</strong> is the only country which looks to have beaten their outbreak. They deserve enormous credit for their (post cover-up) response, and a lot can be learned from what they did. Of course, the number of cases there could rise again, but they know what to do if that happens. [China’s data is somewhat untrustworthy though: one day this week they reported 0 new cases and I don’t buy that.]</li>
-<li><strong>South Korea</strong> has managed to keep its death numbers in a linear regime (growing at constant number of people dying every day) or perhaps slightly better. This is also a great achievement, given how nearly every other country is displaying exponential growth. Still, they need to improve further. More people died there yesterday than the day before; that needs to change.</li>
-</ul>
 </div>
 </div>
 <div id="us-data" class="section level1">
 <h1>US data</h1>
 <p>I’m going to use the same limitations for the US state data: states with at least 100 deaths. For reference, I’m also going to include Spain and Italy.</p>
 <p><img src="/post/2020-03-21-covid19deaths_files/figure-html/us-plot-1.png" width="960" /></p>
-<ul>
-<li><strong>Washington</strong> state is at 23 deaths per million 17 days after its tenth death. At this point, Spain was at 12 deaths per million. This is absolutely dire. One bright light for Washington is that they have avoided exponential growth in the death rate, but the linear growth they have is still a massive problem.</li>
-<li><strong>New York</strong> is at 37 deaths per million 12 days after its tenth death. At this point, Spain was at 5 deaths per million.</li>
-<li><strong>Louisiana</strong> is looking worse than New York. It’s at 29 deaths per million 10 days after its tenth death. At this point, New York was at 20 deaths per million.</li>
-<li><strong>Michigan</strong> is somewhere between New York and Louisiana.</li>
-<li><strong>New Jersey</strong> looks certain to be worse than Washington. It’s at 16 deaths per million 11 days after its tenth death; better than New York but not good at all. At this point, Spain was at 4 deaths per million.</li>
-<li><strong>Georgia</strong> s at 16 deaths per million 11 days after its tenth death; better than New York but not good at all. At this point, Spain was at 4 deaths per million.</li>
-<li><strong>Colorado</strong> and <strong>Indiana</strong> look very much like Georgia.</li>
-<li><strong>Illinois</strong> looks to be somewhere between Georgia and Spain.</li>
-<li>14 days after its tenth death, <strong>California</strong> is at approximately 3 deaths per million. This is similar to where Italy was at this stage. California and Italy have interesting parallels. They have similar situations and they have single main epicenters of their outbreaks (Los Angeles and Lombardy).</li>
-<li><strong>Texas</strong> and <strong>Florida</strong> looks very like California with a few days’ lag. Florida could get very bad with the density of old people there.</li>
-<li>For <strong>Connecticut</strong> and <strong>Massachusetts</strong> it’s too early to say, but they look to be going the way of Michigan.</li>
-</ul>
 </div>
 <div id="appendix" class="section level1">
 <h1>Appendix</h1>
@@ -398,38 +368,50 @@
 <tr class="odd">
 <td align="left">BEL</td>
 <td align="left">Belgium</td>
-<td align="left">GBR</td>
-<td align="left">United Kingdom</td>
+<td align="left">IDN</td>
+<td align="left">Indonesia</td>
 </tr>
 <tr class="even">
-<td align="left">CHE</td>
-<td align="left">Switzerland</td>
+<td align="left">BRA</td>
+<td align="left">Brazil</td>
 <td align="left">IRN</td>
 <td align="left">Iran</td>
 </tr>
 <tr class="odd">
-<td align="left">CHN</td>
-<td align="left">China</td>
+<td align="left">CHE</td>
+<td align="left">Switzerland</td>
 <td align="left">ITA</td>
 <td align="left">Italy</td>
 </tr>
 <tr class="even">
-<td align="left">DEU</td>
-<td align="left">Germany</td>
+<td align="left">CHN</td>
+<td align="left">China</td>
 <td align="left">KOR</td>
 <td align="left">Korea, South</td>
 </tr>
 <tr class="odd">
-<td align="left">ESP</td>
-<td align="left">Spain</td>
+<td align="left">DEU</td>
+<td align="left">Germany</td>
 <td align="left">NLD</td>
 <td align="left">Netherlands</td>
 </tr>
 <tr class="even">
+<td align="left">ESP</td>
+<td align="left">Spain</td>
+<td align="left">PRT</td>
+<td align="left">Portugal</td>
+</tr>
+<tr class="odd">
 <td align="left">FRA</td>
 <td align="left">France</td>
 <td align="left">SWE</td>
 <td align="left">Sweden</td>
+</tr>
+<tr class="even">
+<td align="left">GBR</td>
+<td align="left">United Kingdom</td>
+<td align="left">TUR</td>
+<td align="left">Turkey</td>
 </tr>
 </tbody>
 </table>

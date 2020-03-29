@@ -14,7 +14,8 @@ tags: ["COVID-19", "coronavirus"]
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", echo = FALSE,
-                      fig.height = 5, fig.width = 10, message = FALSE)
+                      fig.height = 5, fig.width = 10, 
+                      message = FALSE, warning = FALSE)
 ```
 
 The rate of testing for COVID-19 is increasing in many countries. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. Nevertheless, many articles---including [this one](https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441) in the _Financial Times_---still talk about the number of confirmed cases. That article also focuses on number of deaths though, which is much better and leads us to what I think should be used.
@@ -53,9 +54,9 @@ raw_data <- read_csv(data_url, guess_max = 1e6)
 countries_iso3c <- tibble(
   country = sort(unique(raw_data$Country.Region))
 ) %>% 
-  filter(!str_detect(country, "(Kosovo|Cruise Ship|Diamond Princess)")) %>%  # not recognised by countrycodes package
+  dplyr::filter(!str_detect(country, "(Kosovo|Cruise Ship|Diamond Princess)")) %>%  # not recognised by countrycodes package
   mutate(iso3c = countrycode(country, "country.name", "iso3c")) %>% 
-  filter(!is.element(iso3c, c("VAT", "MTQ")))  # not included in world bank data
+  dplyr::filter(!is.element(iso3c, c("VAT", "MTQ")))  # not included in world bank data
 
 country_pops <- wb(
   country = countries_iso3c$iso3c,
@@ -77,7 +78,7 @@ data <- raw_data %>%
   summarise_at("deaths", sum) %>% 
   ungroup() %>% 
   add_count(country, wt = deaths, name = "total_deaths") %>% 
-  filter(total_deaths >= total_deaths_thresh) %>% 
+  dplyr::filter(total_deaths >= total_deaths_thresh) %>% 
   inner_join(country_pops, by = c("country" = "country")) %>% 
   arrange(country, date) %>% 
   group_by(country) %>% 
@@ -94,7 +95,7 @@ data <- raw_data %>%
       ]
   ) %>% 
   ungroup() %>% 
-  filter(total_deaths >= total_deaths_thresh, days_since_tenth_death >= 0) %>% 
+  dplyr::filter(total_deaths >= total_deaths_thresh, days_since_tenth_death >= 0) %>% 
   inner_join(countries_iso3c, by = c("country" = "country")) %>% 
   select(
     country, 
@@ -146,32 +147,27 @@ ggplot(
 
 ```{r spain-italy}
 spain_yesterday <- data %>% 
-  filter(iso3c == "ESP") %>% 
-  filter(days_since_tenth_death == max(days_since_tenth_death)) 
+  dplyr::filter(iso3c == "ESP") %>% 
+  dplyr::filter(days_since_tenth_death == max(days_since_tenth_death)) 
 spain_days_after <- spain_yesterday$days_since_tenth_death
 spain_yesterday_deaths_per_mil_smoothed <- 
   round(spain_yesterday$deaths_per_million_smoothed)
 italy_that_day_deaths_per_mil_smoothed <- data %>% 
-  filter(iso3c == "ITA", days_since_tenth_death == spain_days_after) %>% 
+  dplyr::filter(iso3c == "ITA", days_since_tenth_death == spain_days_after) %>% 
   pull(deaths_per_million_smoothed) %>% 
   round()
 ```
-
-* We can see that **Spain** has (predictably) gotten worse than **Italy**. Italy has managed to contain enough to make their curve linear; Spain still looks to be in exponential growth and has surpassed Italy in deaths per million per day. `r spain_days_after` days after its tenth death, it's up to `r spain_yesterday_deaths_per_mil_smoothed` deaths per million that day, whereas Italy was on `r italy_that_day_deaths_per_mil_smoothed` deaths per million on its equivalent day. Linear growth is still catastrophic for Italy. Their deaths per day are huge and growing.
-* **The Netherlands** and **Belgium** appear to be in serious danger of ending up worse than Italy.
 
 ```{r subset-1}
 subset1_deaths_per_million_thresh <- 10
 ```
 
-The other countries are a bit bunched, so next I'll limit the plot to countries with less than `r subset1_deaths_per_million_thresh` deaths per million yesterday.
-
 
 ## Countries with less than `r subset1_deaths_per_million_thresh` deaths per million yesterday
 
-```{r lt5-deaths-per-mil}
+```{r lt10-deaths-per-mil}
 ggplot(
-  filter(
+  dplyr::filter(
     data, 
     deaths_per_million_smoothed_yesterday < subset1_deaths_per_million_thresh
   ), 
@@ -192,11 +188,6 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-* **Sweden** are fast going the way of the Netherlands. Both tried _herd immunity_ and it appears to be failing them. 
-* **Iran** looked to be turning the corner and lowering their fatalities but now they've ticked back up again. [Note that Iran's data is some of the least trustworthy.]
-* **Great Britain** is getting really bad right now. look how steep their curve is.
-* **Switzerland** is between The Netherlands and France.
-
 ```{r subset-2}
 subset2_deaths_per_million_thresh <- 2
 ```
@@ -206,7 +197,7 @@ subset2_deaths_per_million_thresh <- 2
 
 ```{r lt1-death-per-mil}
 ggplot(
-  filter(
+  dplyr::filter(
     data, 
     deaths_per_million_smoothed_yesterday < subset2_deaths_per_million_thresh
   ), 
@@ -227,11 +218,6 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-* The **USA** curve looks ominously steep here. They have 3 main states (California, New York and Washington) driving most of their cases and deaths. See below for a breakdown of the US by states.
-* **Germany**'s growth looks like the numbers that Iran were reporting a month ago.
-* **China** is the only country which looks to have beaten their outbreak. They deserve enormous credit for their (post cover-up) response, and a lot can be learned from what they did. Of course, the number of cases there could rise again, but they know what to do if that happens. [China's data is somewhat untrustworthy though: one day this week they reported 0 new cases and I don't buy that.]
-* **South Korea** has managed to keep its death numbers in a linear regime (growing at constant number of people dying every day) or perhaps slightly better. This is also a great achievement, given how nearly every other country is displaying exponential growth. Still, they need to improve further. More people died there yesterday than the day before; that needs to change.
-
 
 # US data
 
@@ -241,7 +227,7 @@ I'm going to use the same limitations for the US state data: states with at leas
 pacman::p_load(covid19us, tidycensus, openintro)
 pop_thresh <- 7.5e6
 state_pops <- get_estimates(geography = "state", product = "population") %>% 
-  filter(variable == "POP", NAME != "Puerto Rico") %>% 
+  dplyr::filter(variable == "POP", NAME != "Puerto Rico") %>% 
   transmute(state = state2abbr(NAME), population = value)
 us_data <- get_states_daily() %>% 
   select(date, state, death) %>% 
@@ -249,7 +235,7 @@ us_data <- get_states_daily() %>%
   mutate(deaths = replace_na(deaths, 0L)) %>% 
   inner_join(state_pops, by = c("state" = "state")) %>% 
   add_count(state, wt = deaths, name = "total_deaths") %>% 
-  filter(total_deaths >= 10) %>% 
+  dplyr::filter(total_deaths >= 10) %>% 
   arrange(state, date) %>% 
   group_by(state) %>% 
   mutate(
@@ -267,7 +253,7 @@ us_data <- get_states_daily() %>%
       ]
   ) %>% 
   ungroup() %>% 
-  filter(total_deaths >= total_deaths_thresh, days_since_tenth_death >= 0) %>% 
+  dplyr::filter(total_deaths >= total_deaths_thresh, days_since_tenth_death >= 0) %>% 
   select(
     state, 
     days_since_tenth_death, 
@@ -290,7 +276,7 @@ us_plot_data <- bind_rows(
   us_data,
   data %>%
     select(-country) %>% 
-    filter(iso3c %in% c("ESP", "ITA")) %>% 
+    dplyr::filter(iso3c %in% c("ESP", "ITA")) %>% 
     rename(state = iso3c)
 )
 ggplot(
@@ -314,88 +300,76 @@ ggplot(
 
 ```{r us-state-specifics}
 wa_days_since_tenth_death <- us_data %>% 
-  filter(state == "WA") %>% 
+  dplyr::filter(state == "WA") %>% 
   pull(days_since_tenth_death) %>% 
   max()
 wa_current_deaths_per_million <- us_data %>% 
-  filter(state == "WA", days_since_tenth_death == wa_days_since_tenth_death) %>% 
+  dplyr::filter(state == "WA", days_since_tenth_death == wa_days_since_tenth_death) %>% 
   pull(deaths_per_million_smoothed)
 spain_wa_equivalent_deaths_per_million <- data %>% 
-  filter(iso3c == "ESP", days_since_tenth_death == wa_days_since_tenth_death) %>% 
+  dplyr::filter(iso3c == "ESP", days_since_tenth_death == wa_days_since_tenth_death) %>% 
   pull(deaths_per_million_smoothed)
 
 ny_days_since_tenth_death <- us_data %>% 
-  filter(state == "NY") %>% 
+  dplyr::filter(state == "NY") %>% 
   pull(days_since_tenth_death) %>% 
   max()
 ny_current_deaths_per_million <- us_data %>% 
-  filter(state == "NY", days_since_tenth_death == ny_days_since_tenth_death) %>% 
+  dplyr::filter(state == "NY", days_since_tenth_death == ny_days_since_tenth_death) %>% 
   pull(deaths_per_million_smoothed)
 spain_ny_equivalent_deaths_per_million <- data %>% 
-  filter(iso3c == "ESP", days_since_tenth_death == ny_days_since_tenth_death) %>% 
+  dplyr::filter(iso3c == "ESP", days_since_tenth_death == ny_days_since_tenth_death) %>% 
   pull(deaths_per_million_smoothed)
 
 nj_days_since_tenth_death <- us_data %>% 
-  filter(state == "NJ") %>% 
+  dplyr::filter(state == "NJ") %>% 
   pull(days_since_tenth_death) %>% 
   max()
 nj_current_deaths_per_million <- us_data %>% 
-  filter(state == "NJ", days_since_tenth_death == nj_days_since_tenth_death) %>% 
+  dplyr::filter(state == "NJ", days_since_tenth_death == nj_days_since_tenth_death) %>% 
   pull(deaths_per_million_smoothed)
 spain_nj_equivalent_deaths_per_million <- data %>% 
-  filter(iso3c == "ESP", days_since_tenth_death == nj_days_since_tenth_death) %>% 
+  dplyr::filter(iso3c == "ESP", days_since_tenth_death == nj_days_since_tenth_death) %>% 
   pull(deaths_per_million_smoothed)
 
 ca_days_since_tenth_death <- us_data %>% 
-  filter(state == "CA") %>% 
+  dplyr::filter(state == "CA") %>% 
   pull(days_since_tenth_death) %>% 
   max()
 ca_current_deaths_per_million <- us_data %>% 
-  filter(state == "CA", days_since_tenth_death == ca_days_since_tenth_death) %>% 
+  dplyr::filter(state == "CA", days_since_tenth_death == ca_days_since_tenth_death) %>% 
   pull(deaths_per_million_smoothed)
 
 la_days_since_tenth_death <- us_data %>% 
-  filter(state == "LA") %>% 
+  dplyr::filter(state == "LA") %>% 
   pull(days_since_tenth_death) %>% 
   max()
 la_current_deaths_per_million <- us_data %>% 
-  filter(state == "LA", days_since_tenth_death == la_days_since_tenth_death) %>% 
+  dplyr::filter(state == "LA", days_since_tenth_death == la_days_since_tenth_death) %>% 
   pull(deaths_per_million_smoothed)
 ny_la_equivalent_deaths_per_million <- us_data %>% 
-  filter(state == "NY", days_since_tenth_death == la_days_since_tenth_death) %>% 
+  dplyr::filter(state == "NY", days_since_tenth_death == la_days_since_tenth_death) %>% 
   pull(deaths_per_million_smoothed)
 
 ga_days_since_tenth_death <- us_data %>% 
-  filter(state == "GA") %>% 
+  dplyr::filter(state == "GA") %>% 
   pull(days_since_tenth_death) %>% 
   max()
 ga_current_deaths_per_million <- us_data %>% 
-  filter(state == "GA", days_since_tenth_death == ga_days_since_tenth_death) %>% 
+  dplyr::filter(state == "GA", days_since_tenth_death == ga_days_since_tenth_death) %>% 
   pull(deaths_per_million_smoothed)
 spain_ga_equivalent_deaths_per_million <- data %>% 
-  filter(iso3c == "ESP", days_since_tenth_death == ga_days_since_tenth_death) %>% 
+  dplyr::filter(iso3c == "ESP", days_since_tenth_death == ga_days_since_tenth_death) %>% 
   pull(deaths_per_million_smoothed)
 ```
 
-
-* **Washington** state is at `r round(wa_current_deaths_per_million)` deaths per million `r wa_days_since_tenth_death` days after its tenth death. At this point, Spain was at `r round(spain_wa_equivalent_deaths_per_million)` deaths per million. This is absolutely dire. One bright light for Washington is that they have avoided exponential growth in the death rate, but the linear growth they have is still a massive problem.
-* **New York** is at `r round(ny_current_deaths_per_million)` deaths per million `r ny_days_since_tenth_death` days after its tenth death. At this point, Spain was at `r round(spain_ny_equivalent_deaths_per_million)` deaths per million. 
-* **Louisiana** is looking worse than New York. It's at `r round(la_current_deaths_per_million)` deaths per million `r la_days_since_tenth_death` days after its tenth death. At this point, New York was at `r round(ny_la_equivalent_deaths_per_million)` deaths per million.
-* **Michigan** is somewhere between New York and Louisiana.
-* **New Jersey** looks certain to be worse than Washington. It's at `r round(nj_current_deaths_per_million)` deaths per million `r nj_days_since_tenth_death` days after its tenth death; better than New York but not good at all. At this point, Spain was at `r round(spain_nj_equivalent_deaths_per_million)` deaths per million.
-* **Georgia** s at `r round(nj_current_deaths_per_million)` deaths per million `r nj_days_since_tenth_death` days after its tenth death; better than New York but not good at all. At this point, Spain was at `r round(spain_nj_equivalent_deaths_per_million)` deaths per million.
-* **Colorado** and **Indiana** look very much like Georgia.
-* **Illinois** looks to be somewhere between Georgia and Spain.
-* `r round(ca_days_since_tenth_death)` days after its tenth death, **California** is at approximately `r round(ca_current_deaths_per_million)` `r if_else(round(ca_current_deaths_per_million) == 1, "death", "deaths")` per million. This is similar to where Italy was at this stage. California and Italy have interesting parallels. They have similar situations and they have single main epicenters of their outbreaks (Los Angeles and Lombardy).
-* **Texas** and **Florida** looks very like California with a few days' lag. Florida could get very bad with the density of old people there.
-* For **Connecticut** and **Massachusetts** it's too early to say, but they look to be going the way of Michigan.
 
 # Appendix
 
 ```{r country-codes}
 data %>% 
   distinct(iso3c, country) %>%
-  filter(!str_starts(country, coll("US"))) %>% 
+  dplyr::filter(!str_starts(country, coll("US"))) %>% 
   arrange(iso3c) %>% {
     if (FSA::is.odd(nrow(.))) {
       . <- bind_rows(
