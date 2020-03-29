@@ -12,10 +12,10 @@
     
     <item>
       <title>Deaths per capita from COVID-19 are more informative than confirmed cases</title>
-      <link>http://rorynolan.rbind.io/2020/03/28/covid19deathspercapita/</link>
-      <pubDate>Sat, 28 Mar 2020 00:00:00 +0000</pubDate>
+      <link>http://rorynolan.rbind.io/2020/03/29/covid19deathspercapita/</link>
+      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/2020/03/28/covid19deathspercapita/</guid>
+      <guid>http://rorynolan.rbind.io/2020/03/29/covid19deathspercapita/</guid>
       <description>&lt;p&gt;The rate of testing for COVID-19 is increasing in many countries. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. Nevertheless, many articles—including &lt;a href=&#34;https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441&#34;&gt;this one&lt;/a&gt; in the &lt;em&gt;Financial Times&lt;/em&gt;—still talk about the number of confirmed cases. That article also focuses on number of deaths though, which is much better and leads us to what I think should be used.&lt;/p&gt;
 &lt;div id=&#34;we-should-be-using-deaths-per-capita&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;We should be using deaths per capita&lt;/h1&gt;
@@ -79,6 +79,7 @@
 &lt;li&gt;&lt;strong&gt;Michigan&lt;/strong&gt; is somewhere between New York and Louisiana.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;New Jersey&lt;/strong&gt; looks certain to be worse than Washington. It’s at 16 deaths per million 11 days after its tenth death; better than New York but not good at all. At this point, Spain was at 4 deaths per million.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Georgia&lt;/strong&gt; s at 16 deaths per million 11 days after its tenth death; better than New York but not good at all. At this point, Spain was at 4 deaths per million.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Colorado&lt;/strong&gt; and &lt;strong&gt;Indiana&lt;/strong&gt; look very much like Georgia.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Illinois&lt;/strong&gt; looks to be somewhere between Georgia and Spain.&lt;/li&gt;
 &lt;li&gt;14 days after its tenth death, &lt;strong&gt;California&lt;/strong&gt; is at approximately 3 deaths per million. This is similar to where Italy was at this stage. California and Italy have interesting parallels. They have similar situations and they have single main epicenters of their outbreaks (Los Angeles and Lombardy).&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Texas&lt;/strong&gt; and &lt;strong&gt;Florida&lt;/strong&gt; looks very like California with a few days’ lag. Florida could get very bad with the density of old people there.&lt;/li&gt;
@@ -215,7 +216,7 @@ rbernoulli(5, 0.7)
 #&amp;gt; {
 #&amp;gt;     stats::runif(n) &amp;gt; (1 - p)
 #&amp;gt; }
-#&amp;gt; &amp;lt;bytecode: 0x7fbf48b3c358&amp;gt;
+#&amp;gt; &amp;lt;bytecode: 0x7fc03ceb0048&amp;gt;
 #&amp;gt; &amp;lt;environment: namespace:purrr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Ah, it seems Hadley just wrapped &lt;code&gt;runif()&lt;/code&gt;; hence, because &lt;code&gt;set.seed()&lt;/code&gt; works with &lt;code&gt;runif()&lt;/code&gt;, it works with his implementation of &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -288,8 +289,8 @@ rorybernoulli(6, 0.7)
 #&amp;gt; # A tibble: 2 x 6
 #&amp;gt;   expression                            min  median `itr/sec` mem_alloc `gc/sec`
 #&amp;gt;   &amp;lt;bch:expr&amp;gt;                        &amp;lt;bch:t&amp;gt; &amp;lt;bch:t&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;    &amp;lt;dbl&amp;gt;
-#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 27.52ms 27.95ms      34.7   11.45MB    10.7 
-#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.62ms  8.99ms     108.     3.82MB     9.01&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 27.43ms 27.78ms      34.9   11.45MB     9.98
+#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.46ms  8.92ms     110.     3.82MB     8.79&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). It’s also three times as efficient with memory; the memory and time improvements probably have the same underlying reason. The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that they can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
 &lt;/div&gt;
 </description>

@@ -7,15 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sat, 28 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 29 Mar 2020 00:00:00 +0000</lastBuildDate>
     <atom:link href="/tags/coronavirus/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Deaths per capita from COVID-19 are more informative than confirmed cases</title>
-      <link>http://rorynolan.rbind.io/2020/03/28/covid19deathspercapita/</link>
-      <pubDate>Sat, 28 Mar 2020 00:00:00 +0000</pubDate>
+      <link>http://rorynolan.rbind.io/2020/03/29/covid19deathspercapita/</link>
+      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/2020/03/28/covid19deathspercapita/</guid>
+      <guid>http://rorynolan.rbind.io/2020/03/29/covid19deathspercapita/</guid>
       <description>&lt;p&gt;The rate of testing for COVID-19 is increasing in many countries. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. Nevertheless, many articles—including &lt;a href=&#34;https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441&#34;&gt;this one&lt;/a&gt; in the &lt;em&gt;Financial Times&lt;/em&gt;—still talk about the number of confirmed cases. That article also focuses on number of deaths though, which is much better and leads us to what I think should be used.&lt;/p&gt;
 &lt;div id=&#34;we-should-be-using-deaths-per-capita&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;We should be using deaths per capita&lt;/h1&gt;
@@ -79,6 +79,7 @@
 &lt;li&gt;&lt;strong&gt;Michigan&lt;/strong&gt; is somewhere between New York and Louisiana.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;New Jersey&lt;/strong&gt; looks certain to be worse than Washington. It’s at 16 deaths per million 11 days after its tenth death; better than New York but not good at all. At this point, Spain was at 4 deaths per million.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Georgia&lt;/strong&gt; s at 16 deaths per million 11 days after its tenth death; better than New York but not good at all. At this point, Spain was at 4 deaths per million.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Colorado&lt;/strong&gt; and &lt;strong&gt;Indiana&lt;/strong&gt; look very much like Georgia.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Illinois&lt;/strong&gt; looks to be somewhere between Georgia and Spain.&lt;/li&gt;
 &lt;li&gt;14 days after its tenth death, &lt;strong&gt;California&lt;/strong&gt; is at approximately 3 deaths per million. This is similar to where Italy was at this stage. California and Italy have interesting parallels. They have similar situations and they have single main epicenters of their outbreaks (Los Angeles and Lombardy).&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Texas&lt;/strong&gt; and &lt;strong&gt;Florida&lt;/strong&gt; looks very like California with a few days’ lag. Florida could get very bad with the density of old people there.&lt;/li&gt;
