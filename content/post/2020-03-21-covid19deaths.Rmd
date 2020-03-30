@@ -298,6 +298,38 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
+## States with fewer deaths per million than Italy yesterday
+
+```{r us-plot-less-than-italy}
+italy_deaths_per_million_smoothed_yesterday <- us_plot_data %>% 
+  dplyr::filter(state == "ITA") %>% 
+  pull(deaths_per_million_smoothed_yesterday) %>% 
+  unique()
+us_plot_data_less_than_italy <- us_plot_data %>% 
+  dplyr::filter(
+    deaths_per_million_smoothed_yesterday <
+      italy_deaths_per_million_smoothed_yesterday
+  )
+ggplot(
+  us_plot_data_less_than_italy, 
+  aes(
+    x = days_since_tenth_death,
+    y = deaths_per_million_smoothed,
+    colour = deaths_per_million_smoothed_yesterday,
+    group = state
+  )
+) + 
+  geom_line() + 
+  geom_dl(aes(label = state), 
+          method = list("last.points", cex = 4/3)) +
+  labs(x = "days since tenth death", y = "deaths per million",
+       colour = "deaths\nper\nmillion\nyesterday") +
+  scale_colour_gradient(low = "blue", high = "red") + 
+  xlim(0, max(us_plot_data_less_than_italy$days_since_tenth_death) + 2) + 
+  theme(text = element_text(size = 20))
+```
+
+
 ```{r us-state-specifics}
 wa_days_since_tenth_death <- us_data %>% 
   dplyr::filter(state == "WA") %>% 
