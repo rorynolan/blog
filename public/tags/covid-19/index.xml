@@ -7,15 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Mon, 30 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 31 Mar 2020 00:00:00 +0000</lastBuildDate>
     <atom:link href="/tags/covid-19/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Deaths per capita from COVID-19 are more informative than confirmed cases</title>
-      <link>http://rorynolan.rbind.io/2020/03/30/covid19deathspercapita/</link>
-      <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
+      <link>http://rorynolan.rbind.io/2020/03/31/covid19deathspercapita/</link>
+      <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/2020/03/30/covid19deathspercapita/</guid>
+      <guid>http://rorynolan.rbind.io/2020/03/31/covid19deathspercapita/</guid>
       <description>&lt;p&gt;The rate of testing for COVID-19 is increasing in many countries. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. Nevertheless, many articles—including &lt;a href=&#34;https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441&#34;&gt;this one&lt;/a&gt; in the &lt;em&gt;Financial Times&lt;/em&gt;—still talk about the number of confirmed cases. That article also focuses on number of deaths though, which is much better and leads us to what I think should be used.&lt;/p&gt;
 &lt;div id=&#34;we-should-be-using-deaths-per-capita&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;We should be using deaths per capita&lt;/h1&gt;
