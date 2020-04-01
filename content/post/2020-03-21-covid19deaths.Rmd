@@ -54,7 +54,9 @@ raw_data <- read_csv(data_url, guess_max = 1e6)
 countries_iso3c <- tibble(
   country = sort(unique(raw_data$Country.Region))
 ) %>% 
-  dplyr::filter(!str_detect(country, "(Kosovo|Cruise Ship|Diamond Princess)")) %>%  # not recognised by countrycodes package
+  dplyr::filter(  # not recognised by countrycodes package
+    !str_detect(country, "(Kosovo|Cruise Ship|Diamond Princess)")
+  ) %>%  
   mutate(iso3c = countrycode(country, "country.name", "iso3c")) %>% 
   dplyr::filter(!is.element(iso3c, c("VAT", "MTQ")))  # not included in world bank data
 
@@ -253,7 +255,10 @@ us_data <- get_states_daily() %>%
       ]
   ) %>% 
   ungroup() %>% 
-  dplyr::filter(total_deaths >= total_deaths_thresh, days_since_tenth_death >= 0) %>% 
+  dplyr::filter(
+    total_deaths >= total_deaths_thresh,
+    days_since_tenth_death >= 0
+  ) %>% 
   select(
     state, 
     days_since_tenth_death, 
