@@ -12,10 +12,10 @@
     
     <item>
       <title>Deaths per capita from COVID-19 are more informative than confirmed cases</title>
-      <link>http://rorynolan.rbind.io/2020/04/02/covid19deathspercapita/</link>
-      <pubDate>Thu, 02 Apr 2020 00:00:00 +0000</pubDate>
+      <link>http://rorynolan.rbind.io/2020/04/03/covid19deathspercapita/</link>
+      <pubDate>Fri, 03 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/2020/04/02/covid19deathspercapita/</guid>
+      <guid>http://rorynolan.rbind.io/2020/04/03/covid19deathspercapita/</guid>
       <description>&lt;p&gt;The rate of testing for COVID-19 is increasing in many countries. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. Nevertheless, many articles—including &lt;a href=&#34;https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441&#34;&gt;this one&lt;/a&gt; in the &lt;em&gt;Financial Times&lt;/em&gt;—still talk about the number of confirmed cases. That article also focuses on number of deaths though, which is much better and leads us to what I think should be used.&lt;/p&gt;
 &lt;div id=&#34;we-should-be-using-deaths-per-capita&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;We should be using deaths per capita&lt;/h1&gt;
@@ -111,26 +111,32 @@
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;DEU&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Germany&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;PRT&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Portugal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PHL&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Philippines&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;DNK&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Denmark&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PRT&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Portugal&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;ECU&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Ecuador&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ROU&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Romania&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;ESP&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Spain&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;SWE&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Sweden&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;ESP&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Spain&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;TUR&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Turkey&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;FRA&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;France&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;TUR&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Turkey&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -214,7 +220,7 @@ rbernoulli(5, 0.7)
 #&amp;gt; {
 #&amp;gt;     stats::runif(n) &amp;gt; (1 - p)
 #&amp;gt; }
-#&amp;gt; &amp;lt;bytecode: 0x7ff55de3e428&amp;gt;
+#&amp;gt; &amp;lt;bytecode: 0x7fea169cb028&amp;gt;
 #&amp;gt; &amp;lt;environment: namespace:purrr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Ah, it seems Hadley just wrapped &lt;code&gt;runif()&lt;/code&gt;; hence, because &lt;code&gt;set.seed()&lt;/code&gt; works with &lt;code&gt;runif()&lt;/code&gt;, it works with his implementation of &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -287,8 +293,8 @@ rorybernoulli(6, 0.7)
 #&amp;gt; # A tibble: 2 x 6
 #&amp;gt;   expression                            min  median `itr/sec` mem_alloc `gc/sec`
 #&amp;gt;   &amp;lt;bch:expr&amp;gt;                        &amp;lt;bch:t&amp;gt; &amp;lt;bch:t&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;    &amp;lt;dbl&amp;gt;
-#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 27.47ms 27.89ms      35.0   11.45MB     9.99
-#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.42ms  8.88ms     111.     3.82MB     8.85&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5)  27.1ms  27.7ms      34.5   11.45MB    10.6 
+#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      8.24ms  8.77ms     112.     3.82MB     8.77&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). It’s also three times as efficient with memory; the memory and time improvements probably have the same underlying reason. The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that they can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
 &lt;/div&gt;
 </description>

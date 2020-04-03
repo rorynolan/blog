@@ -7,15 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Thu, 02 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Apr 2020 00:00:00 +0000</lastBuildDate>
     <atom:link href="/tags/coronavirus/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Deaths per capita from COVID-19 are more informative than confirmed cases</title>
-      <link>http://rorynolan.rbind.io/2020/04/02/covid19deathspercapita/</link>
-      <pubDate>Thu, 02 Apr 2020 00:00:00 +0000</pubDate>
+      <link>http://rorynolan.rbind.io/2020/04/03/covid19deathspercapita/</link>
+      <pubDate>Fri, 03 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/2020/04/02/covid19deathspercapita/</guid>
+      <guid>http://rorynolan.rbind.io/2020/04/03/covid19deathspercapita/</guid>
       <description>&lt;p&gt;The rate of testing for COVID-19 is increasing in many countries. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. Nevertheless, many articles—including &lt;a href=&#34;https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441&#34;&gt;this one&lt;/a&gt; in the &lt;em&gt;Financial Times&lt;/em&gt;—still talk about the number of confirmed cases. That article also focuses on number of deaths though, which is much better and leads us to what I think should be used.&lt;/p&gt;
 &lt;div id=&#34;we-should-be-using-deaths-per-capita&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;We should be using deaths per capita&lt;/h1&gt;
@@ -111,26 +111,32 @@
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;DEU&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Germany&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;PRT&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Portugal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PHL&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Philippines&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;DNK&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Denmark&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PRT&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Portugal&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;ECU&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Ecuador&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ROU&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Romania&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;ESP&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Spain&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;SWE&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Sweden&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;ESP&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Spain&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;TUR&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Turkey&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;FRA&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;France&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;TUR&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Turkey&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
