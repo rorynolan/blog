@@ -97,7 +97,10 @@ data <- raw_data %>%
       ]
   ) %>% 
   ungroup() %>% 
-  dplyr::filter(total_deaths >= total_deaths_thresh, days_since_tenth_death >= 0) %>% 
+  dplyr::filter(
+    total_deaths >= total_deaths_thresh, 
+    days_since_tenth_death >= 0
+  ) %>% 
   inner_join(countries_iso3c, by = c("country" = "country")) %>% 
   select(
     country, 
