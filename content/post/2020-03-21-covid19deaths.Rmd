@@ -49,7 +49,7 @@ data_url <- str_c(
   "RamiKrispin/coronavirus-csv/master/coronavirus_dataset.csv"
 )
 stopifnot(RCurl::url.exists(data_url))
-raw_data <- read_csv(data_url, guess_max = 1e6)
+raw_data <- suppressMessages(read_csv(data_url, guess_max = 1e6))
 
 countries_iso3c <- tibble(
   country = sort(unique(raw_data$Country.Region))
