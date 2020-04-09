@@ -121,7 +121,7 @@ data <- raw_data %>%
 
 ## A note on social distancing
 
-Social distancing is mostly new (where it exists at all) and due to the long (approximately 2-week) latency period of the virus (_latency_ is roughly the period between a person encountering the virus and showing symptoms of infection), we probably won't see the benefit of social distancing in these statistics for at least another week. If by then there's still no improvement, that would be cause for huge concern. In Taiwan, for example, the government is using people's mobile phone location to ensure they stay at home. If you leave home without permission, the police come and find you within a half hour and make you return home. That is a much better lockdown than exists anywhere in the western world. I was in a crowded supermarket yesterday in Oakland, California. I'd be surprised if there wasn't a single transmission in there that day. The local lake is more crowded than ever with people who are desperate to get outside. They _try_ to keep their distance, but they're not as distant as they would be if they'd stayed at home. Are we doing _enough_? We'll have a better idea in a few weeks.
+Due to the long (approximately 2-week) latency period of the virus (_latency_ is roughly the period between a person encountering the virus and showing symptoms of infection), the benefit of social distancing in these statistics is seen at least two weeks after its inception. 
 
 
 # World data
