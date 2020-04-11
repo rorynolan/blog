@@ -23,7 +23,7 @@ The rate of testing for COVID-19 is increasing in many countries. As such, using
 
 # We should be using deaths per capita
 
-First of all, we should be using per capita statistics. For example, 100,000 cases in China vs 100,000 cases in Ireland would be very different things, because of what they imply for concentration of cases. Per capita (assuming a billion people in China and 5 million in Ireland), this would mean 1% of people in Ireland have the disease compared to 0.01% of people in China: 1 in 100 vs 1 in 10,000. Of course, just using per capita by country, you miss a lot too. A particularly high concentration of cases in Wuhan is not the same as a more even spread of cases throughout China. You can fix this by dividing by province or county (if you have that level of granularity in your data); I do this by state for the US. I'm going to use per million people instead of per capita, because it's a bit easier to think about.
+First of all, we should be using per capita statistics. For example, 100,000 cases in China vs 100,000 cases in Ireland would be very different things, because of what they imply for concentration of cases. Per capita (assuming a billion people in China and 5 million in Ireland), this would mean 1% of people in Ireland have the disease compared to 0.01% of people in China: 1 in 100 vs 1 in 10,000. Of course, just using per capita by country, you miss a lot too. A particularly high concentration of cases in Wuhan is not the same as a more even spread of cases throughout China. You can fix this by dividing by province or county (if you have that level of granularity in your data); I do this by state for the US. I'm going to use per million people instead of per capita, because it's a bit easier to think about. 
 
 Second, reported deaths from the virus are more reliable than confirmed cases. That's because the more ill you are, the more likely you are to get a test. The number of people _reported_ to have died of COVID-19 infection will be closer to the true number of people who died of COVID-19 than the number of people _reported_ to be infected will be to the true number of infected individuals.
 
@@ -52,8 +52,8 @@ stopifnot(RCurl::url.exists(data_url))
 raw_data <- suppressMessages(read_csv(data_url, guess_max = 1e6))
 
 countries_iso3c <- tibble(
-  country = sort(unique(raw_data$Country.Region))
-) %>% 
+    country = sort(unique(raw_data$Country.Region))
+  ) %>% 
   dplyr::filter(  # not recognised by countrycodes package
     !str_detect(country, "(Kosovo|Cruise Ship|Diamond Princess)")
   ) %>%  
