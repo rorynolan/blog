@@ -7,7 +7,7 @@ output:
     toc_depth: 2
     toc_float: true
 author: "Rory Nolan"
-date: "`r lubridate::today()`"
+date: "2020-01-01"
 categories: ["COVID-19"]
 tags: ["COVID-19", "coronavirus"]
 ---
@@ -88,7 +88,7 @@ data <- raw_data %>%
     cum_deaths = cumsum(deaths),
     tenth_death_date = date[cum_deaths >= 10][[1]],
     days_since_tenth_death = as.integer(date - tenth_death_date),
-    deaths_smoothed = smooth.spline(deaths)$y,
+    deaths_smoothed = smooth.spline(deaths, lambda = 2e-4)$y,
     deaths_per_million_smoothed = deaths_smoothed / population * 1e6,
     total_deaths_per_million = total_deaths / population * 1e6,
     deaths_per_million_smoothed_yesterday = 
@@ -150,17 +150,11 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-```{r spain-italy}
-spain_yesterday <- data %>% 
-  dplyr::filter(iso3c == "ESP") %>% 
-  dplyr::filter(days_since_tenth_death == max(days_since_tenth_death)) 
-spain_days_after <- spain_yesterday$days_since_tenth_death
-spain_yesterday_deaths_per_mil_smoothed <- 
-  round(spain_yesterday$deaths_per_million_smoothed)
-italy_that_day_deaths_per_mil_smoothed <- data %>% 
-  dplyr::filter(iso3c == "ITA", days_since_tenth_death == spain_days_after) %>% 
-  pull(deaths_per_million_smoothed) %>% 
-  round()
+```{r italy-yesterday}
+italy_deaths_per_million_smoothed_yesterday <- data %>% 
+  dplyr::filter(iso3c == "ITA") %>% 
+  dplyr::filter(days_since_tenth_death == max(days_since_tenth_death)) %>% 
+  pull(deaths_per_million_smoothed_yesterday)
 ```
 
 ```{r subset-1}
@@ -168,13 +162,14 @@ subset1_deaths_per_million_thresh <- 10
 ```
 
 
-## Countries with less than `r subset1_deaths_per_million_thresh` deaths per million yesterday
+## Countries at least as many deaths per million than Italy yesterday
 
 ```{r lt10-deaths-per-mil}
 ggplot(
   dplyr::filter(
     data, 
-    deaths_per_million_smoothed_yesterday < subset1_deaths_per_million_thresh
+    ceiling(deaths_per_million_smoothed_yesterday) >=
+      floor(italy_deaths_per_million_smoothed_yesterday) 
   ), 
   aes(
     x = days_since_tenth_death,
@@ -193,18 +188,49 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-```{r subset-2}
-subset2_deaths_per_million_thresh <- 2
-```
 
+## Countries with fewer deaths per million than Italy yesterday
 
-## Countries with less than `r subset2_deaths_per_million_thresh` death per million yesterday
-
-```{r lt1-death-per-mil}
+```{r lt-ita-yesterday}
 ggplot(
   dplyr::filter(
     data, 
-    deaths_per_million_smoothed_yesterday < subset2_deaths_per_million_thresh
+    floor(deaths_per_million_smoothed_yesterday) <=
+      ceiling(italy_deaths_per_million_smoothed_yesterday)
+  ), 
+  aes(
+    x = days_since_tenth_death,
+    y = deaths_per_million_smoothed,
+    colour = deaths_per_million_smoothed_yesterday,
+    group = iso3c
+  )
+) + 
+  geom_line() + 
+  geom_dl(aes(label = iso3c), 
+          method = list("last.points", cex = 4/3)) +
+  labs(x = "days since tenth death", y = "deaths per million",
+       colour = "deaths\nper\nmillion\nyesterday") +
+  scale_colour_gradient(low = "blue", high = "red") + 
+  xlim(0, max(data$days_since_tenth_death) + 2) + 
+  theme(text = element_text(size = 20))
+```
+
+
+## Countries with fewer deaths per million than the USA yesterday
+
+```{r usa-yesterday}
+usa_deaths_per_million_smoothed_yesterday <- data %>% 
+  dplyr::filter(iso3c == "USA") %>% 
+  dplyr::filter(days_since_tenth_death == max(days_since_tenth_death)) %>% 
+  pull(deaths_per_million_smoothed_yesterday)
+```
+
+```{r lt-usa-yesterday}
+ggplot(
+  dplyr::filter(
+    data, 
+    floor(deaths_per_million_smoothed_yesterday) <=
+      ceiling(usa_deaths_per_million_smoothed_yesterday)
   ), 
   aes(
     x = days_since_tenth_death,
@@ -248,7 +274,7 @@ us_data <- get_states_daily() %>%
     tenth_death_date = date[cum_deaths >= 10][[1]],
     days_since_tenth_death = as.integer(date - tenth_death_date),
     deaths_smoothed = suppressMessages(
-      smooth.spline(deaths, cv = TRUE)
+      smooth.spline(deaths, lambda = 2e-4)
     )$y,
     deaths_per_million_smoothed = deaths_smoothed / population * 1e6,
     total_deaths_per_million = total_deaths / population * 1e6,
@@ -306,20 +332,21 @@ ggplot(
   theme(text = element_text(size = 20))
 ```
 
-## States with fewer deaths per million than Italy yesterday
 
-```{r us-plot-less-than-italy}
-italy_deaths_per_million_smoothed_yesterday <- us_plot_data %>% 
-  dplyr::filter(state == "ITA") %>% 
+## States more more deaths per million than Washington yesterday
+
+```{r us-plot-more-than-wash}
+wash_deaths_per_million_smoothed_yesterday <- us_plot_data %>% 
+  dplyr::filter(state == "WA") %>% 
   pull(deaths_per_million_smoothed_yesterday) %>% 
   unique()
-us_plot_data_less_than_italy <- us_plot_data %>% 
+us_plot_data_more_than_wash <- us_plot_data %>% 
   dplyr::filter(
-    deaths_per_million_smoothed_yesterday <
-      italy_deaths_per_million_smoothed_yesterday
+    ceiling(deaths_per_million_smoothed_yesterday) >=
+      floor(wash_deaths_per_million_smoothed_yesterday)
   )
 ggplot(
-  us_plot_data_less_than_italy, 
+  us_plot_data_more_than_wash, 
   aes(
     x = days_since_tenth_death,
     y = deaths_per_million_smoothed,
@@ -333,7 +360,35 @@ ggplot(
   labs(x = "days since tenth death", y = "deaths per million",
        colour = "deaths\nper\nmillion\nyesterday") +
   scale_colour_gradient(low = "blue", high = "red") + 
-  xlim(0, max(us_plot_data_less_than_italy$days_since_tenth_death) + 2) + 
+  xlim(0, max(us_plot_data_more_than_wash$days_since_tenth_death) + 2) + 
+  theme(text = element_text(size = 20))
+```
+
+
+## States with fewer deaths per million than Washington yesterday
+
+```{r us-plot-less-than-wash}
+us_plot_data_less_than_wash <- us_plot_data %>% 
+  dplyr::filter(
+    floor(deaths_per_million_smoothed_yesterday) <=
+      ceiling(wash_deaths_per_million_smoothed_yesterday)
+  )
+ggplot(
+  us_plot_data_less_than_wash, 
+  aes(
+    x = days_since_tenth_death,
+    y = deaths_per_million_smoothed,
+    colour = deaths_per_million_smoothed_yesterday,
+    group = state
+  )
+) + 
+  geom_line() + 
+  geom_dl(aes(label = state), 
+          method = list("last.points", cex = 4/3)) +
+  labs(x = "days since tenth death", y = "deaths per million",
+       colour = "deaths\nper\nmillion\nyesterday") +
+  scale_colour_gradient(low = "blue", high = "red") + 
+  xlim(0, max(us_plot_data_less_than_wash$days_since_tenth_death) + 2) + 
   theme(text = element_text(size = 20))
 ```
 

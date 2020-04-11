@@ -7,15 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sat, 11 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate>
     <atom:link href="/tags/coronavirus/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Deaths per capita from COVID-19 are more informative than confirmed cases</title>
-      <link>http://rorynolan.rbind.io/2020/04/11/covid19deathspercapita/</link>
-      <pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
+      <link>http://rorynolan.rbind.io/2020/01/01/covid19deathspercapita/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://rorynolan.rbind.io/2020/04/11/covid19deathspercapita/</guid>
+      <guid>http://rorynolan.rbind.io/2020/01/01/covid19deathspercapita/</guid>
       <description>&lt;p&gt;The rate of testing for COVID-19 is increasing in many countries. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. Nevertheless, many articles—including &lt;a href=&#34;https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441&#34;&gt;this one&lt;/a&gt; in the &lt;em&gt;Financial Times&lt;/em&gt;—still talk about the number of confirmed cases. That article also focuses on number of deaths though, which is much better and leads us to what I think should be used.&lt;/p&gt;
 &lt;div id=&#34;we-should-be-using-deaths-per-capita&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;We should be using deaths per capita&lt;/h1&gt;
@@ -40,24 +40,32 @@
 &lt;div id=&#34;all-countries&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;All countries&lt;/h2&gt;
 &lt;p&gt;I’m going to limit the data to countries that have reported at least 100 deaths. First up, I’ll just plot all of these countries. I’ll give a table of country codes at the end. Note that the data is not cumulative: each data point is deaths per million on that day. The lines are colored by how bad the situation is in that country right now: how many deaths there were there yesterday.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-03-21-covid19deaths_files/figure-html/all-countries-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-01-01-covid19deaths_files/figure-html/all-countries-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;countries-with-less-than-10-deaths-per-million-yesterday&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Countries with less than 10 deaths per million yesterday&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-03-21-covid19deaths_files/figure-html/lt10-deaths-per-mil-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;countries-at-least-as-many-deaths-per-million-than-italy-yesterday&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Countries at least as many deaths per million than Italy yesterday&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-01-01-covid19deaths_files/figure-html/lt10-deaths-per-mil-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;countries-with-less-than-2-death-per-million-yesterday&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Countries with less than 2 death per million yesterday&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-03-21-covid19deaths_files/figure-html/lt1-death-per-mil-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;countries-with-fewer-deaths-per-million-than-italy-yesterday&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Countries with fewer deaths per million than Italy yesterday&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-01-01-covid19deaths_files/figure-html/lt-ita-yesterday-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;countries-with-fewer-deaths-per-million-than-the-usa-yesterday&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Countries with fewer deaths per million than the USA yesterday&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-01-01-covid19deaths_files/figure-html/lt-usa-yesterday-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;us-data&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;US data&lt;/h1&gt;
 &lt;p&gt;I’m going to use the same limitations for the US state data: states with at least 100 deaths. For reference, I’m also going to include Spain and Italy.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-03-21-covid19deaths_files/figure-html/us-plot-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
-&lt;div id=&#34;states-with-fewer-deaths-per-million-than-italy-yesterday&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;States with fewer deaths per million than Italy yesterday&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-03-21-covid19deaths_files/figure-html/us-plot-less-than-italy-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-01-01-covid19deaths_files/figure-html/us-plot-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;states-more-more-deaths-per-million-than-washington-yesterday&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;States more more deaths per million than Washington yesterday&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-01-01-covid19deaths_files/figure-html/us-plot-more-than-wash-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;states-with-fewer-deaths-per-million-than-washington-yesterday&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;States with fewer deaths per million than Washington yesterday&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-01-01-covid19deaths_files/figure-html/us-plot-less-than-wash-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;appendix&#34; class=&#34;section level1&#34;&gt;
