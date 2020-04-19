@@ -105,6 +105,7 @@ data <- raw_data %>%
   select(
     country, 
     iso3c,
+    deaths,
     days_since_tenth_death, 
     deaths_per_million_smoothed,
     total_deaths_per_million,
