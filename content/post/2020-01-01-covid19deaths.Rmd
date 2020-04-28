@@ -163,7 +163,7 @@ subset1_deaths_per_million_thresh <- 10
 ```
 
 
-## Countries at least as many deaths per million than Italy yesterday
+## Countries at least as many deaths per million as Italy yesterday
 
 ```{r lt10-deaths-per-mil}
 ggplot(

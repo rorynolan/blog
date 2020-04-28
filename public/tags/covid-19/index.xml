@@ -42,8 +42,8 @@
 &lt;p&gt;I’m going to limit the data to countries that have reported at least 100 deaths. First up, I’ll just plot all of these countries. I’ll give a table of country codes at the end. Note that the data is not cumulative: each data point is deaths per million on that day. The lines are colored by how bad the situation is in that country right now: how many deaths there were there yesterday.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-01-01-covid19deaths_files/figure-html/all-countries-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;countries-at-least-as-many-deaths-per-million-than-italy-yesterday&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Countries at least as many deaths per million than Italy yesterday&lt;/h2&gt;
+&lt;div id=&#34;countries-at-least-as-many-deaths-per-million-as-italy-yesterday&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Countries at least as many deaths per million as Italy yesterday&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-01-01-covid19deaths_files/figure-html/lt10-deaths-per-mil-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;countries-with-fewer-deaths-per-million-than-italy-yesterday&#34; class=&#34;section level2&#34;&gt;
