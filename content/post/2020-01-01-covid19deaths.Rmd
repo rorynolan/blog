@@ -263,7 +263,10 @@ state_pops <- get_estimates(geography = "state", product = "population") %>%
   transmute(state = state2abbr(NAME), population = value)
 us_data <- get_states_daily() %>% 
   select(date, state, death) %>% 
-  rename(deaths = death) %>% 
+  group_by(state) %>% 
+  group_modify(function(df, .y) {
+    tibble(date = df$date[-nrow(df)], deaths = -diff(df$death))
+  }) %>% 
   mutate(deaths = replace_na(deaths, 0L)) %>% 
   inner_join(state_pops, by = c("state" = "state")) %>% 
   add_count(state, wt = deaths, name = "total_deaths") %>% 
