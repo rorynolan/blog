@@ -14,12 +14,12 @@ tags: ["COVID-19", "coronavirus"]
 
 
 
-<p>The rate of testing for COVID-19 is increasing in many countries. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. Nevertheless, many articles—including <a href="https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441">this one</a> in the <em>Financial Times</em>—still talk about the number of confirmed cases. That article also focuses on number of deaths though, which is much better and leads us to what I think should be used.</p>
+<p>The rate of testing for COVID-19 is variable everywhere. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease.</p>
 <div id="we-should-be-using-deaths-per-capita" class="section level1">
 <h1>We should be using deaths per capita</h1>
 <p>First of all, we should be using per capita statistics. For example, 100,000 cases in China vs 100,000 cases in Ireland would be very different things, because of what they imply for concentration of cases. Per capita (assuming a billion people in China and 5 million in Ireland), this would mean 1% of people in Ireland have the disease compared to 0.01% of people in China: 1 in 100 vs 1 in 10,000. Of course, just using per capita by country, you miss a lot too. A particularly high concentration of cases in Wuhan is not the same as a more even spread of cases throughout China. You can fix this by dividing by province or county (if you have that level of granularity in your data); I do this by state for the US. I’m going to use per million people instead of per capita, because it’s a bit easier to think about.</p>
 <p>Second, reported deaths from the virus are more reliable than confirmed cases. That’s because the more ill you are, the more likely you are to get a test. The number of people <em>reported</em> to have died of COVID-19 infection will be closer to the true number of people who died of COVID-19 than the number of people <em>reported</em> to be infected will be to the true number of infected individuals.</p>
-<p>For timelining, I’ll use days since the tenth confirmed death from COVID-19 in a particular country, just like the <em>Financial Times</em> article.</p>
+<p>For timelining, I’ll use days since the tenth confirmed death from COVID-19.</p>
 <div id="deaths-per-capita-will-lag-other-measures" class="section level2">
 <h2>Deaths per capita will lag other measures</h2>
 <p>I don’t mean to say that deaths per capita is the only useful thing. It actually lags other measures (in particular the number of infected individuals) by a few days because the disease does not kill quickly. In particular, if a countries rate of testing is steady or increasing but the absolute number of people testing positive per day is decreasing, that’s a great sign and a sign that you’ll see sooner than a drop in deaths.</p>
@@ -28,10 +28,6 @@ tags: ["COVID-19", "coronavirus"]
 <div id="data-source-preparation-and-limitations" class="section level1">
 <h1>Data source, preparation and limitations</h1>
 <p>Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE) has put together a great <a href="https://github.com/CSSEGISandData/COVID-19">COVID-19 data repository</a>. Note that I’ve smoothed the data to make the plots more readable. This means that only sustained changes will appear on the plots (e.g. a one-day drop in deaths will be smoothed out). This is a good thing as it prevents us from reading too much into single data. Bear in mind that different countries have different measurement methods and capabilities, so they aren’t strictly comparable. However, provided that within a given country, the measurements are done in a consistent manner, one can still do reliable comparisons of the <em>shapes</em> of the countries’ curves.</p>
-<div id="a-note-on-social-distancing" class="section level2">
-<h2>A note on social distancing</h2>
-<p>Due to the long (approximately 2-week) latency period of the virus (<em>latency</em> is roughly the period between a person encountering the virus and showing symptoms of infection), the benefit of social distancing in these statistics is seen at least two weeks after its inception.</p>
-</div>
 </div>
 <div id="world-data" class="section level1">
 <h1>World data</h1>
@@ -55,194 +51,178 @@ tags: ["COVID-19", "coronavirus"]
 <th align="left">country</th>
 <th align="left">iso3c</th>
 <th align="left">country</th>
+<th align="left">iso3c</th>
+<th align="left">country</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left">AFG</td>
 <td align="left">Afghanistan</td>
-<td align="left">IND</td>
-<td align="left">India</td>
+<td align="left">ECU</td>
+<td align="left">Ecuador</td>
+<td align="left">MEX</td>
+<td align="left">Mexico</td>
 </tr>
 <tr class="even">
 <td align="left">ARE</td>
 <td align="left">United Arab Emirates</td>
-<td align="left">IRL</td>
-<td align="left">Ireland</td>
+<td align="left">EGY</td>
+<td align="left">Egypt</td>
+<td align="left">MYS</td>
+<td align="left">Malaysia</td>
 </tr>
 <tr class="odd">
 <td align="left">ARG</td>
 <td align="left">Argentina</td>
-<td align="left">IRN</td>
-<td align="left">Iran</td>
+<td align="left">ESP</td>
+<td align="left">Spain</td>
+<td align="left">NGA</td>
+<td align="left">Nigeria</td>
 </tr>
 <tr class="even">
 <td align="left">AUT</td>
 <td align="left">Austria</td>
-<td align="left">IRQ</td>
-<td align="left">Iraq</td>
+<td align="left">FIN</td>
+<td align="left">Finland</td>
+<td align="left">NLD</td>
+<td align="left">Netherlands</td>
 </tr>
 <tr class="odd">
 <td align="left">BEL</td>
 <td align="left">Belgium</td>
-<td align="left">ISR</td>
-<td align="left">Israel</td>
+<td align="left">FRA</td>
+<td align="left">France</td>
+<td align="left">NOR</td>
+<td align="left">Norway</td>
 </tr>
 <tr class="even">
 <td align="left">BGD</td>
 <td align="left">Bangladesh</td>
-<td align="left">ITA</td>
-<td align="left">Italy</td>
+<td align="left">GBR</td>
+<td align="left">United Kingdom</td>
+<td align="left">PAK</td>
+<td align="left">Pakistan</td>
 </tr>
 <tr class="odd">
 <td align="left">BIH</td>
 <td align="left">Bosnia and Herzegovina</td>
-<td align="left">JPN</td>
-<td align="left">Japan</td>
+<td align="left">GRC</td>
+<td align="left">Greece</td>
+<td align="left">PAN</td>
+<td align="left">Panama</td>
 </tr>
 <tr class="even">
 <td align="left">BLR</td>
 <td align="left">Belarus</td>
-<td align="left">KOR</td>
-<td align="left">Korea, South</td>
+<td align="left">HND</td>
+<td align="left">Honduras</td>
+<td align="left">PER</td>
+<td align="left">Peru</td>
 </tr>
 <tr class="odd">
 <td align="left">BOL</td>
 <td align="left">Bolivia</td>
-<td align="left">LUX</td>
-<td align="left">Luxembourg</td>
+<td align="left">HUN</td>
+<td align="left">Hungary</td>
+<td align="left">PHL</td>
+<td align="left">Philippines</td>
 </tr>
 <tr class="even">
 <td align="left">BRA</td>
 <td align="left">Brazil</td>
-<td align="left">MAR</td>
-<td align="left">Morocco</td>
+<td align="left">IDN</td>
+<td align="left">Indonesia</td>
+<td align="left">POL</td>
+<td align="left">Poland</td>
 </tr>
 <tr class="odd">
 <td align="left">CAN</td>
 <td align="left">Canada</td>
-<td align="left">MDA</td>
-<td align="left">Moldova</td>
+<td align="left">IND</td>
+<td align="left">India</td>
+<td align="left">PRT</td>
+<td align="left">Portugal</td>
 </tr>
 <tr class="even">
 <td align="left">CHE</td>
 <td align="left">Switzerland</td>
-<td align="left">MEX</td>
-<td align="left">Mexico</td>
+<td align="left">IRL</td>
+<td align="left">Ireland</td>
+<td align="left">ROU</td>
+<td align="left">Romania</td>
 </tr>
 <tr class="odd">
 <td align="left">CHL</td>
 <td align="left">Chile</td>
-<td align="left">MYS</td>
-<td align="left">Malaysia</td>
+<td align="left">IRN</td>
+<td align="left">Iran</td>
+<td align="left">RUS</td>
+<td align="left">Russia</td>
 </tr>
 <tr class="even">
 <td align="left">CHN</td>
 <td align="left">China</td>
-<td align="left">NGA</td>
-<td align="left">Nigeria</td>
+<td align="left">IRQ</td>
+<td align="left">Iraq</td>
+<td align="left">SAU</td>
+<td align="left">Saudi Arabia</td>
 </tr>
 <tr class="odd">
 <td align="left">CMR</td>
 <td align="left">Cameroon</td>
-<td align="left">NLD</td>
-<td align="left">Netherlands</td>
+<td align="left">ISR</td>
+<td align="left">Israel</td>
+<td align="left">SRB</td>
+<td align="left">Serbia</td>
 </tr>
 <tr class="even">
 <td align="left">COL</td>
 <td align="left">Colombia</td>
-<td align="left">NOR</td>
-<td align="left">Norway</td>
+<td align="left">ITA</td>
+<td align="left">Italy</td>
+<td align="left">SVN</td>
+<td align="left">Slovenia</td>
 </tr>
 <tr class="odd">
 <td align="left">CZE</td>
 <td align="left">Czechia</td>
-<td align="left">PAK</td>
-<td align="left">Pakistan</td>
+<td align="left">JPN</td>
+<td align="left">Japan</td>
+<td align="left">SWE</td>
+<td align="left">Sweden</td>
 </tr>
 <tr class="even">
 <td align="left">DEU</td>
 <td align="left">Germany</td>
-<td align="left">PAN</td>
-<td align="left">Panama</td>
+<td align="left">KOR</td>
+<td align="left">Korea, South</td>
+<td align="left">TUR</td>
+<td align="left">Turkey</td>
 </tr>
 <tr class="odd">
 <td align="left">DNK</td>
 <td align="left">Denmark</td>
-<td align="left">PER</td>
-<td align="left">Peru</td>
+<td align="left">LUX</td>
+<td align="left">Luxembourg</td>
+<td align="left">UKR</td>
+<td align="left">Ukraine</td>
 </tr>
 <tr class="even">
 <td align="left">DOM</td>
 <td align="left">Dominican Republic</td>
-<td align="left">PHL</td>
-<td align="left">Philippines</td>
+<td align="left">MAR</td>
+<td align="left">Morocco</td>
+<td align="left">ZAF</td>
+<td align="left">South Africa</td>
 </tr>
 <tr class="odd">
 <td align="left">DZA</td>
 <td align="left">Algeria</td>
-<td align="left">POL</td>
-<td align="left">Poland</td>
-</tr>
-<tr class="even">
-<td align="left">ECU</td>
-<td align="left">Ecuador</td>
-<td align="left">PRT</td>
-<td align="left">Portugal</td>
-</tr>
-<tr class="odd">
-<td align="left">EGY</td>
-<td align="left">Egypt</td>
-<td align="left">ROU</td>
-<td align="left">Romania</td>
-</tr>
-<tr class="even">
-<td align="left">ESP</td>
-<td align="left">Spain</td>
-<td align="left">RUS</td>
-<td align="left">Russia</td>
-</tr>
-<tr class="odd">
-<td align="left">FIN</td>
-<td align="left">Finland</td>
-<td align="left">SAU</td>
-<td align="left">Saudi Arabia</td>
-</tr>
-<tr class="even">
-<td align="left">FRA</td>
-<td align="left">France</td>
-<td align="left">SRB</td>
-<td align="left">Serbia</td>
-</tr>
-<tr class="odd">
-<td align="left">GBR</td>
-<td align="left">United Kingdom</td>
-<td align="left">SVN</td>
-<td align="left">Slovenia</td>
-</tr>
-<tr class="even">
-<td align="left">GRC</td>
-<td align="left">Greece</td>
-<td align="left">SWE</td>
-<td align="left">Sweden</td>
-</tr>
-<tr class="odd">
-<td align="left">HND</td>
-<td align="left">Honduras</td>
-<td align="left">TUR</td>
-<td align="left">Turkey</td>
-</tr>
-<tr class="even">
-<td align="left">HUN</td>
-<td align="left">Hungary</td>
-<td align="left">UKR</td>
-<td align="left">Ukraine</td>
-</tr>
-<tr class="odd">
-<td align="left">IDN</td>
-<td align="left">Indonesia</td>
-<td align="left">ZAF</td>
-<td align="left">South Africa</td>
+<td align="left">MDA</td>
+<td align="left">Moldova</td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 </tbody>
 </table>

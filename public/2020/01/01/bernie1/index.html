@@ -17,11 +17,10 @@
       
     
   
-  <meta name="description" content="In native R, the user sets the seed for random number generation (RNG) with set.seed(). Random number generators exist in C and C&#43;&#43; too; these need their own seeds, which are not obviously settable by set.seed(). Good news! It can be done.
-pacman::p_load(inline, purrr) rbernoulli Base R (or technically the stats package) provides no rbernoulli(). It’s a pretty gaping hole in the pantheon of rbeta(), rbinom(), rcauchy(), rchisq(), rexp(), rf(), rgamma(), etc.">
+  <meta name="description" content="Disclaimer This is a report of how I found it working on the Bernie campaign, mixed with opinions of mine about what happened. I went into 2020 as a Warren and Sanders fan, and so remain. I don’t like the Democratic Party. I would rather them to the GOP, but I would rather an unpolished turd to the GOP. This piece is reflective of this point of view. I welcome comment from other points of view (though I rarely get that; friends and even family members are for the most part very unwilling to engage in political discussion here, for fear of I don’t know what).">
 
   
-  <link rel="alternate" hreflang="en-us" href="http://rorynolan.rbind.io/2018/09/30/rcsetseed/">
+  <link rel="alternate" hreflang="en-us" href="http://rorynolan.rbind.io/2020/01/01/bernie1/">
 
   
 
@@ -82,7 +81,7 @@ pacman::p_load(inline, purrr) rbernoulli Base R (or technically the stats packag
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="http://rorynolan.rbind.io/2018/09/30/rcsetseed/">
+  <link rel="canonical" href="http://rorynolan.rbind.io/2020/01/01/bernie1/">
 
   <meta property="twitter:card" content="summary_large_image">
   
@@ -90,22 +89,21 @@ pacman::p_load(inline, purrr) rbernoulli Base R (or technically the stats packag
   <meta property="twitter:creator" content="@https://twitter.com/noolpost">
   
   <meta property="og:site_name" content="roryverse">
-  <meta property="og:url" content="http://rorynolan.rbind.io/2018/09/30/rcsetseed/">
-  <meta property="og:title" content="Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp) | roryverse">
-  <meta property="og:description" content="In native R, the user sets the seed for random number generation (RNG) with set.seed(). Random number generators exist in C and C&#43;&#43; too; these need their own seeds, which are not obviously settable by set.seed(). Good news! It can be done.
-pacman::p_load(inline, purrr) rbernoulli Base R (or technically the stats package) provides no rbernoulli(). It’s a pretty gaping hole in the pantheon of rbeta(), rbinom(), rcauchy(), rchisq(), rexp(), rf(), rgamma(), etc.">
+  <meta property="og:url" content="http://rorynolan.rbind.io/2020/01/01/bernie1/">
+  <meta property="og:title" content="I worked on the Bernie campaign. We lost. I feel bitter. | roryverse">
+  <meta property="og:description" content="Disclaimer This is a report of how I found it working on the Bernie campaign, mixed with opinions of mine about what happened. I went into 2020 as a Warren and Sanders fan, and so remain. I don’t like the Democratic Party. I would rather them to the GOP, but I would rather an unpolished turd to the GOP. This piece is reflective of this point of view. I welcome comment from other points of view (though I rarely get that; friends and even family members are for the most part very unwilling to engage in political discussion here, for fear of I don’t know what).">
   <meta property="og:locale" content="en-us">
   
-  <meta property="article:published_time" content="2018-09-30T00:00:00&#43;00:00">
+  <meta property="article:published_time" content="2020-01-01T00:00:00&#43;00:00">
   
-  <meta property="article:modified_time" content="2018-09-30T00:00:00&#43;00:00">
-  
-
+  <meta property="article:modified_time" content="2020-01-01T00:00:00&#43;00:00">
   
 
   
 
-  <title>Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp) | roryverse</title>
+  
+
+  <title>I worked on the Bernie campaign. We lost. I feel bitter. | roryverse</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
@@ -224,7 +222,7 @@ pacman::p_load(inline, purrr) rbernoulli Base R (or technically the stats packag
 
 
   <div class="article-container">
-    <h1 itemprop="name">Using R&#39;s set.seed() to set seeds for use in C/C&#43;&#43; (including Rcpp)</h1>
+    <h1 itemprop="name">I worked on the Bernie campaign. We lost. I feel bitter.</h1>
 
     
 
@@ -232,8 +230,8 @@ pacman::p_load(inline, purrr) rbernoulli Base R (or technically the stats packag
 
   <span class="article-date">
     
-    <time datetime="2018-09-30 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
-      Sep 30, 2018
+    <time datetime="2020-01-01 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      Jan 1, 2020
     </time>
   </span>
   <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
@@ -243,14 +241,14 @@ pacman::p_load(inline, purrr) rbernoulli Base R (or technically the stats packag
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    4 min read
+    5 min read
   </span>
   
 
   
   
   <span class="middot-divider"></span>
-  <a href="http://rorynolan.rbind.io/2018/09/30/rcsetseed/#disqus_thread"></a>
+  <a href="http://rorynolan.rbind.io/2020/01/01/bernie1/#disqus_thread"></a>
   
 
   
@@ -260,7 +258,7 @@ pacman::p_load(inline, purrr) rbernoulli Base R (or technically the stats packag
   <span class="article-categories">
     <i class="fa fa-folder"></i>
     
-    <a href="http://rorynolan.rbind.io/categories/r/">R</a
+    <a href="http://rorynolan.rbind.io/categories/covid-19/">COVID-19</a
     >
     
   </span>
@@ -273,35 +271,35 @@ pacman::p_load(inline, purrr) rbernoulli Base R (or technically the stats packag
   <ul class="share">
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=Using%20R%27s%20set.seed%28%29%20to%20set%20seeds%20for%20use%20in%20C%2fC%2b%2b%20%28including%20Rcpp%29&amp;url=http%3a%2f%2frorynolan.rbind.io%2f2018%2f09%2f30%2frcsetseed%2f"
+         href="https://twitter.com/intent/tweet?text=I%20worked%20on%20the%20Bernie%20campaign.%20We%20lost.%20I%20feel%20bitter.&amp;url=http%3a%2f%2frorynolan.rbind.io%2f2020%2f01%2f01%2fbernie1%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-twitter"></i>
       </a>
     </li>
     <li>
       <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=http%3a%2f%2frorynolan.rbind.io%2f2018%2f09%2f30%2frcsetseed%2f"
+         href="https://www.facebook.com/sharer.php?u=http%3a%2f%2frorynolan.rbind.io%2f2020%2f01%2f01%2fbernie1%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-facebook"></i>
       </a>
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2frorynolan.rbind.io%2f2018%2f09%2f30%2frcsetseed%2f&amp;title=Using%20R%27s%20set.seed%28%29%20to%20set%20seeds%20for%20use%20in%20C%2fC%2b%2b%20%28including%20Rcpp%29"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2frorynolan.rbind.io%2f2020%2f01%2f01%2fbernie1%2f&amp;title=I%20worked%20on%20the%20Bernie%20campaign.%20We%20lost.%20I%20feel%20bitter."
          target="_blank" rel="noopener">
         <i class="fa fa-linkedin"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=http%3a%2f%2frorynolan.rbind.io%2f2018%2f09%2f30%2frcsetseed%2f&amp;title=Using%20R%27s%20set.seed%28%29%20to%20set%20seeds%20for%20use%20in%20C%2fC%2b%2b%20%28including%20Rcpp%29"
+         href="http://service.weibo.com/share/share.php?url=http%3a%2f%2frorynolan.rbind.io%2f2020%2f01%2f01%2fbernie1%2f&amp;title=I%20worked%20on%20the%20Bernie%20campaign.%20We%20lost.%20I%20feel%20bitter."
          target="_blank" rel="noopener">
         <i class="fa fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=Using%20R%27s%20set.seed%28%29%20to%20set%20seeds%20for%20use%20in%20C%2fC%2b%2b%20%28including%20Rcpp%29&amp;body=http%3a%2f%2frorynolan.rbind.io%2f2018%2f09%2f30%2frcsetseed%2f">
+         href="mailto:?subject=I%20worked%20on%20the%20Bernie%20campaign.%20We%20lost.%20I%20feel%20bitter.&amp;body=http%3a%2f%2frorynolan.rbind.io%2f2020%2f01%2f01%2fbernie1%2f">
         <i class="fa fa-envelope"></i>
       </a>
     </li>
@@ -315,99 +313,26 @@ pacman::p_load(inline, purrr) rbernoulli Base R (or technically the stats packag
 
 
     <div class="article-style" itemprop="articleBody">
-      <p>In native R, the user sets the seed for random number generation (RNG) with <code>set.seed()</code>. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by <code>set.seed()</code>. Good news! It can be done.</p>
-<pre class="r"><code>pacman::p_load(inline, purrr)</code></pre>
-<div id="rbernoulli" class="section level1">
-<h1><code>rbernoulli</code></h1>
-<p>Base R (or technically the <code>stats</code> package) provides no <code>rbernoulli()</code>. It’s a pretty gaping hole in the pantheon of <code>rbeta()</code>, <code>rbinom()</code>, <code>rcauchy()</code>, <code>rchisq()</code>, <code>rexp()</code>, <code>rf()</code>, <code>rgamma()</code>, etc. Thankfully, Hadley Wickham noticed this and gave us <code>purrr::rbernoulli()</code>.</p>
-<pre class="r"><code>set.seed(1)
-rbernoulli(5, 0.7)
-#&gt; [1] FALSE  TRUE  TRUE  TRUE FALSE
-set.seed(1)
-rbernoulli(5, 0.7)
-#&gt; [1] FALSE  TRUE  TRUE  TRUE FALSE</code></pre>
-<p>So it seems like Hadley managed to get <code>set.seed()</code> to work with <code>rbernoulli()</code>. How did he do this? Let’s take a closer look at <code>purrr::rbernoulli()</code>.</p>
-<pre class="r"><code>purrr::rbernoulli
-#&gt; function (n, p = 0.5) 
-#&gt; {
-#&gt;     stats::runif(n) &gt; (1 - p)
-#&gt; }
-#&gt; &lt;bytecode: 0x7f9bca901108&gt;
-#&gt; &lt;environment: namespace:purrr&gt;</code></pre>
-<p>Ah, it seems Hadley just wrapped <code>runif()</code>; hence, because <code>set.seed()</code> works with <code>runif()</code>, it works with his implementation of <code>purrr::rbernoulli()</code>.</p>
+      <div id="disclaimer" class="section level2">
+<h2>Disclaimer</h2>
+<p>This is a report of how I found it working on the Bernie campaign, mixed with opinions of mine about what happened. I went into 2020 as a Warren and Sanders fan, and so remain. I don’t like the Democratic Party. I would rather them to the GOP, but I would rather an unpolished turd to the GOP. This piece is reflective of this point of view. I welcome comment from other points of view (though I rarely get that; friends and even family members are for the most part very unwilling to engage in political discussion here, for fear of I don’t know what).</p>
 </div>
-<div id="c-rng" class="section level1">
-<h1>C++ RNG</h1>
-<p>The C++ standard library provides the <code>&lt;random&gt;</code> header file, which includes Bernoulli RNG. Let’s give that a whirl.</p>
-<pre class="r"><code>cpp_rbernoulli &lt;- rcpp(c(n = &quot;integer&quot;, p = &quot;numeric&quot;, seed = &quot;integer&quot;), &#39;
-                       int n_ = as&lt;int&gt;(n), seed_ = as&lt;int&gt;(seed);
-                       double p_ = as&lt;double&gt;(p);
-                       std::default_random_engine generator(seed_);
-                       std::bernoulli_distribution distribution(p_);
-                       IntegerVector out(n_);
-                       for (std::size_t i = 0; i != n_; ++i) {
-                         out[i] = distribution(generator);
-                       }
-                       return out;
-                       &#39;, includes = &quot;#include &lt;random&gt;&quot;)</code></pre>
-<pre class="r"><code>cpp_rbernoulli(6, 0.7, seed = 1)
-#&gt; [1] 1 0 1 1 0 1
-cpp_rbernoulli(6, 0.7, seed = 1)
-#&gt; [1] 1 0 1 1 0 1
-cpp_rbernoulli(6, 0.7, seed = 2)
-#&gt; [1] 1 0 1 0 1 1</code></pre>
-<p>OK, so now we have <code>cpp_rbernoulli()</code> which is working, but the user has to pass the seed as an argument of the function, there’s no option to use <code>set.seed()</code>.</p>
+<div id="four-years-ago" class="section level1">
+<h1>Four years ago</h1>
+<p>The Brexit referendum of 2016 frightened me. I desperately wanted Britain to remain in the EU. I voted and hoped other people wouldn’t be <em>stupid</em> and vote the other way. In other words, I did almost nothing other than feeling clever, followed by feeling disappointed. I had seen other people out campaigning for remain, but somehow I felt that that was a job for <em>those</em> people. I still don’t understand why. Maybe I didn’t care as much as I said I did when I had a pint in my hand, or maybe I was just plain <em>stupid</em>.</p>
 </div>
-<div id="get_seed" class="section level1">
-<h1><code>get_seed()</code></h1>
-<p>If only there was a <code>get_seed()</code> function that we could use. Well, here it is!</p>
-<pre class="r"><code>get_seed &lt;- function() {
-  sample.int(.Machine$integer.max, 1)
-}</code></pre>
-<p>This gets a positive number in the unsigned 32-bit integer range (which is always a safe bet for a seed) and it is completely determined by <code>set.seed()</code>. Therefore, it’s fine to use as a seed itself. Let’s take a look.</p>
-<pre class="r"><code>set.seed(1)
-replicate(6, get_seed())
-#&gt; [1] 1140350788  312928385  866248189 1909893419  554504146  884616499
-set.seed(1)
-replicate(6, get_seed())
-#&gt; [1] 1140350788  312928385  866248189 1909893419  554504146  884616499
-set.seed(2)
-replicate(6, get_seed())
-#&gt; [1]  794080207  314911494 1906307464  554751325 2010156236  226245929
-set.seed(2)
-replicate(6, get_seed())
-#&gt; [1]  794080207  314911494 1906307464  554751325 2010156236  226245929</code></pre>
-<p>So as we can see, setting a seed via <code>set.seed()</code> determines the seeds that subsequently come out of <code>get_seed()</code>, so all is well with the world. <code>get_seed()</code> can now be used to create a version of <code>cpp_rbernoulli()</code> which uses <code>set.seed()</code>. For the sake of inflating my own ego, I’ll name this version after myself.</p>
-<pre class="r"><code>rorybernoulli &lt;- function(n, p) {
-  cpp_rbernoulli(n, p, get_seed())
-}</code></pre>
-<p>Let’s check that it’s in working order.</p>
-<pre class="r"><code>set.seed(1)
-rorybernoulli(6, 0.7)
-#&gt; [1] 1 1 0 1 0 1
-set.seed(1)
-rorybernoulli(6, 0.7)
-#&gt; [1] 1 1 0 1 0 1
-set.seed(2)
-rorybernoulli(6, 0.7)
-#&gt; [1] 0 1 1 1 1 1
-set.seed(2)
-rorybernoulli(6, 0.7)
-#&gt; [1] 0 1 1 1 1 1</code></pre>
-<p>Everything is awesome.</p>
+<div id="section" class="section level1">
+<h1>2019</h1>
+<p>I met an American girl in England in 2015. I married her in 2018 and in 2019 I moved to California with her. As Christmas approached, the Democratic Party primary was taking shape. I was particularly excited about Elizabeth Warren and Bernie Sanders. Paul Krugman explained this infatuation well in a January 2020 interview with Ezra Klein, saying “Something went wrong in the US to lead us to where we are now; only Bernie Sanders and Elizabeth Warren have a theory of what that was.” This is perhaps unfair on people like Andrew Yang (I cannot understand why he was never taken seriously but Mayor Pete was), but it captures the general idea.</p>
+<p>So yes, you could say I’m on the left. I want the government to provide healthcare without charges (call that <em>Medicare for all</em> if you want to). I want taxes to be raised on people as lucky as myself (I’m an overpaid tech worker) or luckier to pay for things for people who don’t have enough. I want to stop fossil fuel exploration.</p>
+<p>Towards the end of 2019, Elizabeth Warren was rising in the polls. She almost caught Joe Biden; it was an exciting time. Being a frontrunner coming from the left, she faced an enormous amount of scrutiny. The New York Times, Washington Post, MSNBC pummeled her on the unaffordability of her <em>Medicare for All</em> plan, which was originally just an endorsement of Sanders’ plan. The pressure told. She wriggled around and came up with her own plan, slightly more <em>moderate</em> than the original. Warren the flip flopper was kicked a few more times when she was down and that was the end of her. She had a notable moment left in her—roasting Mike Bloombberg alive on live TV—but she never had a shot again.</p>
+<p>Meanwhile Bernie Sanders had a heart attack and in a quite incredible feat of loyalty from his supporters, managed to brush it off and carry on with his campaign. He seemed to avoid the intense criticism on medicare for all that Warren sustained. You’re only allowed to believe in that if you’re not going to win.</p>
+<p>In fall (that’s autumn for you Europeans) of 2019, I had tried a few times to get involved in the Warren campaign, but they were slow in getting back to me; they didn’t really seem to be up and running in California. When I tried to get involved with the Bernie campaign, it was quickly evident that this was already a well-oiled machine in my locality.</p>
 </div>
-<div id="benchmarking" class="section level1">
-<h1>Benchmarking</h1>
-<p>Lastly, let’s compare the two Bernoulli RNGs that we have now by asking them both to give us a million Bernoulli random numbers with <code>p = 0.5</code>.</p>
-<pre class="r"><code>bench::mark(purrr::rbernoulli(1e6, p = 0.5),
-            rorybernoulli(1e6, p = 0.5),
-            check = FALSE)
-#&gt; # A tibble: 2 x 6
-#&gt;   expression                            min  median `itr/sec` mem_alloc `gc/sec`
-#&gt;   &lt;bch:expr&gt;                        &lt;bch:t&gt; &lt;bch:t&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-#&gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 27.78ms 29.64ms      33.6   11.45MB     15.3
-#&gt; 2 rorybernoulli(1e+06, p = 0.5)      8.72ms  9.11ms     108.     3.82MB     16.8</code></pre>
-<p>Wow, <code>rorybernoulli()</code> is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as <code>purrr::rbernoulli()</code> does). It’s also three times as efficient with memory; the memory and time improvements probably have the same underlying reason. The point of me writing this post was to share this <code>get_seed()</code> thing with people so that they can use <code>set.seed()</code> with <code>Rcpp</code> and the like; <code>purrr::rbernoulli()</code> was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to <code>purrr</code>!</p>
+<div id="section-1" class="section level1">
+<h1>2020</h1>
+<p>I’m in, I’m working for Bernie (call me a bro if it makes you feel good). My day job at the time was contract work at Facebook, so I was villain by day, hero at night (at least in my own head). The work at Facebook was so fantastically undemanding that I had a lot of time and energy to devote to Bernie work. I never did Bernie stuff at work, but I could often leave early. The Oakland campaign office was on my block and I was in there more nights than not in the month before Super Tuesday (which includes the California primary).</p>
+<p>I met lots of wonderful Bernie supporters on the campaign. Most people had one particular issue that they cared about. I think it’s interesting for a moment to dwell on who cared about what (of course I’ll have to generalise). There were a lot of teachers and nurses, who cared about schools and healthcare. They also cared about their own wages, as they should; their wages under-value their work. There were a hell of a lot of young people. They fear climate change and environmental destruction. I’ll put myself into that category. There were a lot of old people (ages 60 and above). They were very angry about American foreign policy. Iraq was the last straw for them. The Obama administration’s continued support for Saudi Arabia in their war with Yemen was last plus one.</p>
 </div>
 
     </div>
@@ -417,17 +342,9 @@ rorybernoulli(6, 0.7)
 
 <div class="article-tags">
   
-  <a class="btn btn-primary btn-outline" href="http://rorynolan.rbind.io/tags/r/">R</a>
+  <a class="btn btn-primary btn-outline" href="http://rorynolan.rbind.io/tags/covid-19/">COVID-19</a>
   
-  <a class="btn btn-primary btn-outline" href="http://rorynolan.rbind.io/tags/seeds/">seeds</a>
-  
-  <a class="btn btn-primary btn-outline" href="http://rorynolan.rbind.io/tags/set.seed/">set.seed()</a>
-  
-  <a class="btn btn-primary btn-outline" href="http://rorynolan.rbind.io/tags/c/">C</a>
-  
-  <a class="btn btn-primary btn-outline" href="http://rorynolan.rbind.io/tags/c&#43;&#43;/">C&#43;&#43;</a>
-  
-  <a class="btn btn-primary btn-outline" href="http://rorynolan.rbind.io/tags/rcpp/">Rcpp</a>
+  <a class="btn btn-primary btn-outline" href="http://rorynolan.rbind.io/tags/coronavirus/">coronavirus</a>
   
 </div>
 
@@ -435,6 +352,16 @@ rorybernoulli(6, 0.7)
 
 
     
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="/2020/01/01/covid19deathspercapita/">Deaths per capita from COVID-19 are more informative than confirmed cases</a></li>
+        
+      </ul>
+    </div>
     
 
     

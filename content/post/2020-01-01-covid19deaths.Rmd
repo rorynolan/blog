@@ -18,7 +18,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", echo = FALSE,
                       message = FALSE, warning = FALSE)
 ```
 
-The rate of testing for COVID-19 is increasing in many countries. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. Nevertheless, many articles---including [this one](https://www.ft.com/content/a26fbf7e-48f8-11ea-aeb3-955839e06441) in the _Financial Times_---still talk about the number of confirmed cases. That article also focuses on number of deaths though, which is much better and leads us to what I think should be used.
+The rate of testing for COVID-19 is variable everywhere. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease. 
 
 
 # We should be using deaths per capita
@@ -27,7 +27,7 @@ First of all, we should be using per capita statistics. For example, 100,000 cas
 
 Second, reported deaths from the virus are more reliable than confirmed cases. That's because the more ill you are, the more likely you are to get a test. The number of people _reported_ to have died of COVID-19 infection will be closer to the true number of people who died of COVID-19 than the number of people _reported_ to be infected will be to the true number of infected individuals.
 
-For timelining, I'll use days since the tenth confirmed death from COVID-19 in a particular country, just like the _Financial Times_ article. 
+For timelining, I'll use days since the tenth confirmed death from COVID-19.
 
 
 ## Deaths per capita will lag other measures
@@ -111,18 +111,8 @@ data <- raw_data %>%
     total_deaths_per_million,
     deaths_per_million_smoothed_yesterday
   ) %>% 
-  arrange(total_deaths_per_million, country, days_since_tenth_death) %>% 
-  write_csv(
-    here::here(
-      "content/post/data", 
-      str_glue("world-data_snapshot-{lubridate::today()}.csv")
-    )
-  )
+  arrange(total_deaths_per_million, country, days_since_tenth_death)
 ```
-
-## A note on social distancing
-
-Due to the long (approximately 2-week) latency period of the virus (_latency_ is roughly the period between a person encountering the virus and showing symptoms of infection), the benefit of social distancing in these statistics is seen at least two weeks after its inception. 
 
 
 # World data
@@ -147,7 +137,7 @@ ggplot(
   labs(x = "days since tenth death", y = "deaths per million",
        colour = "deaths\nper\nmillion\nyesterday") +
   scale_colour_gradient(low = "blue", high = "red") + 
-  xlim(0, max(data$days_since_tenth_death) + 2) + 
+  xlim(50, max(data$days_since_tenth_death) + 2) + ylim(0, 10) +
   theme(text = element_text(size = 20))
 ```
 
@@ -200,13 +190,7 @@ us_data <- get_states_daily() %>%
     deaths_per_million_smoothed_yesterday,
     total_deaths
   ) %>% 
-  arrange(total_deaths_per_million, state, days_since_tenth_death) %>% 
-  write_csv(
-    here::here(
-      "content/post/data", 
-      str_glue("us-data_snapshot-{lubridate::today()}.csv")
-    )
-  )
+  arrange(total_deaths_per_million, state, days_since_tenth_death)
 ```
 
 ```{r us-plot}
@@ -218,7 +202,7 @@ us_plot_data <- bind_rows(
     rename(state = iso3c)
 )
 ggplot(
-  us_plot_data, 
+  filter(us_plot_data, deaths_per_million_smoothed_yesterday > 2),
   aes(
     x = days_since_tenth_death,
     y = deaths_per_million_smoothed,
@@ -229,10 +213,11 @@ ggplot(
   geom_line() + 
   geom_dl(aes(label = state), 
           method = list("last.points", cex = 4/3)) +
-  labs(x = "days since tenth death", y = "deaths per million",
+  labs(x = "days since 50 days after tenth death", y = "deaths per million",
        colour = "deaths\nper\nmillion\nyesterday") +
   scale_colour_gradient(low = "blue", high = "red") + 
-  xlim(0, max(us_plot_data$days_since_tenth_death) + 2) + 
+  xlim(60, max(us_plot_data$days_since_tenth_death) + 2) + 
+  ylim(0, max(us_plot_data$deaths_per_million_smoothed_yesterday)) +
   theme(text = element_text(size = 20))
 ```
 
@@ -247,16 +232,18 @@ data %>%
   distinct(iso3c, country) %>%
   dplyr::filter(!str_starts(country, coll("US"))) %>% 
   arrange(iso3c) %>% {
-    if (FSA::is.odd(nrow(.))) {
+    while (nrow(.) %% 3 != 0) {
       . <- bind_rows(
         ., 
         tibble(iso3c = "", country = "")
       )
     }
-    first_half <- seq_len(nrow(.) / 2)
-    last_half <- setdiff(seq_len(nrow(.)), first_half)
-    bind_cols(.[first_half, ], .[last_half, ])
+    first_third <- seq_len(ceiling(nrow(.) / 3))
+    second_third <- setdiff(seq_len(ceiling(nrow(.) * 2 / 3)), first_third)
+    third_third <- setdiff(seq_len(nrow(.)), c(first_third, second_third))
+    bind_cols(.[first_third, ], .[second_third, ], .[third_third, ])
   } %>% 
-  set_names(names(.)[c(1, 2, 1, 2)]) %>% 
+  set_names(strex::str_before_first(names(.)[rep(1:2, 3)], coll("."))) %>% 
+  .[c(2, 1, 4, 3, 6, 5)] %>% 
   knitr::kable()
 ```
