@@ -7,6 +7,7 @@ categories: ["R"]
 tags: ["R", "C++", "C++11", "Rcpp"]
 ---
 
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <div id="the-problem" class="section level1">
@@ -38,7 +39,7 @@ lapply(x, function(x) as.numeric(stringr::str_replace_all(x, &quot;,&quot;, &quo
   if (!is.na(out)) out &lt;- numeric_version(out)
   out
 }</code></pre>
-<p>This returns the <code>gcc</code> version if <code>gcc</code> is installed and <code>NA</code> otherwise. Then, the statement <code>!is.na(gcc_version()) &amp;&amp; gcc_version() &lt; &quot;4.9&quot;</code> returns <code>TRUE</code> if the user’s <code>gcc</code> does <em>not</em> support C++11 regex and <code>FALSE</code> otherwise.</p>
+<p>This returns the <code>gcc</code> version if <code>gcc</code> is installed and <code>NA</code> otherwise. Then, the statement <code>!is.na(gcc_version()) &amp;&amp; gcc_version() &lt; "4.9"</code> returns <code>TRUE</code> if the user’s <code>gcc</code> does <em>not</em> support C++11 regex and <code>FALSE</code> otherwise.</p>
 </div>
 <div id="dealing-with-the-gcc-version" class="section level2">
 <h2>Dealing with the <code>gcc</code> version</h2>

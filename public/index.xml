@@ -11,234 +11,15 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Deaths per capita from COVID-19 are more informative than confirmed cases</title>
-      <link>http://rorynolan.rbind.io/2020/01/01/covid19deathspercapita/</link>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://rorynolan.rbind.io/2020/01/01/covid19deathspercapita/</guid>
-      <description>&lt;p&gt;The rate of testing for COVID-19 is variable everywhere. As such, using the number of confirmed cases over time is not a reliable method for tracking the spread of the disease.&lt;/p&gt;
-&lt;div id=&#34;we-should-be-using-deaths-per-capita&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;We should be using deaths per capita&lt;/h1&gt;
-&lt;p&gt;First of all, we should be using per capita statistics. For example, 100,000 cases in China vs 100,000 cases in Ireland would be very different things, because of what they imply for concentration of cases. Per capita (assuming a billion people in China and 5 million in Ireland), this would mean 1% of people in Ireland have the disease compared to 0.01% of people in China: 1 in 100 vs 1 in 10,000. Of course, just using per capita by country, you miss a lot too. A particularly high concentration of cases in Wuhan is not the same as a more even spread of cases throughout China. You can fix this by dividing by province or county (if you have that level of granularity in your data); I do this by state for the US. I’m going to use per million people instead of per capita, because it’s a bit easier to think about.&lt;/p&gt;
-&lt;p&gt;Second, reported deaths from the virus are more reliable than confirmed cases. That’s because the more ill you are, the more likely you are to get a test. The number of people &lt;em&gt;reported&lt;/em&gt; to have died of COVID-19 infection will be closer to the true number of people who died of COVID-19 than the number of people &lt;em&gt;reported&lt;/em&gt; to be infected will be to the true number of infected individuals.&lt;/p&gt;
-&lt;p&gt;For timelining, I’ll use days since the tenth confirmed death from COVID-19.&lt;/p&gt;
-&lt;div id=&#34;deaths-per-capita-will-lag-other-measures&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Deaths per capita will lag other measures&lt;/h2&gt;
-&lt;p&gt;I don’t mean to say that deaths per capita is the only useful thing. It actually lags other measures (in particular the number of infected individuals) by a few days because the disease does not kill quickly. In particular, if a countries rate of testing is steady or increasing but the absolute number of people testing positive per day is decreasing, that’s a great sign and a sign that you’ll see sooner than a drop in deaths.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;data-source-preparation-and-limitations&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Data source, preparation and limitations&lt;/h1&gt;
-&lt;p&gt;Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE) has put together a great &lt;a href=&#34;https://github.com/CSSEGISandData/COVID-19&#34;&gt;COVID-19 data repository&lt;/a&gt;. Note that I’ve smoothed the data to make the plots more readable. This means that only sustained changes will appear on the plots (e.g. a one-day drop in deaths will be smoothed out). This is a good thing as it prevents us from reading too much into single data. Bear in mind that different countries have different measurement methods and capabilities, so they aren’t strictly comparable. However, provided that within a given country, the measurements are done in a consistent manner, one can still do reliable comparisons of the &lt;em&gt;shapes&lt;/em&gt; of the countries’ curves.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;world-data&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;World data&lt;/h1&gt;
-&lt;div id=&#34;all-countries&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;All countries&lt;/h2&gt;
-&lt;p&gt;I’m going to limit the data to countries that have reported at least 100 deaths. First up, I’ll just plot all of these countries. I’ll give a table of country codes at the end. Note that the data is not cumulative: each data point is deaths per million on that day. The lines are colored by how bad the situation is in that country right now: how many deaths there were there yesterday.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-01-01-covid19deaths_files/figure-html/all-countries-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;us-data&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;US data&lt;/h1&gt;
-&lt;p&gt;I’m going to use the same limitations for the US state data: states with at least 100 deaths. For reference, I’m also going to include Spain and Italy.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://rorynolan.rbind.io/post/2020-01-01-covid19deaths_files/figure-html/us-plot-1.png&#34; width=&#34;960&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;appendix&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Appendix&lt;/h1&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr class=&#34;header&#34;&gt;
-&lt;th align=&#34;left&#34;&gt;iso3c&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;country&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;iso3c&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;country&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;iso3c&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;country&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;AFG&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Afghanistan&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;ECU&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Ecuador&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;MEX&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Mexico&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;ARE&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;United Arab Emirates&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;EGY&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Egypt&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;MYS&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Malaysia&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;ARG&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Argentina&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;ESP&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Spain&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;NGA&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Nigeria&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;AUT&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Austria&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;FIN&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Finland&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;NLD&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Netherlands&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;BEL&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Belgium&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;FRA&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;France&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;NOR&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Norway&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;BGD&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Bangladesh&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;GBR&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;United Kingdom&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;PAK&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Pakistan&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;BIH&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Bosnia and Herzegovina&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;GRC&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Greece&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;PAN&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Panama&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;BLR&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Belarus&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;HND&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Honduras&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;PER&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Peru&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;BOL&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Bolivia&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;HUN&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Hungary&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;PHL&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Philippines&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;BRA&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Brazil&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;IDN&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Indonesia&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;POL&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Poland&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;CAN&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Canada&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;IND&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;India&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;PRT&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Portugal&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;CHE&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Switzerland&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;IRL&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Ireland&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;ROU&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Romania&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;CHL&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Chile&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;IRN&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Iran&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;RUS&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Russia&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;CHN&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;China&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;IRQ&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Iraq&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;SAU&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Saudi Arabia&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;CMR&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Cameroon&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;ISR&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Israel&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;SRB&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Serbia&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;COL&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Colombia&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;ITA&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Italy&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;SVN&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Slovenia&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;CZE&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Czechia&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;JPN&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Japan&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;SWE&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Sweden&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;DEU&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Germany&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;KOR&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Korea, South&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;TUR&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Turkey&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;DNK&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Denmark&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;LUX&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Luxembourg&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;UKR&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Ukraine&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;DOM&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Dominican Republic&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;MAR&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Morocco&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;ZAF&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;South Africa&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;DZA&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Algeria&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;MDA&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Moldova&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Coping with varying `gcc` versions and capabilities in R packages</title>
       <link>http://rorynolan.rbind.io/2019/06/30/strexgcc/</link>
       <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>http://rorynolan.rbind.io/2019/06/30/strexgcc/</guid>
-      <description>&lt;div id=&#34;the-problem&#34; class=&#34;section level1&#34;&gt;
+      <description>&lt;script src=&#34;http://rorynolan.rbind.io/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;div id=&#34;the-problem&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;The problem&lt;/h1&gt;
 &lt;p&gt;I have a package called &lt;code&gt;strex&lt;/code&gt; which is for string manipulation. In this package, I want to take advantage of the regex capabilities of C++11. The reason for this is that in &lt;code&gt;strex&lt;/code&gt;, I find myself needing to do a calculation like&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;x &amp;lt;- list(c(&amp;quot;1,000&amp;quot;, &amp;quot;2,000,000&amp;quot;),
@@ -267,7 +48,7 @@ lapply(x, function(x) as.numeric(stringr::str_replace_all(x, &amp;quot;,&amp;quo
   if (!is.na(out)) out &amp;lt;- numeric_version(out)
   out
 }&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This returns the &lt;code&gt;gcc&lt;/code&gt; version if &lt;code&gt;gcc&lt;/code&gt; is installed and &lt;code&gt;NA&lt;/code&gt; otherwise. Then, the statement &lt;code&gt;!is.na(gcc_version()) &amp;amp;&amp;amp; gcc_version() &amp;lt; &amp;quot;4.9&amp;quot;&lt;/code&gt; returns &lt;code&gt;TRUE&lt;/code&gt; if the user’s &lt;code&gt;gcc&lt;/code&gt; does &lt;em&gt;not&lt;/em&gt; support C++11 regex and &lt;code&gt;FALSE&lt;/code&gt; otherwise.&lt;/p&gt;
+&lt;p&gt;This returns the &lt;code&gt;gcc&lt;/code&gt; version if &lt;code&gt;gcc&lt;/code&gt; is installed and &lt;code&gt;NA&lt;/code&gt; otherwise. Then, the statement &lt;code&gt;!is.na(gcc_version()) &amp;amp;&amp;amp; gcc_version() &amp;lt; &#34;4.9&#34;&lt;/code&gt; returns &lt;code&gt;TRUE&lt;/code&gt; if the user’s &lt;code&gt;gcc&lt;/code&gt; does &lt;em&gt;not&lt;/em&gt; support C++11 regex and &lt;code&gt;FALSE&lt;/code&gt; otherwise.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;dealing-with-the-gcc-version&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Dealing with the &lt;code&gt;gcc&lt;/code&gt; version&lt;/h2&gt;
@@ -291,7 +72,10 @@ lapply(x, function(x) as.numeric(stringr::str_replace_all(x, &amp;quot;,&amp;quo
       <pubDate>Sun, 30 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>http://rorynolan.rbind.io/2018/09/30/rcsetseed/</guid>
-      <description>&lt;p&gt;In native R, the user sets the seed for random number generation (RNG) with &lt;code&gt;set.seed()&lt;/code&gt;. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by &lt;code&gt;set.seed()&lt;/code&gt;. Good news! It can be done.&lt;/p&gt;
+      <description>&lt;script src=&#34;http://rorynolan.rbind.io/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;In native R, the user sets the seed for random number generation (RNG) with &lt;code&gt;set.seed()&lt;/code&gt;. Random number generators exist in C and C++ too; these need their own seeds, which are not obviously settable by &lt;code&gt;set.seed()&lt;/code&gt;. Good news! It can be done.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pacman::p_load(inline, purrr)&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;rbernoulli&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;&lt;code&gt;rbernoulli&lt;/code&gt;&lt;/h1&gt;
@@ -308,7 +92,7 @@ rbernoulli(5, 0.7)
 #&amp;gt; {
 #&amp;gt;     stats::runif(n) &amp;gt; (1 - p)
 #&amp;gt; }
-#&amp;gt; &amp;lt;bytecode: 0x7f8380d06d18&amp;gt;
+#&amp;gt; &amp;lt;bytecode: 0x7f974b57ffc0&amp;gt;
 #&amp;gt; &amp;lt;environment: namespace:purrr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Ah, it seems Hadley just wrapped &lt;code&gt;runif()&lt;/code&gt;; hence, because &lt;code&gt;set.seed()&lt;/code&gt; works with &lt;code&gt;runif()&lt;/code&gt;, it works with his implementation of &lt;code&gt;purrr::rbernoulli()&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -378,11 +162,11 @@ rorybernoulli(6, 0.7)
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;bench::mark(purrr::rbernoulli(1e6, p = 0.5),
             rorybernoulli(1e6, p = 0.5),
             check = FALSE)
-#&amp;gt; # A tibble: 2 x 6
-#&amp;gt;   expression                            min  median `itr/sec` mem_alloc `gc/sec`
-#&amp;gt;   &amp;lt;bch:expr&amp;gt;                        &amp;lt;bch:t&amp;gt; &amp;lt;bch:t&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;    &amp;lt;dbl&amp;gt;
-#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5) 25.56ms 27.48ms      35.7   11.45MB     14.9
-#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)      7.92ms  8.59ms     115.     3.82MB     16.7&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; # A tibble: 2 × 6
+#&amp;gt;   expression                             min  median `itr/sec` mem_alloc `gc/sec`
+#&amp;gt;   &amp;lt;bch:expr&amp;gt;                        &amp;lt;bch:tm&amp;gt; &amp;lt;bch:t&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;bch:byt&amp;gt;    &amp;lt;dbl&amp;gt;
+#&amp;gt; 1 purrr::rbernoulli(1e+06, p = 0.5)   28.2ms 29.06ms      32.2   11.45MB     14.6
+#&amp;gt; 2 rorybernoulli(1e+06, p = 0.5)       8.73ms  9.13ms     108.     3.82MB     16.9&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Wow, &lt;code&gt;rorybernoulli()&lt;/code&gt; is three times faster! I wasn’t expecting that. Perhaps it’s because there’s a quicker way of generating a Bernoulli random number than by going through a uniform random number (as &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; does). It’s also three times as efficient with memory; the memory and time improvements probably have the same underlying reason. The point of me writing this post was to share this &lt;code&gt;get_seed()&lt;/code&gt; thing with people so that they can use &lt;code&gt;set.seed()&lt;/code&gt; with &lt;code&gt;Rcpp&lt;/code&gt; and the like; &lt;code&gt;purrr::rbernoulli()&lt;/code&gt; was just a cool example of a non-base RNG that popped into my head. Maybe I should submit a pull request to &lt;code&gt;purrr&lt;/code&gt;!&lt;/p&gt;
 &lt;/div&gt;
 </description>
